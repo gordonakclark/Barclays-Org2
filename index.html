@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barclays Group Leadership — Organisation Chart</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Barclays Brand Colors */
+    --barclays-navy: #0a1628;
+    --barclays-navy-mid: #112244;
+    --barclays-navy-light: #1a3060;
+    --barclays-gold: #c9a84c;
+    --barclays-gold-light: #e8cc7a;
+    --barclays-gold-pale: #f5e9c0;
+    --barclays-silver: #8899bb;
+    
+    /* Accenture Brand Colors */
+    --accenture-purple: #A100FF;
+    --accenture-purple-dark: #7B00D4;
+    --accenture-purple-light: #C44EFF;
+    --accenture-purple-pale: #E8D4FF;
+    
+    /* UI Colors */
+    --navy: #0a1628;
+    --navy-mid: #112244;
+    --navy-light: #1a3060;
+    --gold: #c9a84c;
+    --gold-light: #e8cc7a;
+    --gold-pale: #f5e9c0;
+    --silver: #8899bb;
+    --white: #f8f6f0;
+    --line-color: #2a4070;
+    --text-primary: #f0edd8;
+    --text-secondary: #8899bb;
+    
+    /* Score colours */
+    --score-1: #c0392b;
+    --score-2: #e67e22;
+    --score-3: #f1c40f;
+    --score-4: #27ae60;
+    --score-5: #1abc9c;
+    /* Social style colors */
+    --social-analytical: #6495ed;
+    --social-driver: #dc143c;
+    --social-expressive: #ffa500;
+    --social-amiable: #32cd32;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── LOGIN SCREEN ── */
+  #loginScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a1628 0%, #1a3060 50%, #0a1628 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+  }
+
+  .login-container {
+    background: rgba(17, 34, 68, 0.95);
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #A100FF 0%, #c9a84c 100%) 1;
+    border-radius: 12px;
+    padding: 40px 50px;
+    min-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 100px rgba(161, 0, 255, 0.2);
+  }
+
+  .login-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .login-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .login-accenture {
+    font-size: 32px;
+    font-weight: 700;
+    color: #A100FF;
+    letter-spacing: -0.5px;
+  }
+
+  .login-divider {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(180deg, #A100FF 0%, #c9a84c 100%);
+  }
+
+  .login-eagle {
+    width: 40px;
+    height: 40px;
+    background: var(--gold);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .login-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+
+  .login-subtitle {
+    font-size: 12px;
+    color: var(--silver);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .login-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .login-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .login-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 6px;
+    padding: 12px 16px;
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    transition: all 0.3s;
+  }
+
+  .login-input:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(201, 168, 76, 0.1);
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+  }
+
+  .login-button {
+    background: linear-gradient(135deg, #A100FF 0%, #7B00D4 100%);
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(161, 0, 255, 0.3);
+    margin-top: 10px;
+  }
+
+  .login-button:hover {
+    background: linear-gradient(135deg, #C44EFF 0%, #A100FF 100%);
+    box-shadow: 0 6px 20px rgba(161, 0, 255, 0.5);
+    transform: translateY(-2px);
+  }
+
+  .login-button:active {
+    transform: translateY(0);
+  }
+
+  .login-error {
+    background: rgba(192, 57, 43, 0.2);
+    border: 1px solid rgba(192, 57, 43, 0.5);
+    border-radius: 6px;
+    padding: 12px;
+    color: #e74c3c;
+    font-size: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .login-error.show {
+    display: block;
+    animation: shake 0.5s;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+  }
+
+  .login-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(201, 168, 76, 0.2);
+    text-align: center;
+    font-size: 10px;
+    color: var(--silver);
+  }
+
+  #mainApp {
+    display: none;
+  }
+
+  #mainApp.authenticated {
+    display: block;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    background: linear-gradient(135deg, #A100FF 0%, #0a1628 50%, #112244 100%);
+    border-bottom: 2px solid;
+    border-image: linear-gradient(90deg, #A100FF 0%, #c9a84c 100%) 1;
+    padding: 20px 32px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .header-brand { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+  }
+  
+  .brand-logos {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .brand-divider {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(180deg, #A100FF 0%, #c9a84c 100%);
+    opacity: 0.6;
+  }
+
+  .accenture-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #A100FF;
+    letter-spacing: -0.5px;
+    text-transform: lowercase;
+  }
+  
+  .accenture-logo span {
+    color: #C44EFF;
+    font-weight: 300;
+  }
+
+  .eagle-icon {
+    width: 34px; height: 34px;
+    background: var(--gold);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .header-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--gold-light); letter-spacing: 0.4px;
+  }
+  .header-text p {
+    font-size: 11px; color: var(--silver); font-weight: 300;
+    letter-spacing: 2px; text-transform: uppercase; margin-top: 2px;
+  }
+
+  .header-controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+  .btn-control {
+    background: rgba(161,0,255,0.12);
+    border: 1px solid rgba(161,0,255,0.35);
+    color: #C44EFF;
+    padding: 6px 14px; border-radius: 4px;
+    font-size: 11px; font-family: 'DM Sans', sans-serif; font-weight: 500;
+    letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-control:hover { 
+    background: rgba(161,0,255,0.25); 
+    border-color: #A100FF; 
+  }
+  .btn-control.active { 
+    background: linear-gradient(135deg, rgba(161,0,255,0.3) 0%, rgba(201,168,76,0.3) 100%);
+    border: 1px solid;
+    border-image: linear-gradient(90deg, #A100FF 0%, #c9a84c 100%) 1;
+  }
+
+  /* ── LAYOUT SPLIT ── */
+  .app-body {
+    display: flex;
+    height: calc(100vh - 68px);
+  }
+
+  /* ── SIDE PANEL ── */
+  .side-panel {
+    width: 420px;
+    min-width: 340px;
+    background: #07111f;
+    border-right: 1px solid rgba(201,168,76,0.2);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    transition: width 0.3s;
+  }
+  .side-panel.collapsed { width: 0; min-width: 0; overflow: hidden; }
+
+  .panel-header {
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    background: rgba(17,34,68,0.6);
+  }
+  .panel-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px; color: var(--gold-light); font-weight: 600;
+  }
+  .panel-header p { font-size: 11px; color: var(--silver); margin-top: 3px; line-height: 1.4; }
+
+  .score-legend {
+    display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+  }
+  .score-pill {
+    padding: 6px 14px; border-radius: 12px;
+    font-size: 11.5px; font-weight: 600; letter-spacing: 0.6px;
+    display: flex; align-items: center; gap: 5px;
+    border: 1.5px solid;
+  }
+
+  /* Table */
+  .table-wrapper { flex: 1; overflow-y: auto; padding: 0; }
+
+  .rel-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 11.5px;
+  }
+  .rel-table thead {
+    position: sticky; top: 0; z-index: 10;
+    background: #0a1830;
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+  }
+  .rel-table thead th {
+    padding: 10px 12px; text-align: left;
+    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--silver); font-weight: 500;
+  }
+  .rel-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+  .rel-table tbody tr:hover { background: rgba(201,168,76,0.04); }
+
+  .rel-table td { padding: 7px 10px; vertical-align: middle; }
+
+  .person-name-cell {
+    font-size: 11px; font-weight: 500; color: #c8d8f8;
+    max-width: 130px; line-height: 1.3;
+  }
+  .person-role-cell {
+    font-size: 9.5px; color: var(--silver); line-height: 1.3;
+    max-width: 130px;
+  }
+
+  .input-initials {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 600;
+    padding: 4px 7px;
+    width: 52px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .input-initials:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+  .input-initials::placeholder { color: rgba(255,255,255,0.2); font-weight: 300; letter-spacing: 0; text-transform: none; }
+
+  .score-select {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 600;
+    padding: 4px 6px;
+    width: 52px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    appearance: none;
+    text-align: center;
+  }
+  .score-select:focus { outline: none; border-color: var(--gold); }
+  .score-select option { background: #0a1628; color: var(--text-primary); }
+
+  .badge-preview {
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 4px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+    padding: 2px 6px; min-width: 52px; height: 20px;
+    font-family: 'DM Sans', monospace;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .badge-preview.empty {
+    background: rgba(255,255,255,0.05);
+    border: 1px dashed rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.2);
+    font-size: 9px; font-weight: 400;
+  }
+
+  /* panel footer */
+  .panel-footer {
+    padding: 12px 16px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+    background: rgba(10,22,40,0.8);
+  }
+  .btn-sm {
+    font-size: 10px; padding: 5px 12px;
+    border-radius: 4px; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase;
+    transition: all 0.2s; border: 1px solid;
+  }
+  .btn-primary { 
+    background: linear-gradient(135deg, #A100FF 0%, #7B00D4 100%);
+    border-color: #A100FF; 
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(161,0,255,0.3);
+  }
+  .btn-primary:hover { 
+    background: linear-gradient(135deg, #C44EFF 0%, #A100FF 100%);
+    box-shadow: 0 4px 12px rgba(161,0,255,0.5);
+  }
+  .btn-ghost { background: transparent; border-color: rgba(255,255,255,0.15); color: var(--silver); }
+  .btn-ghost:hover { border-color: var(--silver); color: var(--white); }
+
+  .assigned-count {
+    margin-left: auto; font-size: 10px; color: var(--silver);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── CHART AREA ── */
+  .chart-area {
+    flex: 1;
+    overflow: auto;
+    padding: 40px 80px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chart-wrapper {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .scroll-hint {
+    text-align: center; font-size: 11px; color: var(--silver);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 30px; opacity: 0.5;
+    width: 100%;
+  }
+
+  /* ── ORG CHART ── */
+  .node { display: flex; flex-direction: column; align-items: center; }
+
+  .box {
+    border: 1px solid; border-radius: 6px;
+    padding: 10px 16px 10px 14px;
+    min-width: 180px; max-width: 220px;
+    cursor: pointer; position: relative;
+    transition: all 0.25s; text-align: center;
+    user-select: none;
+  }
+  .box:hover { transform: translateY(-2px); z-index: 10; }
+  .box .name { font-size: 12.5px; font-weight: 600; line-height: 1.3; letter-spacing: 0.2px; }
+  .box .role { font-size: 10.5px; font-weight: 300; line-height: 1.35; margin-top: 3px; opacity: 0.75; }
+
+  .box .toggle-badge {
+    position: absolute; top: -8px; right: -8px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--gold); color: var(--navy);
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ── RELATIONSHIP BADGE on box ── */
+  .rel-badge {
+    position: absolute;
+    top: -10px; left: -4px;
+    border-radius: 4px;
+    font-size: 9px; font-weight: 700;
+    padding: 2px 6px;
+    font-family: 'DM Sans', monospace;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 5;
+    box-shadow: 0 1px 4px rgba(161,0,255,0.4), 0 0 12px rgba(161,0,255,0.2);
+    border: 1px solid rgba(161,0,255,0.3);
+    line-height: 1.4;
+  }
+
+  /* score colour classes */
+  .score-bg-1 { background: #c0392b; color: #fff; }
+  .score-bg-2 { background: #e67e22; color: #fff; }
+  .score-bg-3 { background: #c9a800; color: #000; }
+  .score-bg-4 { background: #27ae60; color: #fff; }
+  .score-bg-5 { background: #0fa894; color: #fff; }
+
+  /* Level styles */
+  .level-0 .box {
+    background: linear-gradient(135deg, #1a3060, #0f2040);
+    border-color: var(--gold);
+    box-shadow: 0 0 24px rgba(201,168,76,0.2), 0 4px 20px rgba(0,0,0,0.5);
+    min-width: 220px;
+  }
+  .level-0 .box .name { color: var(--gold-light); font-size: 14px; }
+  .level-0 .box .role { color: var(--gold-pale); font-size: 11px; }
+
+  .level-1 .box {
+    background: linear-gradient(135deg, #142550, #0d1e40);
+    border-color: rgba(201,168,76,0.5);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    min-width: 190px;
+  }
+  .level-1 .box .name { color: var(--gold-light); font-size: 12.5px; }
+  .level-1 .box .role { color: #9ab; }
+
+  .level-2 .box {
+    background: linear-gradient(135deg, #0e2040, #0b1a35);
+    border-color: rgba(170,200,255,0.25);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    min-width: 180px;
+  }
+  .level-2 .box .name { color: #c8daff; font-size: 11.5px; }
+  .level-2 .box .role { color: #7088aa; }
+
+  .level-3 .box {
+    background: linear-gradient(135deg, #0b1c38, #091630);
+    border-color: rgba(120,160,210,0.2);
+    min-width: 170px; max-width: 200px;
+  }
+  .level-3 .box .name { color: #a8c0e8; font-size: 11px; }
+  .level-3 .box .role { color: #607090; font-size: 10px; }
+
+  .level-4 .box {
+    background: rgba(10,25,55,0.8);
+    border-color: rgba(80,120,180,0.15);
+    min-width: 160px; max-width: 190px;
+  }
+  .level-4 .box .name { color: #8aabcc; font-size: 10.5px; }
+  .level-4 .box .role { color: #506070; font-size: 9.5px; }
+
+  .leaf .box { cursor: default; }
+  .leaf .box:hover { transform: none; }
+
+  /* connectors */
+  .v-drop { width: 2px; height: 20px; background: var(--line-color); flex-shrink: 0; }
+  .connector-down { width: 2px; background: var(--line-color); flex-shrink: 0; }
+  .children-section { display: flex; flex-direction: column; align-items: center; }
+  .children-section.collapsed { display: none; }
+  .children-row { display: flex; flex-direction: row; align-items: flex-start; justify-content: center; }
+  .child-col { display: flex; flex-direction: column; align-items: center; padding: 0 8px; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 6px; }
+  ::-webkit-scrollbar-thumb { 
+    background: rgba(201,168,76,0.4); 
+    border-radius: 6px; 
+    border: 2px solid rgba(0,0,0,0.3);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.6); }
+  
+  /* For Firefox */
+  * {
+    scrollbar-width: thick;
+    scrollbar-color: rgba(201,168,76,0.4) rgba(0,0,0,0.3);
+  }
+
+  /* search highlight */
+  .rel-table tbody tr.highlight-row { background: rgba(201,168,76,0.1); }
+  .search-wrap {
+    padding: 10px 16px 0;
+  }
+  .search-input {
+    width: 100%; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;
+    color: var(--text-primary); font-family: 'DM Sans', sans-serif;
+    font-size: 11.5px; padding: 7px 12px;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { outline: none; border-color: var(--gold); }
+  .search-input::placeholder { color: rgba(255,255,255,0.25); }
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN SCREEN ── -->
+<div id="loginScreen">
+  <div class="login-container">
+    <div class="login-header">
+      <div class="login-logo">
+        <div class="login-accenture">accenture></div>
+        <div class="login-divider"></div>
+        <div class="login-eagle"></div>
+      </div>
+      <h1 class="login-title">Barclays Group Leadership</h1>
+      <p class="login-subtitle">Organisation Chart · Secure Access</p>
+    </div>
+
+    <form class="login-form" onsubmit="handleLogin(event)">
+      <div class="login-error" id="loginError">
+        Invalid username or password. Please try again.
+      </div>
+
+      <div class="login-input-group">
+        <label class="login-label" for="username">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          class="login-input" 
+          placeholder="Enter username"
+          autocomplete="username"
+          required
+        >
+      </div>
+
+      <div class="login-input-group">
+        <label class="login-label" for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          class="login-input" 
+          placeholder="Enter password"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+
+      <button type="submit" class="login-button">Sign In</button>
+    </form>
+
+    <div class="login-footer">
+      <span style="color: #A100FF;">Accenture</span> × <span style="color: #c9a84c;">Barclays</span> | Authorized Access Only
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN APP ── -->
+<div id="mainApp">
+
+<!-- ── HEADER ── -->
+<div class="page-header">
+  <div class="header-brand">
+    <div class="brand-logos">
+      <div class="accenture-logo">accenture<span>></span></div>
+      <div class="brand-divider"></div>
+      <div class="eagle-icon"></div>
+      <div class="header-text">
+        <h1>Barclays Group Leadership</h1>
+        <p>Organisation Chart · Relationship Mapping · GitHub Sync</p>
+      </div>
+    </div>
+  </div>
+  <div class="header-controls">
+    <button class="btn-control active" id="togglePanel" onclick="togglePanel()">◀ Contacts</button>
+    <button class="btn-control" onclick="expandAll()">Expand All</button>
+    <button class="btn-control" onclick="collapseAll()">Collapse All</button>
+    <button class="btn-control" onclick="logout()" style="margin-left: 10px;">🔒 Logout</button>
+  </div>
+</div>
+
+<!-- ── BODY ── -->
+<div class="app-body">
+
+  <!-- SIDE PANEL -->
+  <div class="side-panel" id="sidePanel">
+    <div class="panel-header">
+      <h2 style="background: linear-gradient(135deg, #A100FF 0%, #C44EFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Accenture Key Contacts</h2>
+      <p>Enter initials, relationship score (1–5), and social style for each Barclays stakeholder. Changes sync to GitHub for team collaboration.</p>
+      <div class="score-legend">
+        <span class="score-pill" style="background:#c0392b22;color:#e57060;border:1px solid #c0392b44">1 — Minimal</span>
+        <span class="score-pill" style="background:#e67e2222;color:#e8a04a;border:1px solid #e67e2244">2 — Developing</span>
+        <span class="score-pill" style="background:#c9a80022;color:#e0c020;border:1px solid #c9a80044">3 — Established</span>
+        <span class="score-pill" style="background:#27ae6022;color:#4dc87a;border:1px solid #27ae6044">4 — Strong</span>
+        <span class="score-pill" style="background:#0fa89422;color:#20d4be;border:1px solid #0fa89444">5 — Strategic</span>
+      </div>
+      <div style="margin-top:10px;font-size:10px;color:var(--silver);letter-spacing:0.5px;">
+        <strong style="color:var(--text-primary)">Social Styles:</strong> 
+        An (Analytical) · Dr (Driver) · Ex (Expressive) · Am (Amiable)
+      </div>
+    </div>
+
+    <div class="search-wrap">
+      <input class="search-input" type="text" id="searchInput" placeholder="Search people…" oninput="filterTable(this.value)">
+    </div>
+
+    <div class="table-wrapper">
+      <table class="rel-table" id="relTable">
+        <thead>
+          <tr>
+            <th style="width:32%">Barclays Person</th>
+            <th style="width:18%">Initials</th>
+            <th style="width:14%">Score</th>
+            <th style="width:14%">Style</th>
+            <th style="width:22%">Badge</th>
+          </tr>
+        </thead>
+        <tbody id="relTableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="panel-footer">
+      <button class="btn-sm btn-primary" onclick="applyAll()">Save to GitHub</button>
+      <button class="btn-sm btn-primary" onclick="loadFromGitHub().then(() => { buildTable(); applyAll(); })">Refresh from GitHub</button>
+      <button class="btn-sm btn-ghost" onclick="clearAll()">Clear All</button>
+      <button class="btn-sm btn-ghost" onclick="exportCSV()">Export CSV</button>
+      <span class="assigned-count" id="assignedCount">0 assigned</span>
+    </div>
+
+    <!-- GitHub Token Setup -->
+    <div style="padding: 10px 16px; border-top: 1px solid rgba(161,0,255,0.15); background: rgba(10,22,40,0.9);">
+      <button class="btn-sm btn-ghost" onclick="showTokenSetup()" style="width: 100%;">🔑 Setup GitHub Token (First Time Only)</button>
+      <div style="font-size: 9px; color: var(--silver); margin-top: 6px; text-align: center; line-height: 1.4;">
+        Required once to enable saving. Token stored securely in your browser.
+      </div>
+    </div>
+    
+    <!-- Footer branding -->
+    <div style="padding: 12px 16px; border-top: 1px solid rgba(161,0,255,0.15); background: rgba(10,22,40,0.8); font-size: 10px; color: var(--silver); text-align: center; letter-spacing: 0.5px;">
+      <span style="color: #A100FF;">Accenture</span> × <span style="color: #c9a84c;">Barclays</span> | Relationship Intelligence Platform
+    </div>
+  </div>
+
+  <!-- CHART -->
+  <div class="chart-area">
+    <p class="scroll-hint">↔ Scroll to explore · Click any box to expand/collapse</p>
+    <div class="chart-wrapper">
+      <div id="chart"></div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- End mainApp -->
+
+<script>
+// ── AUTHENTICATION ────────────────────────────────────────────────────────────
+const AUTH_CREDENTIALS = {
+  username: 'Barclays_Org',
+  password: 'PS'
+};
+
+function handleLogin(event) {
+  event.preventDefault();
+
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const errorDiv = document.getElementById('loginError');
+
+  if (username === AUTH_CREDENTIALS.username && password === AUTH_CREDENTIALS.password) {
+    // Successful login
+    sessionStorage.setItem('authenticated', 'true');
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('mainApp').classList.add('authenticated');
+
+    // Initialize the app
+    initializeApp();
+  } else {
+    // Failed login
+    errorDiv.classList.add('show');
+    document.getElementById('password').value = '';
+
+    setTimeout(() => {
+      errorDiv.classList.remove('show');
+    }, 3000);
+  }
+}
+
+// Check if already authenticated
+function checkAuth() {
+  if (sessionStorage.getItem('authenticated') === 'true') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('mainApp').classList.add('authenticated');
+    initializeApp();
+  }
+}
+
+// Logout function
+function logout() {
+  if (confirm('Are you sure you want to log out?')) {
+    sessionStorage.removeItem('authenticated');
+    location.reload();
+  }
+}
+
+// Run auth check on page load
+checkAuth();
+
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const data = {
+  name: "CS Venkatakrishnan", role: "Group Chief Executive Officer", level: 0,
+  children: [
+    { name: "Anna Cross", role: "Group Finance Director", level: 1 },
+    {
+      name: "Craig Bright", role: "Group Chief Information Officer", level: 1,
+      children: [
+        { name: "Jillian Chai", role: "Group Technology Chief of Staff and head of EVP", level: 2 },
+        {
+          name: "Antoinette O'Neill", role: "Chief Operating Officer, CIB", level: 2,
+          children: [
+            {
+              name: "Paul Beresford", role: "CIO Consumer Banking, Payments and Group Controls Technology", level: 3,
+              children: [
+                { name: "Neil Welsh", role: "MD : CBP Technology", level: 4 },
+                { name: "Mark Watling", role: "CIO Barclaycard Payment", level: 4 },
+                { name: "Lily Wang", role: "CIO Wholesale Onboarding, GFCO and CRM", level: 4 },
+                { name: "Gareth Hall", role: "CIO Global Fraud Tech", level: 4 },
+                { name: "Jia-Yan Gu", role: "Head of X-Barclays Digital Platform Engineering", level: 4 },
+                { name: "Duncan Bankhead", role: "Head of Architecture", level: 4 },
+                { name: "Paul Clark", role: "CIO for Payments Acceptance", level: 4 },
+                { name: "Sophie Jones", role: "Central Portfolio Office Lead GTIS and CTO", level: 4 },
+                { name: "Emma Charters", role: "Executive Assistant to Paul Beresford", level: 4 },
+                { name: "Anestis Karagiannidis", role: "MD, Head of Operations, Performance & Strategy Execution", level: 4 }
+              ]
+            },
+            {
+              name: "Stephen Flaherty", role: "CTO & Head of Group Technology Infrastructure Services", level: 3,
+              children: [
+                { name: "Stephen Johnston", role: "MD - Distinguished Engineer - Advanced Engineering", level: 4 },
+                { name: "Ben George", role: "Data Distinguished Engineer", level: 4 },
+                { name: "Ramon Ali", role: "Head of Infrastructure Engineering", level: 4 },
+                { name: "Russell Wakefield", role: "GTIS Head of Service Delivery BX", level: 4 },
+                { name: "Paulo De Sa", role: "MD, Workplace & Collaboration Services", level: 4 },
+                { name: "Amy Williams", role: "Head of Core Infrastructure Platform | Radbroke Site Lead", level: 4 },
+                { name: "David Richards", role: "Head of Enterprise Foundation Platforms", level: 4 },
+                { name: "Riaan Postma", role: "Head of Architecture & Platform Engineering", level: 4 },
+                { name: "Vicky Sumner", role: "Portfolio and Strategy Director", level: 4 },
+                { name: "Kristen Bennie", role: "Group Head of Innovation and Partnerships", level: 4 },
+                { name: "Santashil Palchaudhuri", role: "CTO India, Head of AppliedAI", level: 4 },
+                { name: "Michael Rozycki", role: "Network Transformation Lead", level: 4 },
+                { name: "Richard Thomas", role: "Head of Service Delivery for Consumer Banking and Payments", level: 4 },
+                { name: "William Lyvers", role: "Distinguished Engineer - Head of Application Engineering", level: 4 },
+                { name: "Chris Kozlowski", role: "Platform Services and Site Reliability Engineering", level: 4 }
+              ]
+            },
+            {
+              name: "Jonathan Lowe", role: "Head of Group Technology Service Management", level: 3,
+              children: [
+                { name: "Paul Austen", role: "Head of RtB Corporate Tech & Infra BI", level: 4 },
+                { name: "Craig Williams", role: "Head of Technology Command Centres", level: 4 },
+                { name: "Iain MacLeod", role: "Group Technology Service Management", level: 4 },
+                { name: "Leanne Wakefield", role: "Head of Colleague Operations", level: 4 },
+                { name: "Alan Muses", role: "GTSM Head of Markets & Investment Bank", level: 4 },
+                { name: "Jered Powell", role: "GTSM Head of Consumer Banking and Payments", level: 4 },
+                { name: "Kwan Choi", role: "GTSM – Global Head of RFT, FT and Data Platform", level: 4 },
+                { name: "Shaurav Choudhury", role: "GTSM Head of Corporate Banking & Global Payments", level: 4 },
+                { name: "Alison Irving", role: "GTSM Strategy & Performance Management", level: 4 },
+                { name: "Dhana Damodaram", role: "MD – GTSM Head of BUK", level: 4 },
+                { name: "Cassandra Waugh", role: "PA – Head of GTSM & Group Technology Strategy", level: 4 }
+              ]
+            },
+            { name: "Alison Hedges", role: "Head of CIB Tech Strategy and Transformation", level: 3 },
+            { name: "Sheryl Brissett-Sanchez", role: "EA to Antoinette O'Neill", level: 3 }
+          ]
+        },
+        { name: "Stuart Baker", role: "Group Head of Control", level: 2 },
+        {
+          name: "Steve Beasty", role: "COO, Barclays UK", level: 2,
+          children: [
+            { name: "Jan Muralitharan", role: "Chief Information Officer Barclays UK", level: 3 },
+            { name: "Vanessa Murden", role: "Head of Physical Operations", level: 3 },
+            { name: "Mark Watkinson", role: "Head of Execution Oversight and Delivery, BUK", level: 3 },
+            { name: "Gillian Wylie", role: "Head of BUK Transformation, Method & Delivery", level: 3 },
+            { name: "Anna Cleland", role: "Head of Acquisition & Engagement", level: 3 },
+            { name: "Dionne Pinsent", role: "Executive Assistant to Steve Beasty", level: 3 }
+          ]
+        },
+        {
+          name: "John Miller", role: "Group Chief Information Security Officer", level: 2,
+          children: [
+            { name: "Joanna Patrick", role: "Head of CISO Change Portfolio Delivery", level: 3 },
+            { name: "Colleen Rose", role: "Chief Information Security Officer BUK", level: 3 },
+            { name: "Ian Moseley", role: "Head of Cyber Posture & Assurance", level: 3 },
+            { name: "Michael Jones", role: "Group CISO Chief of Staff", level: 3 },
+            { name: "Becky Pinkard", role: "Head of Cyber Operations", level: 3 },
+            { name: "Andrew Pickering", role: "Group Technology and Functions CISO", level: 3 },
+            { name: "Roberto Armenteros", role: "Head of Proactive Defence", level: 3 },
+            { name: "Rohit Arora", role: "Head of Data and AI Security", level: 3 },
+            { name: "Liza Russell", role: "US Consumer Bank, Investment Bank, and Americas CISO", level: 3 },
+            { name: "Gloria DeBenedictis", role: "Executive Assistant to John Miller", level: 3 },
+            { name: "Nicole Phillips", role: "EA to Gary Smolyanskiy, Tejas Nadkarni & William McWeeny", level: 3 }
+          ]
+        },
+        { name: "Leonhard Mueller", role: "Operations Leader - MD", level: 2 },
+        { name: "Lauren Bennett", role: "EA to Craig Bright", level: 2 }
+      ]
+    },
+    {
+      name: "Anne Marie Darling", role: "Group Co-COO and Co-CEO, BX", level: 1,
+      children: [
+        { name: "Malcolm Brooke", role: "Group COO Chief of Staff", level: 2 },
+        {
+          name: "Georges Lauchard", role: "Global Markets and Wholesale Lending COO", level: 2,
+          children: [
+            {
+              name: "Andrew Longmuir", role: "Head of Global Markets Operations", level: 3,
+              children: [
+                { name: "Matthew Keys-Lumley", role: "Global Head of Network Management, Treasury, and Cost Operations", level: 4 },
+                { name: "Paul Eblett", role: "Head of Client & Colleague Services", level: 4 },
+                { name: "Nicholas Searle", role: "(role not listed)", level: 4 },
+                { name: "Brian Williams", role: "Director - Global Head of Network & Data Management Services", level: 4 },
+                { name: "Sue McMillan", role: "Director - TTRO", level: 4 },
+                { name: "Christopher Chalmers", role: "Director - GMO Service Management, Control & Resiliency", level: 4 },
+                { name: "Paul Zedlovich", role: "Global Head Security Services & Asset Servicing", level: 4 },
+                { name: "Joanne Brower", role: "MD - Global Head of Markets Operations Service Performance", level: 4 },
+                { name: "Nina Tait", role: "Greater China & Australia CIB Operations, APAC", level: 4 },
+                { name: "Munawar Hussain", role: "Head of Operations, Middle East", level: 4 },
+                { name: "Anand Rajasekaran", role: "Director, Head of Securities Settlements - India", level: 4 },
+                { name: "Corinne Goh", role: "Executive Assistant", level: 4 },
+                { name: "Natalie Whyte", role: "Executive Assistant to Andrew Longmuir", level: 4 }
+              ]
+            },
+            { name: "Carl Brown", role: "Co CIO Markets Pre-Trade Technology", level: 3 },
+            { name: "Paul C Sampat", role: "Co CIO Markets Pre-Trade Technology", level: 3 },
+            { name: "James Clark", role: "MD - Global Head of CIB Planning and Execution", level: 3 },
+            { name: "Craig Day", role: "CIB CDO", level: 3 },
+            { name: "Luke Khanna", role: "Head of Strategy & Transformation, Global Markets", level: 3 },
+            { name: "Darragh Dempsey", role: "Global Head of Wholesale Lending Operations", level: 3 },
+            { name: "Alexander Harrison", role: "COO, APACMEA & Country CEO, Singapore", level: 3 },
+            {
+              name: "Austin Fernandes", role: "MD, CIO Global Markets Sales & Post Trade Technology", level: 3,
+              children: [
+                { name: "Rohit Prabhu", role: "MD, Global Head of Collateral and PDS Technology", level: 4 },
+                { name: "Vandhana Srinivas", role: "MD CIO Wholesale Lending", level: 4 },
+                { name: "Maria Buckley", role: "MD - Head of Reference Data Technology", level: 4 },
+                { name: "Ilia Berman", role: "CIO Investment Banking Technology & Head of CIB Digital Strategy", level: 4 },
+                { name: "Larisa Kvetnoy", role: "Head of Core Svcs & Post Trade Arch", level: 4 },
+                { name: "Harsha Yale", role: "Post Trade Tech Data Management", level: 4 },
+                { name: "Chris Wells", role: "MD - Head of Markets Regulatory Technology", level: 4 },
+                { name: "Nirav Shah", role: "Director - Head of Confirms Tech and Markets Process Automation", level: 4 },
+                { name: "Nidhi Khanna", role: "Head of Strategy & Transformation", level: 4 },
+                { name: "Jignesh Patel", role: "Global Markets Sales & Post Trade Technology", level: 4 },
+                { name: "Anand Singh", role: "Head of Data Platform Engineering", level: 4 },
+                { name: "Anastasia Ivanova", role: "Change Delivery Manager", level: 4 },
+                { name: "Adam Shadbolt", role: "Head of Securities Settlements Technology", level: 4 }
+              ]
+            },
+            { name: "Daron Bowes", role: "MD, Algo & Electronic Trading Technology", level: 3 },
+            { name: "Mary Ambrecht", role: "Head of Trading Controls Programme", level: 3 },
+            { name: "Louise Smith", role: "EA to Georges Lauchard", level: 3 }
+          ]
+        },
+        { name: "Sara O'Keane", role: "Chief of Staff to Anne Marie Darling", level: 2 },
+        {
+          name: "Steve Allen", role: "Chief Operating Officer, Corporate, Cards & Payments", level: 2,
+          children: [
+            { name: "Pete Bridge", role: "MD - Head of IB & UKC Financial Crime Execution", level: 3 },
+            { name: "Zoe Smithson", role: "Director, Strategy & Execution, DE&I and Colleague Engagement", level: 3 },
+            { name: "Judith Currie", role: "MD, COO Corporate Banking", level: 3 },
+            { name: "Paul Jury", role: "COO Barclaycard Payments & Merchant Services", level: 3 },
+            { name: "Saket Sharma", role: "CIO, Corporate & Investment Bank Tech", level: 3 },
+            { name: "Vicky West", role: "PA to Steve Allen", level: 3 },
+            { name: "Ryan Hayward", role: "Head of Strategic Investments for Europe and Asia", level: 3 }
+          ]
+        },
+        { name: "Alastair Blackwell", role: "Chief Operating Officer (COO) for BX, Risk & Finance", level: 2 },
+        { name: "Sarah DeGuilio", role: "Executive Assistant", level: 2 }
+      ]
+    },
+    { name: "Vim Maru", role: "CEO, Barclays UK", level: 1 },
+    { name: "Denny Nealon", role: "CEO, US Consumer Bank & BBDE", level: 1 },
+    { name: "Matt Hammerstein", role: "CEO, UK Corporate Bank and Head of Public Policy", level: 1 },
+    { name: "Sasha Wiggins", role: "CEO, Private Bank and Wealth Management", level: 1 },
+    { name: "Taalib Shaah", role: "Group Chief Risk Officer", level: 1 },
+    { name: "Matthew Fitzwater", role: "Group Chief Compliance Officer", level: 1 },
+    { name: "Stephen Shapiro", role: "Group General Counsel", level: 1 },
+    { name: "Gijs Borghouts", role: "Chief Internal Auditor, Barclays PLC", level: 1 },
+    { name: "Tristram Roberts", role: "Group HR Director", level: 1 },
+    { name: "Stephen Dainton", role: "BBPLC President and Head of IB Management", level: 1 },
+    { name: "Paul Compton", role: "Chairman of Investment Banking", level: 1 },
+    { name: "Adeel Khan", role: "Global Head of Markets", level: 1 },
+    { name: "Cathal Deasy", role: "Global Co-Head of Banking", level: 1 },
+    { name: "Taylor Wright", role: "Global Co-Head of Banking", level: 1 },
+    { name: "Anita Tanna", role: "Group Chief of Staff", level: 1 }
+  ]
+};
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+// relationships: { "Person Name": { initials: "PS", score: "3", socialStyle: "Ex" } }
+let relationships = {};
+
+// ── GITHUB CONFIGURATION ──────────────────────────────────────────────────────
+const GITHUB_CONFIG = {
+  owner: 'gordonakclark',
+  repo: 'barclays-org-chart-',
+  dataFile: 'relationships.json',
+  branch: 'main',
+  apiUrl: 'https://api.github.com/repos/gordonakclark/barclays-org-chart-/contents/relationships.json'
+};
+
+// Get GitHub token from localStorage (user sets this once)
+function getGitHubToken() {
+  return localStorage.getItem('github-token');
+}
+
+function setGitHubToken(token) {
+  localStorage.setItem('github-token', token);
+}
+
+// Load relationships from GitHub - EXACT COPY FROM WORKING MINIMAL TEST
+async function loadFromGitHub() {
+  try {
+    showNotification('Loading data from GitHub...', 'info');
+
+    const token = getGitHubToken();
+    if (!token) {
+      throw new Error('No token found');
+    }
+
+    const response = await fetch(GITHUB_CONFIG.apiUrl, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Load failed: ${response.status}`);
+    }
+
+    const file = await response.json();
+    const content = JSON.parse(atob(file.content));
+
+    relationships = content.relationships || {};
+    localStorage.setItem('github-sha', file.sha);
+    localStorage.setItem('barclays-relationships', JSON.stringify(relationships));
+
+    console.log(`Loaded ${Object.keys(relationships).length} relationships from GitHub`);
+    return true;
+
+  } catch (error) {
+    console.error('Error loading from GitHub:', error);
+    const saved = localStorage.getItem('barclays-relationships');
+    if (saved) {
+      relationships = JSON.parse(saved);
+      showNotification('Loaded from local backup', 'warning');
+      return true;
+    }
+    showNotification('Unable to load data', 'error');
+    return false;
+  }
+}
+
+// Save relationships to GitHub - EXACT COPY FROM WORKING MINIMAL TEST
+async function saveToGitHub() {
+  const token = getGitHubToken();
+
+  if (!token) {
+    showNotification('GitHub token required. Click "Setup GitHub Token" below.', 'warning');
+    return false;
+  }
+
+  try {
+    showNotification('Saving to GitHub...', 'info');
+    console.log('Starting save operation...');
+
+    // Step 1: Read current file - EXACT copy from minimal test
+    console.log('Step 1: Reading current file...');
+    const getResponse = await fetch(GITHUB_CONFIG.apiUrl, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+
+    if (!getResponse.ok) {
+      throw new Error(`Read failed: ${getResponse.status} ${getResponse.statusText}`);
+    }
+
+    const currentFile = await getResponse.json();
+    console.log('✅ Current SHA:', currentFile.sha);
+
+    // Step 2: Parse existing data
+    let existingData = {};
+    try {
+      const parsed = JSON.parse(atob(currentFile.content));
+      existingData = parsed.relationships || {};
+    } catch (e) {
+      console.log('No existing data, creating new');
+    }
+
+    // Step 3: Merge with local changes
+    const mergedData = { ...existingData, ...relationships };
+    console.log(`Merged: ${Object.keys(mergedData).length} total relationships`);
+
+    // Step 4: Prepare save
+    const dataToSave = {
+      relationships: mergedData,
+      lastUpdated: new Date().toISOString(),
+      lastUpdatedBy: 'Web App User'
+    };
+
+    const encodedContent = btoa(JSON.stringify(dataToSave, null, 2));
+
+    // Step 5: Write - EXACT copy from minimal test
+    console.log('Step 2: Writing to GitHub...');
+    const putResponse = await fetch(GITHUB_CONFIG.apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `Update relationship data - ${new Date().toLocaleString()}`,
+        content: encodedContent,
+        sha: currentFile.sha,
+        branch: GITHUB_CONFIG.branch
+      })
+    });
+
+    if (!putResponse.ok) {
+      const errorData = await putResponse.json();
+      console.error('Write failed:', errorData);
+
+      if (errorData.message && errorData.message.includes('does not match')) {
+        throw new Error('Data changed - click "Refresh from GitHub" and try again');
+      }
+
+      throw new Error(errorData.message || `Save failed: ${putResponse.status}`);
+    }
+
+    const result = await putResponse.json();
+    console.log('✅ Save successful! New SHA:', result.content.sha);
+
+    // Update storage
+    localStorage.setItem('github-sha', result.content.sha);
+    localStorage.setItem('barclays-relationships', JSON.stringify(mergedData));
+    relationships = mergedData;
+
+    showNotification('✅ Successfully saved to GitHub!', 'success');
+    return true;
+
+  } catch (error) {
+    console.error('Save error:', error);
+    showNotification(`❌ ${error.message}`, 'error');
+
+    localStorage.setItem('barclays-relationships', JSON.stringify(relationships));
+    return false;
+  }
+}
+
+// Auto-sync from GitHub periodically
+let autoSyncTimer = null;
+function startAutoSync() {
+  if (autoSyncTimer) clearInterval(autoSyncTimer);
+  autoSyncTimer = setInterval(async () => {
+    await loadFromGitHub();
+    buildTable();
+    applyAll();
+  }, 30000); // Every 30 seconds
+  console.log('Auto-sync enabled (every 30s)');
+}
+
+function stopAutoSync() {
+  if (autoSyncTimer) {
+    clearInterval(autoSyncTimer);
+    autoSyncTimer = null;
+  }
+}
+
+// Setup GitHub token dialog
+function showTokenSetup() {
+  const token = prompt(
+    'Enter your GitHub Personal Access Token:\n\n' +
+    '1. Go to: https://github.com/settings/tokens/new\n' +
+    '2. Give it a name: "Barclays Org Chart"\n' +
+    '3. Select scope: "repo" (full control)\n' +
+    '4. Click "Generate token"\n' +
+    '5. Copy and paste the token here:\n\n' +
+    'Token expires in 90 days by default.'
+  );
+
+  if (token && token.trim()) {
+    setGitHubToken(token.trim());
+    showNotification('GitHub token saved! You can now save changes.', 'success');
+  }
+}
+
+
+
+// Notification system
+function showNotification(message, type = 'info') {
+  const existing = document.getElementById('spNotification');
+  if (existing) existing.remove();
+  
+  const colors = {
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FF9800',
+    error: '#F44336'
+  };
+  
+  const notification = document.createElement('div');
+  notification.id = 'spNotification';
+  notification.style.cssText = `
+    position: fixed; top: 80px; right: 20px; z-index: 9999;
+    background: ${colors[type]}; color: white;
+    padding: 12px 20px; border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    animation: slideIn 0.3s ease-out;
+  `;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => notification.remove(), 300);
+  }, 3000);
+}
+
+// Add animation styles
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideIn { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+  @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(400px); opacity: 0; } }
+`;
+document.head.appendChild(style);
+
+// Flat list of all people, built from data tree
+let allPeople = [];
+
+function flattenTree(node) {
+  allPeople.push({ name: node.name, role: node.role, level: node.level });
+  if (node.children) node.children.forEach(flattenTree);
+}
+flattenTree(data);
+
+// ── SCORE COLOURS ─────────────────────────────────────────────────────────────
+const scoreBgClass = ['','score-bg-1','score-bg-2','score-bg-3','score-bg-4','score-bg-5'];
+const scoreHex = ['','#c0392b','#e67e22','#b8960a','#27ae60','#0fa894'];
+const scoreTextHex = ['','#fff','#fff','#000','#fff','#fff'];
+
+// ── BUILD TABLE ───────────────────────────────────────────────────────────────
+function buildTable() {
+  const tbody = document.getElementById('relTableBody');
+  tbody.innerHTML = '';
+  allPeople.forEach(person => {
+    const rel = relationships[person.name] || { initials: '', score: '', socialStyle: '' };
+    const tr = document.createElement('tr');
+    tr.dataset.name = person.name;
+
+    const tdName = document.createElement('td');
+    tdName.innerHTML = `<div class="person-name-cell">${person.name}</div><div class="person-role-cell">${person.role}</div>`;
+
+    const tdInitials = document.createElement('td');
+    const inp = document.createElement('input');
+    inp.className = 'input-initials';
+    inp.type = 'text';
+    inp.maxLength = 4;
+    inp.placeholder = 'e.g. PS';
+    inp.value = rel.initials || '';
+    inp.dataset.name = person.name;
+    inp.addEventListener('input', () => { updateRel(person.name); updateBadgePreview(tr, person.name); updateCount(); });
+    tdInitials.appendChild(inp);
+
+    const tdScore = document.createElement('td');
+    const sel = document.createElement('select');
+    sel.className = 'score-select';
+    sel.dataset.name = person.name;
+    ['—','1','2','3','4','5'].forEach((v, i) => {
+      const opt = document.createElement('option');
+      opt.value = i === 0 ? '' : v;
+      opt.textContent = v;
+      if ((rel.score || '') == opt.value) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', () => { updateRel(person.name); updateBadgePreview(tr, person.name); updateCount(); });
+    tdScore.appendChild(sel);
+
+    const tdSocial = document.createElement('td');
+    const selSocial = document.createElement('select');
+    selSocial.className = 'social-select';
+    selSocial.dataset.name = person.name;
+    ['—','An','Dr','Ex','Am'].forEach((v, i) => {
+      const opt = document.createElement('option');
+      opt.value = i === 0 ? '' : v;
+      opt.textContent = v;
+      if ((rel.socialStyle || '') == opt.value) opt.selected = true;
+      selSocial.appendChild(opt);
+    });
+    selSocial.addEventListener('change', () => { updateRel(person.name); updateBadgePreview(tr, person.name); updateCount(); });
+    tdSocial.appendChild(selSocial);
+
+    const tdPreview = document.createElement('td');
+    tdPreview.className = 'preview-cell';
+    tdName.appendChild(document.createElement('span')); // spacer
+    tr.appendChild(tdName);
+    tr.appendChild(tdInitials);
+    tr.appendChild(tdScore);
+    tr.appendChild(tdSocial);
+    tr.appendChild(tdPreview);
+    tbody.appendChild(tr);
+    updateBadgePreview(tr, person.name);
+  });
+  updateCount();
+}
+
+function updateRel(name) {
+  const inp = document.querySelector(`input.input-initials[data-name="${CSS.escape(name)}"]`);
+  const sel = document.querySelector(`select.score-select[data-name="${CSS.escape(name)}"]`);
+  const selSocial = document.querySelector(`select.social-select[data-name="${CSS.escape(name)}"]`);
+  if (!inp || !sel || !selSocial) return;
+  const initials = inp.value.trim().toUpperCase();
+  const score = sel.value;
+  const socialStyle = selSocial.value;
+  if (initials || score || socialStyle) {
+    relationships[name] = { initials, score, socialStyle };
+  } else {
+    delete relationships[name];
+  }
+  // Save to localStorage as backup
+  localStorage.setItem('barclays-relationships', JSON.stringify(relationships));
+  // live-update the chart badge
+  updateChartBadge(name);
+}
+
+function updateBadgePreview(tr, name) {
+  const rel = relationships[name];
+  const cell = tr.querySelector('.preview-cell');
+  if (!rel || (!rel.initials && !rel.score && !rel.socialStyle)) {
+    cell.innerHTML = `<span class="badge-preview empty">—</span>`;
+    return;
+  }
+  const text = [rel.initials, rel.score, rel.socialStyle].filter(Boolean).join(':');
+  const badgeText = text ? `[${text}]` : '—';
+  const sc = parseInt(rel.score) || 0;
+  const bgC = sc ? scoreHex[sc] : '#444';
+  const txC = sc ? scoreTextHex[sc] : '#fff';
+  cell.innerHTML = `<span class="badge-preview" style="background:${bgC};color:${txC};border-color:rgba(0,0,0,0.2)">${badgeText}</span>`;
+}
+
+function updateCount() {
+  const n = Object.keys(relationships).length;
+  document.getElementById('assignedCount').textContent = `${n} assigned`;
+}
+
+// ── CHART BADGE UPDATE ────────────────────────────────────────────────────────
+// nodeMap: name → box DOM element (built during renderChart)
+const nodeMap = {};
+
+function updateChartBadge(name) {
+  const box = nodeMap[name];
+  if (!box) return;
+  // Remove existing rel badge
+  const existing = box.querySelector('.rel-badge');
+  if (existing) existing.remove();
+  const rel = relationships[name];
+  if (!rel || (!rel.initials && !rel.score && !rel.socialStyle)) return;
+  const parts = [rel.initials, rel.score, rel.socialStyle].filter(Boolean);
+  const text = parts.length > 0 ? `[${parts.join(':')}]` : '';
+  if (!text) return;
+  const sc = parseInt(rel.score) || 0;
+  const badge = document.createElement('div');
+  badge.className = `rel-badge ${sc ? scoreBgClass[sc] : ''}`;
+  if (!sc) { badge.style.background = '#444'; badge.style.color = '#fff'; }
+  badge.textContent = text;
+  box.appendChild(badge);
+}
+
+function applyAll() {
+  allPeople.forEach(p => updateChartBadge(p.name));
+  saveToGitHub();
+}
+
+function clearAll() {
+  if (!confirm('Are you sure you want to clear all relationship data?')) return;
+  relationships = {};
+  allPeople.forEach(p => updateChartBadge(p.name));
+  buildTable();
+  saveToGitHub();
+}
+
+// ── EXPORT ────────────────────────────────────────────────────────────────────
+function exportCSV() {
+  const rows = [['Name','Role','Accenture Initials','Relationship Score','Social Style']];
+  allPeople.forEach(p => {
+    const rel = relationships[p.name] || {};
+    rows.push([p.name, p.role, rel.initials || '', rel.score || '', rel.socialStyle || '']);
+  });
+  const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'barclays_accenture_relationships.csv'; a.click();
+}
+
+// ── TABLE SEARCH ──────────────────────────────────────────────────────────────
+function filterTable(query) {
+  const q = query.toLowerCase();
+  document.querySelectorAll('#relTableBody tr').forEach(tr => {
+    const name = tr.dataset.name || '';
+    tr.style.display = name.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+// ── PANEL TOGGLE ──────────────────────────────────────────────────────────────
+function togglePanel() {
+  const panel = document.getElementById('sidePanel');
+  const btn = document.getElementById('togglePanel');
+  const collapsed = panel.classList.toggle('collapsed');
+  btn.textContent = collapsed ? '▶ Contacts' : '◀ Contacts';
+  btn.classList.toggle('active', !collapsed);
+}
+
+// ── ORG CHART RENDER ──────────────────────────────────────────────────────────
+function buildNode(node, isRoot = false) {
+  const hasChildren = node.children && node.children.length > 0;
+  const nodeDiv = document.createElement('div');
+  nodeDiv.className = `node level-${node.level} ${hasChildren ? '' : 'leaf'}`;
+
+  if (!isRoot) {
+    const vDrop = document.createElement('div');
+    vDrop.className = 'v-drop';
+    nodeDiv.appendChild(vDrop);
+  }
+
+  const box = document.createElement('div');
+  box.className = 'box';
+
+  const nameEl = document.createElement('div');
+  nameEl.className = 'name';
+  nameEl.textContent = node.name;
+  box.appendChild(nameEl);
+
+  const roleEl = document.createElement('div');
+  roleEl.className = 'role';
+  roleEl.textContent = node.role;
+  box.appendChild(roleEl);
+
+  // Register in nodeMap for live updates
+  nodeMap[node.name] = box;
+
+  if (hasChildren) {
+    const badge = document.createElement('div');
+    badge.className = 'toggle-badge';
+    badge.textContent = '−';
+    box.appendChild(badge);
+    box.addEventListener('click', () => {
+      const section = nodeDiv.querySelector(':scope > .children-section');
+      if (section) {
+        const collapsed = section.classList.toggle('collapsed');
+        badge.textContent = collapsed ? '+' : '−';
+      }
+    });
+  }
+
+  nodeDiv.appendChild(box);
+
+  if (hasChildren) {
+    const section = document.createElement('div');
+    section.className = 'children-section';
+    const lineDown = document.createElement('div');
+    lineDown.className = 'connector-down';
+    lineDown.style.height = '20px';
+    section.appendChild(lineDown);
+
+    if (node.children.length === 1) {
+      section.appendChild(buildNode(node.children[0]));
+    } else {
+      const row = document.createElement('div');
+      row.className = 'children-row';
+      node.children.forEach(child => {
+        const col = document.createElement('div');
+        col.className = 'child-col';
+        col.style.cssText = 'display:flex;flex-direction:column;align-items:center;padding:0 8px';
+        const hBar = document.createElement('div');
+        hBar.style.cssText = 'width:100%;height:2px;background:var(--line-color);align-self:flex-start';
+        col.appendChild(hBar);
+        col.appendChild(buildNode(child));
+        row.appendChild(col);
+      });
+      section.appendChild(row);
+    }
+    nodeDiv.appendChild(section);
+  }
+  return nodeDiv;
+}
+
+function renderChart() {
+  const chart = document.getElementById('chart');
+  chart.innerHTML = '';
+  const root = buildNode(data, true);
+  root.style.cssText = 'display:flex;flex-direction:column;align-items:center';
+  chart.appendChild(root);
+  // Apply any existing relationships
+  applyAll();
+}
+
+function expandAll() {
+  document.querySelectorAll('.children-section').forEach(s => s.classList.remove('collapsed'));
+  document.querySelectorAll('.toggle-badge').forEach(b => b.textContent = '−');
+}
+
+function collapseAll() {
+  document.querySelectorAll('.children-section').forEach(s => {
+    const parentBox = s.previousElementSibling;
+    if (parentBox?.classList.contains('box')) {
+      const badge = parentBox.querySelector('.toggle-badge');
+      if (badge) badge.textContent = '+';
+    }
+    s.classList.add('collapsed');
+  });
+  const topSection = document.querySelector('.level-0 > .children-section');
+  if (topSection) {
+    topSection.classList.remove('collapsed');
+    const badge = document.querySelector('.level-0 > .box .toggle-badge');
+    if (badge) badge.textContent = '−';
+  }
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+// Wrapped in function to call after authentication
+async function initializeApp() {
+  const success = await loadFromGitHub();
+  renderChart();
+  buildTable();
+
+  if (success) {
+    showNotification('Data loaded from GitHub - multi-user sync enabled!', 'success');
+    startAutoSync(); // Auto-refresh every 30 seconds
+  } else {
+    showNotification('Using local data. Setup GitHub token to enable sync.', 'warning');
+  }
+}
+</script>
+</body>
+</html>
