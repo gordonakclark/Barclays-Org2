@@ -415,6 +415,30 @@
   }
   .input-initials::placeholder { color: rgba(255,255,255,0.2); font-weight: 300; letter-spacing: 0; text-transform: none; }
 
+  .input-bu {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 500;
+    padding: 4px 7px;
+    width: 100%;
+    box-sizing: border-box;
+    letter-spacing: 0.3px;
+    transition: border-color 0.2s;
+  }
+  .input-bu:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+  .input-bu::placeholder { color: rgba(255,255,255,0.25); font-weight: 300; }
+
+  /* Business Unit filter dim/highlight */
+  .box.bu-dim { opacity: 0.18; filter: grayscale(0.85); transition: opacity 0.25s, filter 0.25s, box-shadow 0.25s; }
+  .box.bu-match { box-shadow: 0 0 0 2px var(--gold), 0 0 18px rgba(201,168,76,0.35); transition: box-shadow 0.25s; }
+
   .score-select {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
@@ -710,6 +734,9 @@
     <button class="btn-control active" id="togglePanel" onclick="togglePanel()">◀ Contacts</button>
     <button class="btn-control" onclick="expandAll()">Expand All</button>
     <button class="btn-control" onclick="collapseAll()">Collapse All</button>
+    <select class="btn-control" id="buFilter" onchange="applyBUFilter(this.value)" style="margin-left: 10px; cursor: pointer;" title="Filter org chart by Business Unit">
+      <option value="">All Business Units</option>
+    </select>
     <button class="btn-control" onclick="logout()" style="margin-left: 10px;">🔒 Logout</button>
   </div>
 </div>
@@ -743,11 +770,12 @@
       <table class="rel-table" id="relTable">
         <thead>
           <tr>
-            <th style="width:32%">Barclays Person</th>
-            <th style="width:18%">Initials</th>
-            <th style="width:14%">Score</th>
-            <th style="width:14%">Style</th>
-            <th style="width:22%">Badge</th>
+            <th style="width:26%">Barclays Person</th>
+            <th style="width:12%">Initials</th>
+            <th style="width:10%">Score</th>
+            <th style="width:10%">Style</th>
+            <th style="width:18%">Badge</th>
+            <th style="width:24%">Business Unit</th>
           </tr>
         </thead>
         <tbody id="relTableBody"></tbody>
@@ -1341,15 +1369,30 @@ function buildTable() {
     const tdPreview = document.createElement('td');
     tdPreview.className = 'preview-cell';
     tdName.appendChild(document.createElement('span')); // spacer
+
+    const tdBU = document.createElement('td');
+    const inpBU = document.createElement('input');
+    inpBU.className = 'input-bu';
+    inpBU.type = 'text';
+    inpBU.placeholder = 'e.g. BUK, CIB, BX';
+    inpBU.setAttribute('list', 'bu-suggestions');
+    inpBU.value = rel.businessUnit || '';
+    inpBU.dataset.name = person.name;
+    inpBU.addEventListener('input', () => { updateRel(person.name); updateCount(); });
+    inpBU.addEventListener('change', () => { populateBUFilter(); });
+    tdBU.appendChild(inpBU);
+
     tr.appendChild(tdName);
     tr.appendChild(tdInitials);
     tr.appendChild(tdScore);
     tr.appendChild(tdSocial);
     tr.appendChild(tdPreview);
+    tr.appendChild(tdBU);
     tbody.appendChild(tr);
     updateBadgePreview(tr, person.name);
   });
   updateCount();
+  populateBUFilter();
 }
 
 function updateRel(name) {
@@ -1357,11 +1400,13 @@ function updateRel(name) {
   const sel = document.querySelector(`select.score-select[data-name="${CSS.escape(name)}"]`);
   const selSocial = document.querySelector(`select.social-select[data-name="${CSS.escape(name)}"]`);
   if (!inp || !sel || !selSocial) return;
+  const inpBU = document.querySelector(`input.input-bu[data-name="${CSS.escape(name)}"]`);
   const initials = inp.value.trim().toUpperCase();
   const score = sel.value;
   const socialStyle = selSocial.value;
-  if (initials || score || socialStyle) {
-    relationships[name] = { initials, score, socialStyle };
+  const businessUnit = inpBU ? inpBU.value.trim() : (relationships[name] && relationships[name].businessUnit) || '';
+  if (initials || score || socialStyle || businessUnit) {
+    relationships[name] = { initials, score, socialStyle, businessUnit };
   } else {
     delete relationships[name];
   }
@@ -1429,10 +1474,10 @@ function clearAll() {
 
 // ── EXPORT ────────────────────────────────────────────────────────────────────
 function exportCSV() {
-  const rows = [['Name','Role','Accenture Initials','Relationship Score','Social Style']];
+  const rows = [['Name','Role','Accenture Initials','Relationship Score','Social Style','Business Unit']];
   allPeople.forEach(p => {
     const rel = relationships[p.name] || {};
-    rows.push([p.name, p.role, rel.initials || '', rel.score || '', rel.socialStyle || '']);
+    rows.push([p.name, p.role, rel.initials || '', rel.score || '', rel.socialStyle || '', rel.businessUnit || '']);
   });
   const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
   const blob = new Blob([csv], { type: 'text/csv' });
@@ -1445,7 +1490,53 @@ function filterTable(query) {
   const q = query.toLowerCase();
   document.querySelectorAll('#relTableBody tr').forEach(tr => {
     const name = tr.dataset.name || '';
-    tr.style.display = name.toLowerCase().includes(q) ? '' : 'none';
+    const rel = relationships[name] || {};
+    const hay = (name + ' ' + (rel.businessUnit || '')).toLowerCase();
+    tr.style.display = hay.includes(q) ? '' : 'none';
+  });
+}
+
+// ── BUSINESS UNIT FILTER ──────────────────────────────────────────────────────
+function getUniqueBUs() {
+  const set = new Set();
+  Object.values(relationships).forEach(r => {
+    if (r && r.businessUnit && r.businessUnit.trim()) set.add(r.businessUnit.trim());
+  });
+  return Array.from(set).sort((a, b) => a.localeCompare(b));
+}
+
+function populateBUFilter() {
+  const sel = document.getElementById('buFilter');
+  if (!sel) return;
+  const current = sel.value;
+  const bus = getUniqueBUs();
+  sel.innerHTML = '<option value="">All Business Units</option>' +
+    bus.map(b => `<option value="${b.replace(/"/g,'&quot;')}">${b}</option>`).join('');
+  // Refresh datalist suggestions for the BU column
+  let dl = document.getElementById('bu-suggestions');
+  if (!dl) {
+    dl = document.createElement('datalist');
+    dl.id = 'bu-suggestions';
+    document.body.appendChild(dl);
+  }
+  dl.innerHTML = bus.map(b => `<option value="${b.replace(/"/g,'&quot;')}">`).join('');
+  if (bus.includes(current)) sel.value = current;
+}
+
+function applyBUFilter(bu) {
+  const chart = document.getElementById('chart');
+  if (!chart) return;
+  if (!bu) {
+    chart.querySelectorAll('.box').forEach(b => { b.classList.remove('bu-dim'); b.classList.remove('bu-match'); });
+    return;
+  }
+  allPeople.forEach(p => {
+    const box = nodeMap[p.name];
+    if (!box) return;
+    const rel = relationships[p.name];
+    const matches = rel && rel.businessUnit && rel.businessUnit.trim() === bu;
+    box.classList.toggle('bu-match', !!matches);
+    box.classList.toggle('bu-dim', !matches);
   });
 }
 
@@ -1540,6 +1631,9 @@ function renderChart() {
   chart.appendChild(root);
   // Apply any existing relationships
   applyAll();
+  // Re-apply BU filter if one is active
+  const buSel = document.getElementById('buFilter');
+  if (buSel && buSel.value) applyBUFilter(buSel.value);
 }
 
 function expandAll() {
