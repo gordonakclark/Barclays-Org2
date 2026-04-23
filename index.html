@@ -436,7 +436,7 @@
   .input-bu::placeholder { color: rgba(255,255,255,0.25); font-weight: 300; }
 
   /* Business Unit filter dim/highlight */
-  .box.bu-dim { opacity: 0.18; filter: grayscale(0.85); transition: opacity 0.25s, filter 0.25s, box-shadow 0.25s; }
+  .box.bu-dim { opacity: 0.55; filter: grayscale(0.4); transition: opacity 0.25s, filter 0.25s, box-shadow 0.25s; }
   .box.bu-match { box-shadow: 0 0 0 2px var(--gold), 0 0 18px rgba(201,168,76,0.35); transition: box-shadow 0.25s; }
 
   .score-select {
@@ -1523,19 +1523,57 @@ function populateBUFilter() {
   if (bus.includes(current)) sel.value = current;
 }
 
+// Build a pruned copy of the org tree containing only nodes that either match
+// the selected BU or have a descendant that does (ancestors are kept so the
+// tree remains connected to the root).
+function pruneTreeByBU(node, bu) {
+  const rel = relationships[node.name];
+  const selfMatches = !!(rel && rel.businessUnit && rel.businessUnit.trim() === bu);
+  const prunedChildren = (node.children || [])
+    .map(ch => pruneTreeByBU(ch, bu))
+    .filter(Boolean);
+  if (!selfMatches && prunedChildren.length === 0) return null;
+  const copy = { name: node.name, role: node.role, level: node.level };
+  if (prunedChildren.length) copy.children = prunedChildren;
+  return copy;
+}
+
+// Render the chart from an arbitrary (already-pruned) tree root. Rebuilds DOM
+// and refreshes the relationship badges. Does NOT trigger saveToGitHub.
+function renderChartTree(rootData) {
+  const chart = document.getElementById('chart');
+  if (!chart) return;
+  chart.innerHTML = '';
+  Object.keys(nodeMap).forEach(k => delete nodeMap[k]);
+  const root = buildNode(rootData, true);
+  root.style.cssText = 'display:flex;flex-direction:column;align-items:center';
+  chart.appendChild(root);
+  allPeople.forEach(p => updateChartBadge(p.name));
+}
+
 function applyBUFilter(bu) {
   const chart = document.getElementById('chart');
   if (!chart) return;
   if (!bu) {
+    // Show full org; strip any filter styling.
+    renderChartTree(data);
     chart.querySelectorAll('.box').forEach(b => { b.classList.remove('bu-dim'); b.classList.remove('bu-match'); });
     return;
   }
+  const pruned = pruneTreeByBU(data, bu);
+  if (!pruned) {
+    Object.keys(nodeMap).forEach(k => delete nodeMap[k]);
+    chart.innerHTML = '<div style="padding:60px 40px;color:var(--silver);text-align:center;font-size:13px;letter-spacing:0.5px;">No people assigned to business unit "' + bu.replace(/</g,'&lt;') + '"</div>';
+    return;
+  }
+  renderChartTree(pruned);
+  // Highlight matches, gently dim ancestor-only context nodes.
   allPeople.forEach(p => {
     const box = nodeMap[p.name];
     if (!box) return;
     const rel = relationships[p.name];
-    const matches = rel && rel.businessUnit && rel.businessUnit.trim() === bu;
-    box.classList.toggle('bu-match', !!matches);
+    const matches = !!(rel && rel.businessUnit && rel.businessUnit.trim() === bu);
+    box.classList.toggle('bu-match', matches);
     box.classList.toggle('bu-dim', !matches);
   });
 }
