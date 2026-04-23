@@ -1,5 +1,11 @@
 {
-  "relationships": {},
-  "lastUpdated": "2026-04-23T18:46:57.647Z",
+  "relationships": {
+    "Jillian Chai": {
+      "initials": "GAKC",
+      "score": "2",
+      "socialStyle": "Dr"
+    }
+  },
+  "lastUpdated": "2026-04-23T18:47:10.869Z",
   "lastUpdatedBy": "Web App User"
 }
