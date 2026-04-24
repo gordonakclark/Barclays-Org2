@@ -369,11 +369,10 @@
   .panel-header p { font-size: 11px; color: var(--silver); margin-top: 3px; line-height: 1.4; }
 
   .security-panel {
-    margin-top: 12px;
-    padding: 10px 12px;
+    padding: 14px 16px;
     border: 1px solid rgba(201,168,76,0.18);
-    border-radius: 8px;
-    background: rgba(10,22,40,0.55);
+    border-radius: 10px;
+    background: rgba(10,22,40,0.7);
   }
   .security-panel h3 {
     font-size: 10px;
@@ -381,6 +380,59 @@
     text-transform: uppercase;
     color: var(--gold-light);
     margin-bottom: 8px;
+  }
+  .security-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 8, 18, 0.7);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 90px 24px 24px;
+    z-index: 1000;
+  }
+  .security-modal-backdrop.open { display: flex; }
+  .security-modal {
+    width: min(560px, 100%);
+    background: linear-gradient(180deg, rgba(17,34,68,0.98) 0%, rgba(7,17,31,0.98) 100%);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 14px;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+    overflow: hidden;
+  }
+  .security-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+    border-bottom: 1px solid rgba(201,168,76,0.14);
+    background: rgba(10,22,40,0.75);
+  }
+  .security-modal-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .security-modal-close {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--silver);
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .security-modal-close:hover {
+    color: var(--white);
+    border-color: rgba(201,168,76,0.35);
+  }
+  .security-modal-body {
+    padding: 18px;
   }
   .security-line {
     font-size: 10px;
@@ -785,6 +837,7 @@
   </div>
   <div class="header-controls">
     <div class="version-badge" id="appVersion"></div>
+    <button class="btn-control" onclick="toggleSecurityModal(true)">Security & Audit</button>
     <button class="btn-control active" id="togglePanel" onclick="togglePanel()">◀ Contacts</button>
     <button class="btn-control" onclick="expandAll()">Expand All</button>
     <button class="btn-control" onclick="collapseAll()">Collapse All</button>
@@ -813,14 +866,6 @@
       <div style="margin-top:10px;font-size:10px;color:var(--silver);letter-spacing:0.5px;">
         <strong style="color:var(--text-primary)">Social Styles:</strong> 
         An (Analytical) · Dr (Driver) · Ex (Expressive) · Am (Amiable)
-      </div>
-      <div class="security-panel">
-        <h3>Security & Audit</h3>
-        <div class="security-line" id="currentUserDisplay">GitHub user: Not connected</div>
-        <div class="security-line" id="securityModeDisplay">Mode: Read-only until token is configured</div>
-        <div class="security-line" id="syncStatusDisplay">Last sync: Not yet loaded</div>
-        <div class="security-line" id="lastUpdatedDisplay">Last update: No remote audit information</div>
-        <ol class="security-history" id="recentHistoryList"><li>—</li></ol>
       </div>
     </div>
 
@@ -876,11 +921,30 @@
 
 </div>
 
+<div class="security-modal-backdrop" id="securityModal" onclick="if(event.target === this) toggleSecurityModal(false)">
+  <div class="security-modal">
+    <div class="security-modal-header">
+      <div class="security-modal-title">Security & Audit</div>
+      <button class="security-modal-close" type="button" onclick="toggleSecurityModal(false)">Close</button>
+    </div>
+    <div class="security-modal-body">
+      <div class="security-panel">
+        <h3>Security & Audit</h3>
+        <div class="security-line" id="currentUserDisplay">GitHub user: Not connected</div>
+        <div class="security-line" id="securityModeDisplay">Mode: Read-only until token is configured</div>
+        <div class="security-line" id="syncStatusDisplay">Last sync: Not yet loaded</div>
+        <div class="security-line" id="lastUpdatedDisplay">Last update: No remote audit information</div>
+        <ol class="security-history" id="recentHistoryList"><li>—</li></ol>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div><!-- End mainApp -->
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.1.0';
+const APP_VERSION = 'v1.1.1';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -961,6 +1025,23 @@ function setSaveUiState() {
   saveBtn.disabled = saveInProgress;
   saveBtn.textContent = saveInProgress ? 'Saving…' : 'Save to GitHub';
 }
+
+function toggleSecurityModal(forceOpen) {
+  const modal = document.getElementById('securityModal');
+  if (!modal) return;
+
+  const open = typeof forceOpen === 'boolean'
+    ? forceOpen
+    : !modal.classList.contains('open');
+
+  modal.classList.toggle('open', open);
+}
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    toggleSecurityModal(false);
+  }
+});
 
 function sanitizeInitials(value) {
   return String(value || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 4);
