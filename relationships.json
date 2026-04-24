@@ -3,7 +3,8 @@
     "Jillian Chai": {
       "initials": "GAKC",
       "score": "2",
-      "socialStyle": "Dr"
+      "socialStyle": "Dr",
+      "businessUnit": "BUK"
     },
     "CS Venkatakrishnan": {
       "initials": "PS",
@@ -27,7 +28,7 @@
       "initials": "GAKC",
       "score": "2",
       "socialStyle": "An",
-      "businessUnit": ""
+      "businessUnit": "IB"
     },
     "Lily Wang": {
       "initials": "GAKC",
@@ -42,6 +43,6 @@
       "businessUnit": "BUK"
     }
   },
-  "lastUpdated": "2026-04-24T11:49:49.841Z",
+  "lastUpdated": "2026-04-24T11:56:09.923Z",
   "lastUpdatedBy": "Web App User"
 }
