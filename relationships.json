@@ -8,7 +8,7 @@
     },
     "CS Venkatakrishnan": {
       "initials": "PS",
-      "score": "3",
+      "score": "1",
       "socialStyle": "Dr",
       "businessUnit": "BUK"
     },
@@ -43,6 +43,12 @@
       "businessUnit": "BUK"
     }
   },
-  "lastUpdated": "2026-04-24T14:14:47.057Z",
-  "lastUpdatedBy": "Web App User"
+  "lastUpdated": "2026-04-24T14:46:30.972Z",
+  "lastUpdatedBy": "gordonakclark",
+  "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-24T14:46:30.972Z"
+    }
+  ]
 }
