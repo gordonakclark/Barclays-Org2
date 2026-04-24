@@ -301,6 +301,22 @@
 
   .header-controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
+  .version-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(201,168,76,0.35);
+    background: rgba(201,168,76,0.12);
+    color: var(--gold-light);
+    font-size: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
   .btn-control {
     background: rgba(161,0,255,0.12);
     border: 1px solid rgba(161,0,255,0.35);
@@ -674,6 +690,7 @@
       </div>
       <h1 class="login-title">Barclays Group Leadership</h1>
       <p class="login-subtitle">Organisation Chart · Secure Access</p>
+      <div class="version-badge" id="loginVersion"></div>
     </div>
 
     <form class="login-form" onsubmit="handleLogin(event)">
@@ -731,6 +748,7 @@
     </div>
   </div>
   <div class="header-controls">
+    <div class="version-badge" id="appVersion"></div>
     <button class="btn-control active" id="togglePanel" onclick="togglePanel()">◀ Contacts</button>
     <button class="btn-control" onclick="expandAll()">Expand All</button>
     <button class="btn-control" onclick="collapseAll()">Collapse All</button>
@@ -783,7 +801,7 @@
     </div>
 
     <div class="panel-footer">
-      <button class="btn-sm btn-primary" onclick="applyAll()">Save to GitHub</button>
+      <button class="btn-sm btn-primary" onclick="saveAll()">Save to GitHub</button>
       <button class="btn-sm btn-primary" onclick="loadFromGitHub().then(() => { buildTable(); applyAll(); })">Refresh from GitHub</button>
       <button class="btn-sm btn-ghost" onclick="clearAll()">Clear All</button>
       <button class="btn-sm btn-ghost" onclick="exportCSV()">Export CSV</button>
@@ -818,6 +836,11 @@
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
+const APP_VERSION = 'v1.0.1';
+
+document.getElementById('loginVersion').textContent = `Version ${APP_VERSION}`;
+document.getElementById('appVersion').textContent = `Version ${APP_VERSION}`;
+
 const AUTH_CREDENTIALS = {
   username: 'Barclays_Org',
   password: 'PS'
@@ -1091,6 +1114,7 @@ async function loadFromGitHub() {
     }
 
     const response = await fetch(GITHUB_CONFIG.apiUrl, {
+      cache: 'no-store',
       headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/vnd.github.v3+json'
@@ -1140,6 +1164,7 @@ async function saveToGitHub() {
     // Step 1: Read current file - EXACT copy from minimal test
     console.log('Step 1: Reading current file...');
     const getResponse = await fetch(GITHUB_CONFIG.apiUrl, {
+      cache: 'no-store',
       headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/vnd.github.v3+json'
@@ -1461,7 +1486,11 @@ function updateChartBadge(name) {
 
 function applyAll() {
   allPeople.forEach(p => updateChartBadge(p.name));
-  saveToGitHub();
+}
+
+async function saveAll() {
+  applyAll();
+  return saveToGitHub();
 }
 
 function clearAll() {
