@@ -344,8 +344,8 @@
 
   /* ── SIDE PANEL ── */
   .side-panel {
-    width: 420px;
-    min-width: 340px;
+    width: 560px;
+    min-width: 460px;
     background: #07111f;
     border-right: 1px solid rgba(201,168,76,0.2);
     display: flex;
@@ -836,7 +836,7 @@
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.0.1';
+const APP_VERSION = 'v1.0.2';
 
 document.getElementById('loginVersion').textContent = `Version ${APP_VERSION}`;
 document.getElementById('appVersion').textContent = `Version ${APP_VERSION}`;
@@ -1103,6 +1103,28 @@ function setGitHubToken(token) {
   localStorage.setItem('github-token', token);
 }
 
+function getGitHubErrorMessage(status, statusText, errorData, operation) {
+  if (status === 401) {
+    return 'GitHub token is invalid, expired, or not authorised. Click "Setup GitHub Token" and enter a valid token.';
+  }
+
+  if (status === 403) {
+    return 'GitHub access denied. Check token permissions and any required SSO authorisation.';
+  }
+
+  if (status === 404) {
+    return operation === 'save'
+      ? 'GitHub save failed. Your token can read the app but does not have write access to this repository/file.'
+      : 'GitHub file not found or your token does not have access to this repository.';
+  }
+
+  if (errorData && errorData.message && errorData.message.includes('does not match')) {
+    return 'Data changed - click "Refresh from GitHub" and try again';
+  }
+
+  return (errorData && errorData.message) || `${operation === 'save' ? 'Save' : 'Load'} failed: ${status} ${statusText}`;
+}
+
 // Load relationships from GitHub - EXACT COPY FROM WORKING MINIMAL TEST
 async function loadFromGitHub() {
   try {
@@ -1122,7 +1144,12 @@ async function loadFromGitHub() {
     });
 
     if (!response.ok) {
-      throw new Error(`Load failed: ${response.status}`);
+      let errorData = null;
+      try {
+        errorData = await response.json();
+      } catch (e) {
+      }
+      throw new Error(getGitHubErrorMessage(response.status, response.statusText, errorData, 'load'));
     }
 
     const file = await response.json();
@@ -1140,10 +1167,10 @@ async function loadFromGitHub() {
     const saved = localStorage.getItem('barclays-relationships');
     if (saved) {
       relationships = JSON.parse(saved);
-      showNotification('Loaded from local backup', 'warning');
+      showNotification(`Loaded from local backup. ${error.message}`, 'warning');
       return true;
     }
-    showNotification('Unable to load data', 'error');
+    showNotification(`Unable to load data. ${error.message}`, 'error');
     return false;
   }
 }
@@ -1172,7 +1199,12 @@ async function saveToGitHub() {
     });
 
     if (!getResponse.ok) {
-      throw new Error(`Read failed: ${getResponse.status} ${getResponse.statusText}`);
+      let errorData = null;
+      try {
+        errorData = await getResponse.json();
+      } catch (e) {
+      }
+      throw new Error(getGitHubErrorMessage(getResponse.status, getResponse.statusText, errorData, 'save'));
     }
 
     const currentFile = await getResponse.json();
@@ -1221,11 +1253,7 @@ async function saveToGitHub() {
       const errorData = await putResponse.json();
       console.error('Write failed:', errorData);
 
-      if (errorData.message && errorData.message.includes('does not match')) {
-        throw new Error('Data changed - click "Refresh from GitHub" and try again');
-      }
-
-      throw new Error(errorData.message || `Save failed: ${putResponse.status}`);
+      throw new Error(getGitHubErrorMessage(putResponse.status, putResponse.statusText, errorData, 'save'));
     }
 
     const result = await putResponse.json();
