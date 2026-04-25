@@ -155,7 +155,7 @@
       "initials": "GAKC",
       "score": "5",
       "socialStyle": "An",
-      "businessUnit": "IB",
+      "businessUnit": "CIO",
       "region": "",
       "function": "Chief Operating Officer, CIB",
       "engagementOwner": "GAKC",
@@ -248,9 +248,13 @@
       "changeHistory": []
     }
   },
-  "lastUpdated": "2026-04-25T19:43:37.770Z",
+  "lastUpdated": "2026-04-25T19:46:44.440Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-25T19:46:44.440Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-25T19:43:37.770Z"
