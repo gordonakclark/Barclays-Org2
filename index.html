@@ -98,10 +98,7 @@
   }
 
   .login-accenture {
-    font-size: 32px;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: -0.5px;
+    transform: scale(1.06);
   }
 
   .login-divider {
@@ -272,17 +269,29 @@
   }
 
   .accenture-logo {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-end;
     font-family: 'DM Sans', sans-serif;
     font-size: 26px;
     font-weight: 700;
-    color: #ffffff;
     letter-spacing: -0.5px;
     text-transform: lowercase;
+    line-height: 1;
   }
-  
-  .accenture-logo span {
-    color: #C44EFF;
-    font-weight: 300;
+  .accenture-logo .accenture-word {
+    color: #ffffff;
+    font-weight: 700;
+  }
+  .accenture-logo .accenture-chevron {
+    position: absolute;
+    top: -14px;
+    left: 69%;
+    transform: translateX(-50%);
+    color: #A100FF;
+    font-size: 0.92em;
+    font-weight: 800;
+    line-height: 1;
   }
 
   .eagle-icon {
@@ -996,7 +1005,7 @@
   <div class="login-container">
     <div class="login-header">
       <div class="login-logo">
-        <div class="login-accenture">accenture></div>
+        <div class="accenture-logo login-accenture"><span class="accenture-word">accenture</span><span class="accenture-chevron">&gt;</span></div>
         <div class="login-divider"></div>
         <div class="login-eagle"></div>
       </div>
@@ -1050,7 +1059,7 @@
 <div class="page-header">
   <div class="header-brand">
     <div class="brand-logos">
-      <div class="accenture-logo">accenture<span>></span></div>
+      <div class="accenture-logo"><span class="accenture-word">accenture</span><span class="accenture-chevron">&gt;</span></div>
       <div class="brand-divider"></div>
       <div class="eagle-icon"></div>
       <div class="header-text">
@@ -1291,7 +1300,7 @@
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.2.3';
+const APP_VERSION = 'v1.2.4';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -2670,7 +2679,7 @@ function openExecutiveDashboard() {
   const strongestSponsors = all.filter(item => parseInt(item.rel.sponsorship, 10) >= 4).sort((a, b) => calculateExposureScore(b.rel) - calculateExposureScore(a.rel)).slice(0, 5);
   const atRisk = all.filter(item => item.rel.supportStatus === 'Risk' || item.rel.supportStatus === 'Blocker' || parseInt(item.rel.blockerRisk, 10) >= 4).sort((a, b) => calculateExposureScore(b.rel) - calculateExposureScore(a.rel)).slice(0, 6);
   const stale = all.filter(item => isCriticalStakeholder(item.person, item.rel) && (daysSince(item.rel.lastTouchpoint) || 0) > 30).sort((a, b) => (daysSince(b.rel.lastTouchpoint) || 0) - (daysSince(a.rel.lastTouchpoint) || 0)).slice(0, 6);
-  const coverageGaps = all.filter(item => isCriticalStakeholder(item.person, item.rel) && (!item.rel.engagementOwner || !item.rel.nextAction)).slice(0, 6);
+  const coverageGaps = all.filter(item => isCriticalStakeholder(item.person, item.rel) && !item.rel.engagementOwner).slice(0, 6);
   const alerts = all.filter(item => (!item.rel.engagementOwner || !item.rel.nextAction || ((daysSince(item.rel.lastTouchpoint) || 0) > 45) || (item.rel.dueDate && new Date(item.rel.dueDate) < new Date()))).slice(0, 8);
   const aiInsights = getAiAssistedInsights(all);
   const content = document.getElementById('dashboardContent');
@@ -2682,7 +2691,7 @@ function openExecutiveDashboard() {
       <div class="metric-pill"><strong>${atRisk.length}</strong><span>At risk</span></div>
     </div>
     <div class="dashboard-grid" style="margin-top:16px;">
-      <div class="dashboard-card"><h3>Coverage gaps</h3><ul class="list-compact">${coverageGaps.length ? coverageGaps.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(item.rel.engagementOwner ? 'Missing next action' : 'Missing engagement owner')}</small></li>`).join('') : '<li>Coverage looks healthy.</li>'}</ul></div>
+      <div class="dashboard-card"><h3>Coverage gaps</h3><ul class="list-compact">${coverageGaps.length ? coverageGaps.map(item => `<li>${escapeHtml(item.person.name)}<small>Missing engagement owner</small></li>`).join('') : '<li>Coverage looks healthy.</li>'}</ul></div>
       <div class="dashboard-card"><h3>Strongest sponsors</h3><ul class="list-compact">${strongestSponsors.length ? strongestSponsors.map(item => `<li>${escapeHtml(item.person.name)}<small>Sponsorship ${escapeHtml(item.rel.sponsorship)} · Influence ${escapeHtml(item.rel.influence || '—')}</small></li>`).join('') : '<li>No sponsor data yet.</li>'}</ul></div>
       <div class="dashboard-card"><h3>At-risk accounts</h3><ul class="list-compact">${atRisk.length ? atRisk.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(item.rel.supportStatus || 'Risk')} · Blocker risk ${escapeHtml(item.rel.blockerRisk || '—')}</small></li>`).join('') : '<li>No at-risk stakeholders flagged.</li>'}</ul></div>
       <div class="dashboard-card"><h3>Inactive critical stakeholders</h3><ul class="list-compact">${stale.length ? stale.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(String(daysSince(item.rel.lastTouchpoint)))} days since last touchpoint</small></li>`).join('') : '<li>No stale relationships found.</li>'}</ul></div>
