@@ -127,7 +127,7 @@
     },
     "Antoinette O'Neill": {
       "initials": "GAKC",
-      "score": "2",
+      "score": "5",
       "socialStyle": "An",
       "businessUnit": "IB",
       "region": "",
@@ -152,7 +152,16 @@
       "notes": "",
       "reviewStatus": "",
       "interactions": [],
-      "changeHistory": []
+      "changeHistory": [
+        {
+          "at": "2026-04-25T16:01:11.081Z",
+          "score": "5",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        }
+      ]
     },
     "Lily Wang": {
       "initials": "AH",
@@ -213,9 +222,13 @@
       "changeHistory": []
     }
   },
-  "lastUpdated": "2026-04-25T16:01:00.100Z",
+  "lastUpdated": "2026-04-25T16:01:11.081Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-25T16:01:11.081Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-25T16:01:00.100Z"
