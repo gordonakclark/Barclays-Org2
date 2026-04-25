@@ -754,6 +754,230 @@
   .search-wrap {
     padding: 10px 16px 0;
   }
+  .filter-wrap {
+    padding: 10px 16px 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .filter-select,
+  .overlay-select,
+  .workspace-input,
+  .workspace-select,
+  .workspace-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+  .filter-select:focus,
+  .overlay-select:focus,
+  .workspace-input:focus,
+  .workspace-select:focus,
+  .workspace-textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+  .filter-select option,
+  .overlay-select option,
+  .workspace-select option {
+    background: #0a1628;
+    color: var(--text-primary);
+  }
+  .workspace-textarea {
+    min-height: 84px;
+    resize: vertical;
+  }
+  .power-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 76px 18px 18px;
+    background: rgba(5, 10, 20, 0.74);
+    z-index: 1100;
+  }
+  .power-modal-backdrop.open { display: flex; }
+  .power-modal {
+    width: min(1180px, 100%);
+    max-height: calc(100vh - 96px);
+    overflow: auto;
+    background: linear-gradient(180deg, rgba(17,34,68,0.98) 0%, rgba(7,17,31,0.98) 100%);
+    border: 1px solid rgba(201,168,76,0.24);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .power-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(201,168,76,0.14);
+    background: rgba(10,22,40,0.74);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .power-modal-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--gold-light);
+  }
+  .power-modal-header p {
+    font-size: 11px;
+    color: var(--silver);
+    margin-top: 3px;
+    letter-spacing: 0.6px;
+  }
+  .power-modal-body {
+    padding: 20px 22px 24px;
+  }
+  .power-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 16px;
+  }
+  .workspace-card,
+  .dashboard-card,
+  .briefing-card {
+    background: rgba(10,22,40,0.62);
+    border: 1px solid rgba(201,168,76,0.14);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .workspace-card h3,
+  .dashboard-card h3,
+  .briefing-card h3 {
+    font-size: 11px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 12px;
+  }
+  .workspace-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 12px;
+  }
+  .workspace-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .workspace-field.full { grid-column: 1 / -1; }
+  .workspace-field label {
+    font-size: 10px;
+    color: var(--silver);
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+  }
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .metric-pill {
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .metric-pill strong {
+    display: block;
+    font-size: 18px;
+    color: var(--gold-light);
+  }
+  .metric-pill span {
+    display: block;
+    font-size: 10px;
+    color: var(--silver);
+    text-transform: uppercase;
+    letter-spacing: 0.9px;
+    margin-top: 4px;
+  }
+  .list-compact {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .list-compact li {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: 11px;
+    color: var(--text-primary);
+  }
+  .list-compact small {
+    display: block;
+    color: var(--silver);
+    font-size: 10px;
+    margin-top: 4px;
+  }
+  .workspace-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  .section-note {
+    font-size: 10px;
+    color: var(--silver);
+    line-height: 1.5;
+  }
+  .workspace-inline-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .interaction-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .interaction-list li {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: 11px;
+  }
+  .heat-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: var(--silver);
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  @media (max-width: 980px) {
+    .power-grid,
+    .dashboard-grid,
+    .metric-grid,
+    .workspace-fields,
+    .filter-wrap {
+      grid-template-columns: 1fr;
+    }
+  }
   .search-input {
     width: 100%; background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;
@@ -837,6 +1061,15 @@
   </div>
   <div class="header-controls">
     <div class="version-badge" id="appVersion"></div>
+    <select class="overlay-select" id="overlaySelect" onchange="setOverlayMode(this.value)" title="Change power-map overlay">
+      <option value="org">Org hierarchy</option>
+      <option value="influence">Influence heatmap</option>
+      <option value="strategic">Strategic importance</option>
+      <option value="engagement">Engagement health</option>
+      <option value="support">Support / risk</option>
+      <option value="budget">Budget control</option>
+    </select>
+    <button class="btn-control" onclick="openExecutiveDashboard()">Executive Dashboard</button>
     <button class="btn-control" onclick="toggleSecurityModal(true)">Security & Audit</button>
     <button class="btn-control active" id="togglePanel" onclick="togglePanel()">◀ Contacts</button>
     <button class="btn-control" onclick="expandAll()">Expand All</button>
@@ -871,6 +1104,30 @@
 
     <div class="search-wrap">
       <input class="search-input" type="text" id="searchInput" placeholder="Search people…" oninput="filterTable(this.value)">
+    </div>
+
+    <div class="filter-wrap">
+      <select class="filter-select" id="ownerFilter" onchange="filterTable(document.getElementById('searchInput').value)">
+        <option value="">All Owners</option>
+      </select>
+      <select class="filter-select" id="supportFilter" onchange="filterTable(document.getElementById('searchInput').value)">
+        <option value="">All Support/Risk</option>
+        <option value="Supporter">Supporter</option>
+        <option value="Neutral">Neutral</option>
+        <option value="Risk">Risk</option>
+        <option value="Blocker">Blocker</option>
+      </select>
+      <select class="filter-select" id="regionFilter" onchange="filterTable(document.getElementById('searchInput').value)">
+        <option value="">All Regions</option>
+      </select>
+      <select class="filter-select" id="influenceFilter" onchange="filterTable(document.getElementById('searchInput').value)">
+        <option value="">All Influence Levels</option>
+        <option value="5">Influence 5</option>
+        <option value="4">Influence 4+</option>
+        <option value="3">Influence 3+</option>
+        <option value="2">Influence 2+</option>
+        <option value="1">Influence 1+</option>
+      </select>
     </div>
 
     <div class="table-wrapper">
@@ -940,21 +1197,117 @@
   </div>
 </div>
 
+<div class="power-modal-backdrop" id="stakeholderModal" onclick="if(event.target === this) closeStakeholderWorkspace()">
+  <div class="power-modal">
+    <div class="power-modal-header">
+      <div>
+        <h2 id="stakeholderModalTitle">Stakeholder Workspace</h2>
+        <p id="stakeholderModalSubtitle">Power-map planning, actions, history, and briefing</p>
+      </div>
+      <button class="security-modal-close" type="button" onclick="closeStakeholderWorkspace()">Close</button>
+    </div>
+    <div class="power-modal-body">
+      <div class="power-grid">
+        <div>
+          <div class="workspace-card">
+            <h3>Influence model & action plan</h3>
+            <div class="workspace-fields">
+              <div class="workspace-field"><label>Engagement owner</label><input class="workspace-input" id="workspaceOwner"></div>
+              <div class="workspace-field"><label>Region</label><input class="workspace-input" id="workspaceRegion"></div>
+              <div class="workspace-field"><label>Function</label><input class="workspace-input" id="workspaceFunction"></div>
+              <div class="workspace-field"><label>Initiative alignment</label><input class="workspace-input" id="workspaceInitiative"></div>
+              <div class="workspace-field"><label>Influence</label><select class="workspace-select" id="workspaceInfluence"></select></div>
+              <div class="workspace-field"><label>Budget control</label><select class="workspace-select" id="workspaceBudget"></select></div>
+              <div class="workspace-field"><label>Sponsorship</label><select class="workspace-select" id="workspaceSponsorship"></select></div>
+              <div class="workspace-field"><label>Blocker risk</label><select class="workspace-select" id="workspaceBlocker"></select></div>
+              <div class="workspace-field"><label>Change appetite</label><select class="workspace-select" id="workspaceChangeAppetite"></select></div>
+              <div class="workspace-field"><label>Strategic importance</label><select class="workspace-select" id="workspaceStrategic"></select></div>
+              <div class="workspace-field"><label>Engagement health</label><select class="workspace-select" id="workspaceEngagement"></select></div>
+              <div class="workspace-field"><label>Support / risk</label><select class="workspace-select" id="workspaceSupport"></select></div>
+              <div class="workspace-field"><label>Sentiment</label><select class="workspace-select" id="workspaceSentiment"></select></div>
+              <div class="workspace-field"><label>Confidence</label><select class="workspace-select" id="workspaceConfidence"></select></div>
+              <div class="workspace-field"><label>Source</label><input class="workspace-input" id="workspaceSource"></div>
+              <div class="workspace-field"><label>Review status</label><select class="workspace-select" id="workspaceReview"></select></div>
+              <div class="workspace-field"><label>Last touchpoint</label><input class="workspace-input" id="workspaceLastTouchpoint" type="date"></div>
+              <div class="workspace-field"><label>Due date</label><input class="workspace-input" id="workspaceDueDate" type="date"></div>
+              <div class="workspace-field full"><label>Objective</label><input class="workspace-input" id="workspaceObjective"></div>
+              <div class="workspace-field full"><label>Next action</label><input class="workspace-input" id="workspaceNextAction"></div>
+              <div class="workspace-field full"><label>Notes / comments</label><textarea class="workspace-textarea" id="workspaceNotes"></textarea></div>
+            </div>
+          </div>
+          <div class="workspace-card" style="margin-top:16px;">
+            <h3>Interaction history</h3>
+            <div class="workspace-fields">
+              <div class="workspace-field"><label>Date</label><input class="workspace-input" id="interactionDate" type="date"></div>
+              <div class="workspace-field"><label>Type</label><select class="workspace-select" id="interactionType"><option>Meeting</option><option>Email</option><option>Call</option><option>Workshop</option><option>Note</option></select></div>
+              <div class="workspace-field full"><label>Summary</label><input class="workspace-input" id="interactionSummary"></div>
+            </div>
+            <div class="workspace-inline-actions">
+              <button class="btn-sm btn-primary" type="button" onclick="addInteractionEntry()">Add Interaction</button>
+              <span class="section-note">Use this to track meetings, emails, actions, and recent movement.</span>
+            </div>
+            <ul class="interaction-list" id="interactionList"><li>No interactions yet.</li></ul>
+          </div>
+        </div>
+        <div>
+          <div class="briefing-card">
+            <h3>Meeting prep briefing</h3>
+            <div id="briefingContent" class="section-note">Select a stakeholder to generate a briefing card.</div>
+          </div>
+          <div class="workspace-card" style="margin-top:16px;">
+            <h3>Change tracking, paths & scenarios</h3>
+            <div id="changeTrackingContent" class="section-note">Trend and change history will appear here.</div>
+            <div style="margin-top:12px;" id="pathInsightContent" class="section-note"></div>
+            <div style="margin-top:12px;" id="scenarioInsightContent" class="section-note"></div>
+          </div>
+          <div class="workspace-card" style="margin-top:16px;">
+            <h3>Insights & notifications</h3>
+            <ul class="list-compact" id="workspaceInsightsList"><li>No alerts for this stakeholder.</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="workspace-actions">
+        <button class="btn-sm btn-ghost" type="button" onclick="closeStakeholderWorkspace()">Cancel</button>
+        <button class="btn-sm btn-primary" type="button" onclick="saveStakeholderWorkspace()">Apply to Power Map</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="power-modal-backdrop" id="dashboardModal" onclick="if(event.target === this) closeExecutiveDashboard()">
+  <div class="power-modal">
+    <div class="power-modal-header">
+      <div>
+        <h2>Executive Dashboard</h2>
+        <p>Coverage, sponsorship strength, risk, stale engagement, and action alerts</p>
+      </div>
+      <button class="security-modal-close" type="button" onclick="closeExecutiveDashboard()">Close</button>
+    </div>
+    <div class="power-modal-body" id="dashboardContent"></div>
+  </div>
+</div>
+
 </div><!-- End mainApp -->
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.1.1';
+const APP_VERSION = 'v1.2.0';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
-  maxBusinessUnitLength: 40
+  maxBusinessUnitLength: 40,
+  stakeholderHistoryLimit: 12
 };
 
 let relationshipMeta = { lastUpdated: '', lastUpdatedBy: '', history: [] };
 let currentGitHubUser = 'Not connected';
 let saveInProgress = false;
 let lastSaveAttempt = 0;
+let currentOverlay = 'org';
+let selectedStakeholder = null;
+let workspaceInteractions = [];
+const stakeholderLookup = {};
+const stakeholderParentMap = {};
 
 document.getElementById('loginVersion').textContent = `Version ${APP_VERSION}`;
 document.getElementById('appVersion').textContent = `Version ${APP_VERSION}`;
@@ -974,6 +1327,140 @@ function formatTimestamp(value) {
   const parsed = new Date(value);
   if (Number.isNaN(parsed.getTime())) return value;
   return parsed.toLocaleString();
+}
+
+function createRangeOptions(selectId, includeBlank = false) {
+  const select = document.getElementById(selectId);
+  if (!select) return;
+  const values = includeBlank ? [''] : [];
+  values.push('1', '2', '3', '4', '5');
+  select.innerHTML = values.map(value => `<option value="${value}">${value || '—'}</option>`).join('');
+}
+
+function initializeWorkspaceControls() {
+  ['workspaceInfluence', 'workspaceBudget', 'workspaceSponsorship', 'workspaceBlocker', 'workspaceChangeAppetite', 'workspaceStrategic', 'workspaceEngagement', 'workspaceConfidence']
+    .forEach(id => createRangeOptions(id, true));
+
+  const optionSets = {
+    workspaceSupport: ['', 'Supporter', 'Neutral', 'Risk', 'Blocker'],
+    workspaceSentiment: ['', 'Positive', 'Mixed', 'Negative'],
+    workspaceReview: ['', 'Draft', 'In Review', 'Approved']
+  };
+
+  Object.entries(optionSets).forEach(([id, values]) => {
+    const select = document.getElementById(id);
+    if (!select) return;
+    select.innerHTML = values.map(value => `<option value="${value}">${value || '—'}</option>`).join('');
+  });
+}
+
+function sanitizeShortText(value, maxLength = 80) {
+  return String(value || '').replace(/[<>]/g, '').trim().slice(0, maxLength);
+}
+
+function sanitizeFreeText(value, maxLength = 1000) {
+  return String(value || '').replace(/[<>]/g, '').trim().slice(0, maxLength);
+}
+
+function sanitizeNumericRating(value) {
+  const normal = String(value || '');
+  return ['1', '2', '3', '4', '5'].includes(normal) ? normal : '';
+}
+
+function normalizeRelationship(name, rel = {}) {
+  const person = stakeholderLookup[name] || {};
+  return {
+    initials: sanitizeInitials(rel.initials || ''),
+    score: sanitizeScore(rel.score || ''),
+    socialStyle: sanitizeSocialStyle(rel.socialStyle || ''),
+    businessUnit: sanitizeBusinessUnit(rel.businessUnit || ''),
+    region: sanitizeShortText(rel.region || ''),
+    function: sanitizeShortText(rel.function || person.role || '', 120),
+    engagementOwner: sanitizeShortText(rel.engagementOwner || ''),
+    initiative: sanitizeShortText(rel.initiative || '', 120),
+    influence: sanitizeNumericRating(rel.influence || ''),
+    budgetControl: sanitizeNumericRating(rel.budgetControl || ''),
+    sponsorship: sanitizeNumericRating(rel.sponsorship || ''),
+    blockerRisk: sanitizeNumericRating(rel.blockerRisk || ''),
+    changeAppetite: sanitizeNumericRating(rel.changeAppetite || ''),
+    strategicImportance: sanitizeNumericRating(rel.strategicImportance || ''),
+    engagementHealth: sanitizeNumericRating(rel.engagementHealth || ''),
+    supportStatus: ['', 'Supporter', 'Neutral', 'Risk', 'Blocker'].includes(rel.supportStatus || '') ? rel.supportStatus || '' : '',
+    sentiment: ['', 'Positive', 'Mixed', 'Negative'].includes(rel.sentiment || '') ? rel.sentiment || '' : '',
+    confidence: sanitizeNumericRating(rel.confidence || ''),
+    source: sanitizeShortText(rel.source || '', 120),
+    objective: sanitizeShortText(rel.objective || '', 180),
+    nextAction: sanitizeShortText(rel.nextAction || '', 180),
+    dueDate: sanitizeShortText(rel.dueDate || '', 20),
+    lastTouchpoint: sanitizeShortText(rel.lastTouchpoint || '', 20),
+    notes: sanitizeFreeText(rel.notes || '', 2000),
+    reviewStatus: ['', 'Draft', 'In Review', 'Approved'].includes(rel.reviewStatus || '') ? rel.reviewStatus || '' : '',
+    interactions: Array.isArray(rel.interactions) ? rel.interactions.slice(0, 20).map(item => ({
+      date: sanitizeShortText(item.date || '', 20),
+      type: sanitizeShortText(item.type || '', 40),
+      summary: sanitizeFreeText(item.summary || '', 240)
+    })).filter(item => item.date || item.type || item.summary) : [],
+    changeHistory: Array.isArray(rel.changeHistory) ? rel.changeHistory.slice(0, SECURITY_CONFIG.stakeholderHistoryLimit).map(item => ({
+      at: sanitizeShortText(item.at || '', 40),
+      score: sanitizeScore(item.score || ''),
+      influence: sanitizeNumericRating(item.influence || ''),
+      supportStatus: sanitizeShortText(item.supportStatus || '', 40),
+      engagementHealth: sanitizeNumericRating(item.engagementHealth || ''),
+      newStakeholder: !!item.newStakeholder
+    })) : []
+  };
+}
+
+function ensureStakeholder(name) {
+  relationships[name] = normalizeRelationship(name, relationships[name] || {});
+  return relationships[name];
+}
+
+function normalizeAllRelationships() {
+  Object.keys(relationships).forEach(name => {
+    relationships[name] = normalizeRelationship(name, relationships[name]);
+  });
+}
+
+function getRelationship(name) {
+  return normalizeRelationship(name, relationships[name] || {});
+}
+
+function getPathToStakeholder(name) {
+  const path = [];
+  let current = name;
+  while (current) {
+    path.unshift(current);
+    current = stakeholderParentMap[current] || '';
+  }
+  return path;
+}
+
+function daysSince(dateValue) {
+  if (!dateValue) return null;
+  const parsed = new Date(dateValue);
+  if (Number.isNaN(parsed.getTime())) return null;
+  return Math.floor((Date.now() - parsed.getTime()) / 86400000);
+}
+
+function calculateExposureScore(rel) {
+  return ['influence', 'budgetControl', 'sponsorship', 'strategicImportance'].reduce((sum, key) => sum + (parseInt(rel[key], 10) || 0), 0);
+}
+
+function getOverlayStyle(rel) {
+  const styles = {
+    org: { border: '', glow: '', tag: 'Org hierarchy' },
+    influence: { border: '#A100FF', glow: `0 0 18px rgba(161,0,255,${(parseInt(rel.influence, 10) || 0) / 8})`, tag: `Influence ${rel.influence || '—'}` },
+    strategic: { border: '#c9a84c', glow: `0 0 18px rgba(201,168,76,${(parseInt(rel.strategicImportance, 10) || 0) / 8})`, tag: `Strategic ${rel.strategicImportance || '—'}` },
+    engagement: { border: '#27ae60', glow: `0 0 18px rgba(39,174,96,${(parseInt(rel.engagementHealth, 10) || 0) / 8})`, tag: `Engagement ${rel.engagementHealth || '—'}` },
+    budget: { border: '#0fa894', glow: `0 0 18px rgba(15,168,148,${(parseInt(rel.budgetControl, 10) || 0) / 8})`, tag: `Budget ${rel.budgetControl || '—'}` },
+    support: {
+      border: rel.supportStatus === 'Blocker' ? '#c0392b' : rel.supportStatus === 'Risk' ? '#e67e22' : rel.supportStatus === 'Supporter' ? '#27ae60' : '#7088aa',
+      glow: rel.supportStatus === 'Blocker' ? '0 0 18px rgba(192,57,43,0.45)' : rel.supportStatus === 'Risk' ? '0 0 18px rgba(230,126,34,0.4)' : rel.supportStatus === 'Supporter' ? '0 0 18px rgba(39,174,96,0.4)' : '0 0 0 transparent',
+      tag: rel.supportStatus || 'Neutral'
+    }
+  };
+  return styles[currentOverlay] || styles.org;
 }
 
 function persistLocalBackup() {
@@ -1040,6 +1527,8 @@ function toggleSecurityModal(forceOpen) {
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
     toggleSecurityModal(false);
+    closeStakeholderWorkspace();
+    closeExecutiveDashboard();
   }
 });
 
@@ -1417,6 +1906,7 @@ async function loadFromGitHub() {
     const content = JSON.parse(atob(file.content));
 
     relationships = content.relationships || {};
+    normalizeAllRelationships();
     relationshipMeta = {
       lastUpdated: content.lastUpdated || '',
       lastUpdatedBy: content.lastUpdatedBy || '',
@@ -1435,6 +1925,7 @@ async function loadFromGitHub() {
     const savedMeta = localStorage.getItem('barclays-relationship-meta');
     if (saved) {
       relationships = JSON.parse(saved);
+      normalizeAllRelationships();
       relationshipMeta = savedMeta ? JSON.parse(savedMeta) : relationshipMeta;
       updateSecurityPanel();
       showNotification(`Loaded from local backup. ${error.message}`, 'warning');
@@ -1444,6 +1935,35 @@ async function loadFromGitHub() {
     showNotification(`Unable to load data. ${error.message}`, 'error');
     return false;
   }
+}
+
+function applyStakeholderChangeHistory(existingData, mergedData, actor, savedAt) {
+  Object.keys(mergedData).forEach(name => {
+    const current = normalizeRelationship(name, mergedData[name]);
+    const previous = normalizeRelationship(name, existingData[name] || {});
+    const changed = !existingData[name]
+      || current.score !== previous.score
+      || current.influence !== previous.influence
+      || current.supportStatus !== previous.supportStatus
+      || current.engagementHealth !== previous.engagementHealth
+      || current.lastTouchpoint !== previous.lastTouchpoint;
+
+    if (changed) {
+      current.changeHistory = [{
+        at: savedAt,
+        score: current.score,
+        influence: current.influence,
+        supportStatus: current.supportStatus,
+        engagementHealth: current.engagementHealth,
+        newStakeholder: !existingData[name]
+      }, ...(Array.isArray(previous.changeHistory) ? previous.changeHistory : [])]
+        .slice(0, SECURITY_CONFIG.stakeholderHistoryLimit);
+    } else {
+      current.changeHistory = Array.isArray(previous.changeHistory) ? previous.changeHistory.slice(0, SECURITY_CONFIG.stakeholderHistoryLimit) : [];
+    }
+
+    mergedData[name] = current;
+  });
 }
 
 // Save relationships to GitHub - EXACT COPY FROM WORKING MINIMAL TEST
@@ -1511,6 +2031,7 @@ async function saveToGitHub() {
     // Step 4: Prepare save
     const actor = await loadGitHubUser() || currentGitHubUser || 'Web App User';
     const savedAt = new Date().toISOString();
+    applyStakeholderChangeHistory(existingData, mergedData, actor, savedAt);
     const updatedHistory = [{ by: actor, at: savedAt }, ...(Array.isArray(relationshipMeta.history) ? relationshipMeta.history : [])]
       .slice(0, SECURITY_CONFIG.historyLimit);
 
@@ -1666,11 +2187,14 @@ document.head.appendChild(style);
 // Flat list of all people, built from data tree
 let allPeople = [];
 
-function flattenTree(node) {
+function flattenTree(node, parentName = '') {
   allPeople.push({ name: node.name, role: node.role, level: node.level });
-  if (node.children) node.children.forEach(flattenTree);
+  stakeholderLookup[node.name] = { name: node.name, role: node.role, level: node.level };
+  stakeholderParentMap[node.name] = parentName;
+  if (node.children) node.children.forEach(child => flattenTree(child, node.name));
 }
 flattenTree(data);
+initializeWorkspaceControls();
 
 // ── SCORE COLOURS ─────────────────────────────────────────────────────────────
 const scoreBgClass = ['','score-bg-1','score-bg-2','score-bg-3','score-bg-4','score-bg-5'];
@@ -1682,9 +2206,13 @@ function buildTable() {
   const tbody = document.getElementById('relTableBody');
   tbody.innerHTML = '';
   allPeople.forEach(person => {
-    const rel = relationships[person.name] || { initials: '', score: '', socialStyle: '' };
+    const rel = getRelationship(person.name);
     const tr = document.createElement('tr');
     tr.dataset.name = person.name;
+    tr.addEventListener('click', event => {
+      if (event.target.closest('input, select, button')) return;
+      openStakeholderWorkspace(person.name);
+    });
 
     const tdName = document.createElement('td');
     tdName.innerHTML = `<div class="person-name-cell">${person.name}</div><div class="person-role-cell">${person.role}</div>`;
@@ -1755,6 +2283,8 @@ function buildTable() {
   });
   updateCount();
   populateBUFilter();
+  populateAdvancedFilters();
+  filterTable(document.getElementById('searchInput')?.value || '');
 }
 
 function updateRel(name) {
@@ -1769,8 +2299,15 @@ function updateRel(name) {
   const businessUnit = sanitizeBusinessUnit(inpBU ? inpBU.value : (relationships[name] && relationships[name].businessUnit) || '');
   inp.value = initials;
   if (inpBU) inpBU.value = businessUnit;
-  if (initials || score || socialStyle || businessUnit) {
-    relationships[name] = { initials, score, socialStyle, businessUnit };
+  const existing = ensureStakeholder(name);
+  if (initials || score || socialStyle || businessUnit || calculateExposureScore(existing) > 0 || existing.engagementOwner || existing.notes || existing.nextAction) {
+    relationships[name] = {
+      ...existing,
+      initials,
+      score,
+      socialStyle,
+      businessUnit
+    };
   } else {
     delete relationships[name];
   }
@@ -1810,16 +2347,37 @@ function updateChartBadge(name) {
   // Remove existing rel badge
   const existing = box.querySelector('.rel-badge');
   if (existing) existing.remove();
-  const rel = relationships[name];
-  if (!rel || (!rel.initials && !rel.score && !rel.socialStyle)) return;
+  const rel = getRelationship(name);
+  box.style.removeProperty('box-shadow');
+  box.style.removeProperty('border-color');
+  const overlay = getOverlayStyle(rel);
+  if (currentOverlay !== 'org' && overlay.border) {
+    box.style.borderColor = overlay.border;
+    box.style.boxShadow = overlay.glow;
+  }
+  if (!rel || (!rel.initials && !rel.score && !rel.socialStyle)) {
+    if (currentOverlay !== 'org' && overlay.tag && overlay.tag !== 'Org hierarchy') {
+      const tag = document.createElement('div');
+      tag.className = 'rel-badge';
+      tag.style.top = '-10px';
+      tag.style.left = 'unset';
+      tag.style.right = '-4px';
+      tag.style.background = 'rgba(10,22,40,0.9)';
+      tag.style.color = '#f0edd8';
+      tag.textContent = overlay.tag;
+      box.appendChild(tag);
+    }
+    return;
+  }
   const parts = [rel.initials, rel.score, rel.socialStyle].filter(Boolean);
   const text = parts.length > 0 ? `[${parts.join(':')}]` : '';
-  if (!text) return;
+  const overlayLabel = currentOverlay !== 'org' && overlay.tag ? overlay.tag : '';
+  if (!text && !overlayLabel) return;
   const sc = parseInt(rel.score) || 0;
   const badge = document.createElement('div');
   badge.className = `rel-badge ${sc ? scoreBgClass[sc] : ''}`;
   if (!sc) { badge.style.background = '#444'; badge.style.color = '#fff'; }
-  badge.textContent = text;
+  badge.textContent = [text, overlayLabel].filter(Boolean).join(' · ');
   box.appendChild(badge);
 }
 
@@ -1841,12 +2399,234 @@ function clearAll() {
   saveAll();
 }
 
+function setOverlayMode(mode) {
+  currentOverlay = mode || 'org';
+  applyAll();
+}
+
+function populateAdvancedFilters() {
+  const ownerFilter = document.getElementById('ownerFilter');
+  const regionFilter = document.getElementById('regionFilter');
+  if (!ownerFilter || !regionFilter) return;
+
+  const owners = new Set();
+  const regions = new Set();
+  Object.keys(relationships).forEach(name => {
+    const rel = getRelationship(name);
+    if (rel.engagementOwner) owners.add(rel.engagementOwner);
+    if (rel.region) regions.add(rel.region);
+  });
+
+  const currentOwner = ownerFilter.value;
+  const currentRegion = regionFilter.value;
+  ownerFilter.innerHTML = '<option value="">All Owners</option>' + Array.from(owners).sort().map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
+  regionFilter.innerHTML = '<option value="">All Regions</option>' + Array.from(regions).sort().map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
+  ownerFilter.value = Array.from(owners).includes(currentOwner) ? currentOwner : '';
+  regionFilter.value = Array.from(regions).includes(currentRegion) ? currentRegion : '';
+}
+
+function getWorkspaceInsightItems(name, rel) {
+  const items = [];
+  const staleDays = daysSince(rel.lastTouchpoint);
+  if (!rel.engagementOwner) items.push('Assign an engagement owner to avoid coverage gaps.');
+  if (!rel.nextAction) items.push('Define a next action to convert this relationship into an active pipeline item.');
+  if (staleDays !== null && staleDays > 30) items.push(`Stakeholder is stale: last touchpoint was ${staleDays} days ago.`);
+  if ((parseInt(rel.blockerRisk, 10) || 0) >= 4) items.push('High blocker risk: prepare an alternate sponsor and mitigation plan.');
+  if ((parseInt(rel.sponsorship, 10) || 0) >= 4) items.push('Strong sponsor: consider using this stakeholder as an introduction path.');
+  if (!items.length) items.push('No immediate alerts. Continue current engagement plan.');
+  return items;
+}
+
+function renderInteractionList() {
+  const list = document.getElementById('interactionList');
+  if (!list) return;
+  list.innerHTML = workspaceInteractions.length
+    ? workspaceInteractions.map(item => `<li><strong>${escapeHtml(item.type || 'Note')}</strong> · ${escapeHtml(formatTimestamp(item.date))}<small>${escapeHtml(item.summary || '')}</small></li>`).join('')
+    : '<li>No interactions yet.</li>';
+}
+
+function populateWorkspaceFields(name) {
+  const rel = ensureStakeholder(name);
+  const person = stakeholderLookup[name] || { role: '' };
+  const title = document.getElementById('stakeholderModalTitle');
+  const subtitle = document.getElementById('stakeholderModalSubtitle');
+  if (title) title.textContent = name;
+  if (subtitle) subtitle.textContent = `${person.role || 'Stakeholder'} · Power map workspace`;
+
+  const fieldMap = {
+    workspaceOwner: rel.engagementOwner,
+    workspaceRegion: rel.region,
+    workspaceFunction: rel.function || person.role || '',
+    workspaceInitiative: rel.initiative,
+    workspaceInfluence: rel.influence,
+    workspaceBudget: rel.budgetControl,
+    workspaceSponsorship: rel.sponsorship,
+    workspaceBlocker: rel.blockerRisk,
+    workspaceChangeAppetite: rel.changeAppetite,
+    workspaceStrategic: rel.strategicImportance,
+    workspaceEngagement: rel.engagementHealth,
+    workspaceSupport: rel.supportStatus,
+    workspaceSentiment: rel.sentiment,
+    workspaceConfidence: rel.confidence,
+    workspaceSource: rel.source,
+    workspaceReview: rel.reviewStatus,
+    workspaceLastTouchpoint: rel.lastTouchpoint,
+    workspaceDueDate: rel.dueDate,
+    workspaceObjective: rel.objective,
+    workspaceNextAction: rel.nextAction,
+    workspaceNotes: rel.notes
+  };
+
+  Object.entries(fieldMap).forEach(([id, value]) => {
+    const element = document.getElementById(id);
+    if (element) element.value = value || '';
+  });
+
+  workspaceInteractions = Array.isArray(rel.interactions) ? rel.interactions.slice() : [];
+  renderInteractionList();
+
+  const briefing = document.getElementById('briefingContent');
+  const pathInsight = document.getElementById('pathInsightContent');
+  const scenario = document.getElementById('scenarioInsightContent');
+  const changeTracking = document.getElementById('changeTrackingContent');
+  const insights = document.getElementById('workspaceInsightsList');
+  const path = getPathToStakeholder(name);
+  const alternates = allPeople.filter(p => p.name !== name).map(p => ({ ...p, rel: getRelationship(p.name) }))
+    .filter(item => item.rel.sponsorship >= '4' && item.rel.engagementOwner && item.rel.engagementOwner === rel.engagementOwner)
+    .slice(0, 3);
+
+  if (briefing) {
+    briefing.innerHTML = `
+      <div class="metric-grid">
+        <div class="metric-pill"><strong>${escapeHtml(rel.supportStatus || 'Neutral')}</strong><span>Support / risk</span></div>
+        <div class="metric-pill"><strong>${escapeHtml(rel.nextAction || 'None')}</strong><span>Next action</span></div>
+        <div class="metric-pill"><strong>${escapeHtml(rel.lastTouchpoint ? formatTimestamp(rel.lastTouchpoint) : 'No touchpoint')}</strong><span>Last touchpoint</span></div>
+      </div>
+      <div style="margin-top:12px;" class="section-note">
+        <div><strong>Objective:</strong> ${escapeHtml(rel.objective || 'Define a stakeholder objective.')}</div>
+        <div style="margin-top:8px;"><strong>Recommended approach:</strong> ${escapeHtml(rel.sentiment === 'Negative' ? 'Rebuild trust with a low-friction touchpoint and a sponsor-led introduction.' : rel.supportStatus === 'Supporter' ? 'Use this stakeholder as a sponsor and keep momentum with a targeted ask.' : 'Advance with a proof-point-led conversation and clear next step.')}</div>
+        <div style="margin-top:8px;"><strong>Recent update:</strong> ${escapeHtml(workspaceInteractions[0]?.summary || rel.notes || 'No recent update recorded.')}</div>
+      </div>`;
+  }
+
+  if (changeTracking) {
+    const historyItems = (rel.changeHistory || []).slice(0, 4).map(item => `${formatTimestamp(item.at)} · score ${item.score || '—'} · influence ${item.influence || '—'} · ${item.supportStatus || 'Neutral'}`);
+    changeTracking.innerHTML = historyItems.length
+      ? historyItems.map(item => `<div class="heat-tag">${escapeHtml(item)}</div>`).join('')
+      : 'No tracked change history yet. Save changes to start trend tracking.';
+  }
+
+  if (pathInsight) {
+    pathInsight.innerHTML = `<strong>Spotlight path:</strong> ${escapeHtml(path.join(' → ')) || 'No path available.'}`;
+  }
+
+  if (scenario) {
+    scenario.innerHTML = `<strong>Scenario planning:</strong> ${escapeHtml(alternates.length ? `Alternate sponsors: ${alternates.map(item => item.name).join(', ')}` : 'Single-point dependency detected — no alternate sponsors currently assigned.')}`;
+  }
+
+  if (insights) {
+    insights.innerHTML = getWorkspaceInsightItems(name, rel).map(item => `<li>${escapeHtml(item)}</li>`).join('');
+  }
+}
+
+function openStakeholderWorkspace(name) {
+  selectedStakeholder = name;
+  populateWorkspaceFields(name);
+  document.getElementById('stakeholderModal')?.classList.add('open');
+}
+
+function closeStakeholderWorkspace() {
+  document.getElementById('stakeholderModal')?.classList.remove('open');
+}
+
+function addInteractionEntry() {
+  const date = sanitizeShortText(document.getElementById('interactionDate')?.value || '', 20);
+  const type = sanitizeShortText(document.getElementById('interactionType')?.value || '', 40);
+  const summary = sanitizeFreeText(document.getElementById('interactionSummary')?.value || '', 240);
+  if (!date && !summary) {
+    showNotification('Enter an interaction date or summary first.', 'warning');
+    return;
+  }
+  workspaceInteractions.unshift({ date, type, summary });
+  workspaceInteractions = workspaceInteractions.slice(0, 20);
+  if (document.getElementById('interactionSummary')) document.getElementById('interactionSummary').value = '';
+  renderInteractionList();
+}
+
+function saveStakeholderWorkspace() {
+  if (!selectedStakeholder) return;
+  const base = ensureStakeholder(selectedStakeholder);
+  relationships[selectedStakeholder] = normalizeRelationship(selectedStakeholder, {
+    ...base,
+    engagementOwner: document.getElementById('workspaceOwner')?.value,
+    region: document.getElementById('workspaceRegion')?.value,
+    function: document.getElementById('workspaceFunction')?.value,
+    initiative: document.getElementById('workspaceInitiative')?.value,
+    influence: document.getElementById('workspaceInfluence')?.value,
+    budgetControl: document.getElementById('workspaceBudget')?.value,
+    sponsorship: document.getElementById('workspaceSponsorship')?.value,
+    blockerRisk: document.getElementById('workspaceBlocker')?.value,
+    changeAppetite: document.getElementById('workspaceChangeAppetite')?.value,
+    strategicImportance: document.getElementById('workspaceStrategic')?.value,
+    engagementHealth: document.getElementById('workspaceEngagement')?.value,
+    supportStatus: document.getElementById('workspaceSupport')?.value,
+    sentiment: document.getElementById('workspaceSentiment')?.value,
+    confidence: document.getElementById('workspaceConfidence')?.value,
+    source: document.getElementById('workspaceSource')?.value,
+    reviewStatus: document.getElementById('workspaceReview')?.value,
+    lastTouchpoint: document.getElementById('workspaceLastTouchpoint')?.value,
+    dueDate: document.getElementById('workspaceDueDate')?.value,
+    objective: document.getElementById('workspaceObjective')?.value,
+    nextAction: document.getElementById('workspaceNextAction')?.value,
+    notes: document.getElementById('workspaceNotes')?.value,
+    interactions: workspaceInteractions
+  });
+  persistLocalBackup();
+  buildTable();
+  applyAll();
+  populateWorkspaceFields(selectedStakeholder);
+  showNotification('Stakeholder workspace updated locally. Save to GitHub to publish changes.', 'success');
+}
+
+function openExecutiveDashboard() {
+  const all = allPeople.map(person => ({ person, rel: getRelationship(person.name) }));
+  const strongestSponsors = all.filter(item => parseInt(item.rel.sponsorship, 10) >= 4).sort((a, b) => calculateExposureScore(b.rel) - calculateExposureScore(a.rel)).slice(0, 5);
+  const atRisk = all.filter(item => item.rel.supportStatus === 'Risk' || item.rel.supportStatus === 'Blocker' || parseInt(item.rel.blockerRisk, 10) >= 4).slice(0, 6);
+  const stale = all.filter(item => (daysSince(item.rel.lastTouchpoint) || 0) > 30).sort((a, b) => (daysSince(b.rel.lastTouchpoint) || 0) - (daysSince(a.rel.lastTouchpoint) || 0)).slice(0, 6);
+  const coverageGaps = all.filter(item => !item.rel.engagementOwner || !item.rel.nextAction).slice(0, 6);
+  const alerts = all.filter(item => (!item.rel.engagementOwner || !item.rel.nextAction || ((daysSince(item.rel.lastTouchpoint) || 0) > 45) || (item.rel.dueDate && new Date(item.rel.dueDate) < new Date()))).slice(0, 8);
+  const content = document.getElementById('dashboardContent');
+  if (!content) return;
+  content.innerHTML = `
+    <div class="metric-grid">
+      <div class="metric-pill"><strong>${all.filter(item => item.rel.engagementOwner).length}</strong><span>Owned stakeholders</span></div>
+      <div class="metric-pill"><strong>${strongestSponsors.length}</strong><span>Strong sponsors</span></div>
+      <div class="metric-pill"><strong>${atRisk.length}</strong><span>At risk</span></div>
+    </div>
+    <div class="dashboard-grid" style="margin-top:16px;">
+      <div class="dashboard-card"><h3>Coverage gaps</h3><ul class="list-compact">${coverageGaps.length ? coverageGaps.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(item.rel.engagementOwner ? 'Missing next action' : 'Missing engagement owner')}</small></li>`).join('') : '<li>Coverage looks healthy.</li>'}</ul></div>
+      <div class="dashboard-card"><h3>Strongest sponsors</h3><ul class="list-compact">${strongestSponsors.length ? strongestSponsors.map(item => `<li>${escapeHtml(item.person.name)}<small>Sponsorship ${escapeHtml(item.rel.sponsorship)} · Influence ${escapeHtml(item.rel.influence || '—')}</small></li>`).join('') : '<li>No sponsor data yet.</li>'}</ul></div>
+      <div class="dashboard-card"><h3>At-risk accounts</h3><ul class="list-compact">${atRisk.length ? atRisk.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(item.rel.supportStatus || 'Risk')} · Blocker risk ${escapeHtml(item.rel.blockerRisk || '—')}</small></li>`).join('') : '<li>No at-risk stakeholders flagged.</li>'}</ul></div>
+      <div class="dashboard-card"><h3>Inactive critical stakeholders</h3><ul class="list-compact">${stale.length ? stale.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(String(daysSince(item.rel.lastTouchpoint)))} days since last touchpoint</small></li>`).join('') : '<li>No stale relationships found.</li>'}</ul></div>
+      <div class="dashboard-card" style="grid-column: 1 / -1;"><h3>Notifications</h3><ul class="list-compact">${alerts.length ? alerts.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(getWorkspaceInsightItems(item.person.name, item.rel)[0])}</small></li>`).join('') : '<li>No urgent notifications.</li>'}</ul></div>
+    </div>`;
+  document.getElementById('dashboardModal')?.classList.add('open');
+}
+
+function closeExecutiveDashboard() {
+  document.getElementById('dashboardModal')?.classList.remove('open');
+}
+
 // ── EXPORT ────────────────────────────────────────────────────────────────────
 function exportCSV() {
-  const rows = [['Name','Role','Accenture Initials','Relationship Score','Social Style','Business Unit']];
+  const rows = [[
+    'Name','Role','Accenture Initials','Relationship Score','Social Style','Business Unit','Region','Function','Engagement Owner','Influence','Budget Control','Sponsorship','Blocker Risk','Change Appetite','Strategic Importance','Engagement Health','Support Status','Sentiment','Confidence','Source','Objective','Next Action','Due Date','Last Touchpoint'
+  ]];
   allPeople.forEach(p => {
-    const rel = relationships[p.name] || {};
-    rows.push([p.name, p.role, rel.initials || '', rel.score || '', rel.socialStyle || '', rel.businessUnit || '']);
+    const rel = getRelationship(p.name);
+    rows.push([
+      p.name, p.role, rel.initials || '', rel.score || '', rel.socialStyle || '', rel.businessUnit || '', rel.region || '', rel.function || '', rel.engagementOwner || '', rel.influence || '', rel.budgetControl || '', rel.sponsorship || '', rel.blockerRisk || '', rel.changeAppetite || '', rel.strategicImportance || '', rel.engagementHealth || '', rel.supportStatus || '', rel.sentiment || '', rel.confidence || '', rel.source || '', rel.objective || '', rel.nextAction || '', rel.dueDate || '', rel.lastTouchpoint || ''
+    ]);
   });
   const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
   const blob = new Blob([csv], { type: 'text/csv' });
@@ -1857,11 +2637,20 @@ function exportCSV() {
 // ── TABLE SEARCH ──────────────────────────────────────────────────────────────
 function filterTable(query) {
   const q = query.toLowerCase();
+  const ownerFilter = document.getElementById('ownerFilter')?.value || '';
+  const supportFilter = document.getElementById('supportFilter')?.value || '';
+  const regionFilter = document.getElementById('regionFilter')?.value || '';
+  const influenceFilter = parseInt(document.getElementById('influenceFilter')?.value || '0', 10);
   document.querySelectorAll('#relTableBody tr').forEach(tr => {
     const name = tr.dataset.name || '';
-    const rel = relationships[name] || {};
-    const hay = (name + ' ' + (rel.businessUnit || '')).toLowerCase();
-    tr.style.display = hay.includes(q) ? '' : 'none';
+    const rel = getRelationship(name);
+    const hay = (name + ' ' + (rel.businessUnit || '') + ' ' + (rel.region || '') + ' ' + (rel.function || '') + ' ' + (rel.engagementOwner || '')).toLowerCase();
+    const matchesSearch = hay.includes(q);
+    const matchesOwner = !ownerFilter || rel.engagementOwner === ownerFilter;
+    const matchesSupport = !supportFilter || rel.supportStatus === supportFilter;
+    const matchesRegion = !regionFilter || rel.region === regionFilter;
+    const matchesInfluence = !influenceFilter || (parseInt(rel.influence, 10) || 0) >= influenceFilter;
+    tr.style.display = matchesSearch && matchesOwner && matchesSupport && matchesRegion && matchesInfluence ? '' : 'none';
   });
 }
 
@@ -2033,6 +2822,7 @@ function buildNode(node, isRoot = false) {
 function renderChart() {
   const chart = document.getElementById('chart');
   chart.innerHTML = '';
+  Object.keys(nodeMap).forEach(k => delete nodeMap[k]);
   const root = buildNode(data, true);
   root.style.cssText = 'display:flex;flex-direction:column;align-items:center';
   chart.appendChild(root);
