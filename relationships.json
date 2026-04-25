@@ -7,7 +7,7 @@
       "businessUnit": "BUK",
       "region": "",
       "function": "Group Technology Chief of Staff and head of EVP",
-      "engagementOwner": "",
+      "engagementOwner": "GAKC",
       "initiative": "",
       "influence": "",
       "budgetControl": "",
@@ -36,7 +36,7 @@
       "businessUnit": "BUK",
       "region": "",
       "function": "Group Chief Executive Officer",
-      "engagementOwner": "",
+      "engagementOwner": "PS",
       "initiative": "",
       "influence": "",
       "budgetControl": "",
@@ -65,7 +65,7 @@
       "businessUnit": "BUK",
       "region": "",
       "function": "Group Finance Director",
-      "engagementOwner": "",
+      "engagementOwner": "PS",
       "initiative": "",
       "influence": "",
       "budgetControl": "",
@@ -103,7 +103,7 @@
       "businessUnit": "IB",
       "region": "",
       "function": "Group Chief Information Officer",
-      "engagementOwner": "",
+      "engagementOwner": "PS",
       "initiative": "",
       "influence": "",
       "budgetControl": "",
@@ -132,7 +132,7 @@
       "businessUnit": "IB",
       "region": "",
       "function": "Chief Operating Officer, CIB",
-      "engagementOwner": "",
+      "engagementOwner": "GAKC",
       "initiative": "",
       "influence": "",
       "budgetControl": "",
@@ -161,7 +161,7 @@
       "businessUnit": "BUK",
       "region": "",
       "function": "CIO Wholesale Onboarding, GFCO and CRM",
-      "engagementOwner": "",
+      "engagementOwner": "AH",
       "initiative": "",
       "influence": "",
       "budgetControl": "",
@@ -190,7 +190,7 @@
       "businessUnit": "BUK",
       "region": "",
       "function": "CIO Consumer Banking, Payments and Group Controls Technology",
-      "engagementOwner": "",
+      "engagementOwner": "GAKC",
       "initiative": "",
       "influence": "",
       "budgetControl": "",
@@ -213,9 +213,13 @@
       "changeHistory": []
     }
   },
-  "lastUpdated": "2026-04-25T15:50:28.168Z",
+  "lastUpdated": "2026-04-25T16:01:00.100Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-25T16:01:00.100Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-25T15:50:28.168Z"
