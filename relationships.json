@@ -31,7 +31,7 @@
     },
     "CS Venkatakrishnan": {
       "initials": "PS",
-      "score": "1",
+      "score": "3",
       "socialStyle": "Dr",
       "businessUnit": "BUK",
       "region": "",
@@ -56,7 +56,16 @@
       "notes": "",
       "reviewStatus": "",
       "interactions": [],
-      "changeHistory": []
+      "changeHistory": [
+        {
+          "at": "2026-04-25T19:25:44.476Z",
+          "score": "3",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        }
+      ]
     },
     "Anna Cross": {
       "initials": "PS",
@@ -98,7 +107,7 @@
     },
     "Craig Bright": {
       "initials": "PS",
-      "score": "2",
+      "score": "4",
       "socialStyle": "Dr",
       "businessUnit": "IB",
       "region": "",
@@ -123,7 +132,16 @@
       "notes": "",
       "reviewStatus": "",
       "interactions": [],
-      "changeHistory": []
+      "changeHistory": [
+        {
+          "at": "2026-04-25T19:25:44.476Z",
+          "score": "4",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        }
+      ]
     },
     "Antoinette O'Neill": {
       "initials": "GAKC",
@@ -222,9 +240,13 @@
       "changeHistory": []
     }
   },
-  "lastUpdated": "2026-04-25T16:01:11.081Z",
+  "lastUpdated": "2026-04-25T19:25:44.476Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-25T19:25:44.476Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-25T16:01:11.081Z"
