@@ -153,7 +153,7 @@
     },
     "Antoinette O'Neill": {
       "initials": "GAKC",
-      "score": "5",
+      "score": "3",
       "socialStyle": "An",
       "businessUnit": "CIO",
       "region": "US",
@@ -179,6 +179,14 @@
       "reviewStatus": "",
       "interactions": [],
       "changeHistory": [
+        {
+          "at": "2026-04-25T20:00:15.749Z",
+          "score": "3",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        },
         {
           "at": "2026-04-25T16:01:11.081Z",
           "score": "5",
@@ -248,9 +256,13 @@
       "changeHistory": []
     }
   },
-  "lastUpdated": "2026-04-25T20:00:05.240Z",
+  "lastUpdated": "2026-04-25T20:00:15.749Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-25T20:00:15.749Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-25T20:00:05.240Z"
