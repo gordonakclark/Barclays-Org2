@@ -1925,18 +1925,33 @@ function parseOrgOutline(text) {
   return root;
 }
 
+function normalizeImportedText(text) {
+  return String(text || '')
+    .replace(/^\uFEFF/, '')
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, ' ')
+    .replace(/\r\n/g, '\n');
+}
+
 function parseImportedOrg(text) {
-  const trimmed = text.trim();
+  const trimmed = normalizeImportedText(text).trim();
   if (!trimmed) throw new Error('No hierarchy pasted.');
   if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
-    const parsed = JSON.parse(trimmed);
-    return Array.isArray(parsed) ? parsed[0] : parsed;
+    try {
+      const parsed = JSON.parse(trimmed);
+      return Array.isArray(parsed) ? parsed[0] : parsed;
+    } catch (error) {
+      // Fall through to alternative formats so pasted content does not fail hard on JSON syntax issues.
+    }
   }
   const firstLine = trimmed.split(/\r?\n/)[0].toLowerCase();
   if (firstLine.includes('name') && firstLine.includes('role') && firstLine.includes('manager')) {
     return parseOrgCsv(trimmed);
   }
-  return parseOrgOutline(trimmed);
+  try {
+    return parseOrgOutline(trimmed);
+  } catch (error) {
+    throw new Error('Unable to parse the hierarchy. Use valid JSON, CSV with Name/Role/Manager, or an indented outline.');
+  }
 }
 
 function walkOrg(node, parentName = '', map = new Map()) {
