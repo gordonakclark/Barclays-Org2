@@ -60,7 +60,7 @@
     },
     "Anna Cross": {
       "initials": "PS",
-      "score": "1",
+      "score": "3",
       "socialStyle": "Dr",
       "businessUnit": "BUK",
       "region": "",
@@ -85,7 +85,16 @@
       "notes": "",
       "reviewStatus": "",
       "interactions": [],
-      "changeHistory": []
+      "changeHistory": [
+        {
+          "at": "2026-04-25T15:50:28.168Z",
+          "score": "3",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        }
+      ]
     },
     "Craig Bright": {
       "initials": "PS",
@@ -204,9 +213,13 @@
       "changeHistory": []
     }
   },
-  "lastUpdated": "2026-04-25T15:35:51.368Z",
+  "lastUpdated": "2026-04-25T15:50:28.168Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-25T15:50:28.168Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-25T15:35:51.368Z"
