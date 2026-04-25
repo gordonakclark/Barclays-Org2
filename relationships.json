@@ -31,7 +31,7 @@
     },
     "CS Venkatakrishnan": {
       "initials": "PS",
-      "score": "3",
+      "score": "4",
       "socialStyle": "Dr",
       "businessUnit": "BUK",
       "region": "",
@@ -57,6 +57,14 @@
       "reviewStatus": "",
       "interactions": [],
       "changeHistory": [
+        {
+          "at": "2026-04-25T19:43:37.770Z",
+          "score": "4",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        },
         {
           "at": "2026-04-25T19:25:44.476Z",
           "score": "3",
@@ -240,9 +248,13 @@
       "changeHistory": []
     }
   },
-  "lastUpdated": "2026-04-25T19:25:44.476Z",
+  "lastUpdated": "2026-04-25T19:43:37.770Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-25T19:43:37.770Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-25T19:25:44.476Z"
