@@ -1370,7 +1370,7 @@
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.4.2';
+const APP_VERSION = 'v1.4.4';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -1472,6 +1472,16 @@ function inferRegionFromRole(role) {
 function inferBusinessUnitFromRole(role) {
   const text = String(role || '');
   const patterns = [
+    { regex: /\bGTSM\b/i, value: 'GTSM' },
+    { regex: /Chief Technology Office/i, value: 'Chief Technology Office' },
+    { regex: /\bGTIS\b/i, value: 'GTIS' },
+    { regex: /Functions Technology|GFED Tech/i, value: 'Functions Technology' },
+    { regex: /Group Technology/i, value: 'Group Technology' },
+    { regex: /Corporate\s*&\s*Payments COO|CB&P COO|CBP CIO/i, value: 'Corporate & Payments COO' },
+    { regex: /PCB Technology/i, value: 'PCB Technology' },
+    { regex: /Wealth Processing/i, value: 'Wealth Processing' },
+    { regex: /\bControl\b|Group Control/i, value: 'Control' },
+    { regex: /\bIT\b/i, value: 'IT' },
     { regex: /\bGroup CIO\b/i, value: 'CIO' },
     { regex: /\bCIO\b/i, value: 'CIO' },
     { regex: /\bMarkets\b/i, value: 'Markets' },
@@ -1526,8 +1536,8 @@ function normalizeRelationship(name, rel = {}) {
   const person = stakeholderLookup[name] || {};
   const engagementOwner = sanitizeEngagementOwner(rel.engagementOwner || rel.initials || '');
   const inherited = getInheritedOrgMetadata(name);
-  const inferredBusinessUnit = inherited.businessUnit || person.businessUnit || inferBusinessUnitFromRole(person.role || '');
-  const inferredRegion = inherited.region || person.region || inferRegionFromRole(person.role || '');
+  const inferredBusinessUnit = person.businessUnit || inferBusinessUnitFromRole(person.role || '') || inherited.businessUnit;
+  const inferredRegion = person.region || inferRegionFromRole(person.role || '') || inherited.region;
   return {
     initials: engagementOwner,
     score: sanitizeScore(rel.score || ''),
@@ -2178,7 +2188,7 @@ const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive
         orgNode("Alan Muses", "GTSM Head of Markets & Investment Bank"),
         orgNode("Leanne Wakefield", "Head of Colleague Operations"),
         orgNode("Kwan Choi", "Global Head of RFT, FT and Data Platform")
-      ]),
+      ], { businessUnit: 'GTSM' }),
       orgNode("Sheryl Sanchez", "Executive Assistant to Antoinette O'Neill"),
       orgNode("Paul Beresford", "CIO Consumer Banking, Payments and Group Controls Technology", [
         orgNode("Lily Wang", "CIO Wholesale Onboarding, GFCO and CRM", [
@@ -2410,7 +2420,7 @@ const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive
           ]),
           orgNode("Pat Leason", "Operational Rigour (VP)")
         ])
-      ]),
+      ], { businessUnit: 'CIO' }),
       orgNode("Stephen Flaherty", "Chief Technology Officer & Head of Group Technology Infrastructure Services", [
         orgNode("Michael Rozycki", "Network Transformation Lead"),
         orgNode("Amy Williams", "Head of Core Infrastructure Platform | Radbroke Site Lead"),
@@ -2438,7 +2448,7 @@ const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive
         orgNode("Kristen Bennie", "Group Head of Innovation and Partnerships"),
         orgNode("Santashil Palchaudhuri", "GTIS"),
         orgNode("William Lyvers", "Distinguished Engineer, Head of Application Engineering")
-      ]),
+      ], { businessUnit: 'Chief Technology Office' }),
       orgNode("Alison Hedges", "Head of CIB Tech Strategy and Transformation", [
         orgNode("Rebecca Hands", "Change Delivery Director (Group Tech EVP)", [
           orgNode("Severine Hankinson", "Learning Manager"),
@@ -2454,7 +2464,7 @@ const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive
         orgNode("Anne Simpson", "CIB COO, Strategy & Governance", [
           orgNode("Victoria Lawlor", "AVP")
         ])
-      ]),
+      ], { businessUnit: 'IT' }),
       orgNode("Rakesh Prasad", "CIO Functions Technology", [
         orgNode("Saurabh Gosain", "MD, CIO Group Sustainability", [
           orgNode("Rebecca Tuff", "Head of CIO Sustainability Change Execution and PPCR Tech"),
@@ -2495,7 +2505,7 @@ const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive
         orgNode("Sara Gettings", "Director, Head of Functions Technology Portfolio & Governance"),
         orgNode("Elise Sakala", "VP, Communications Lead"),
         orgNode("Andrea Muha", "Executive Assistant / Administration Manager (FT CIO)")
-      ])
+      ], { businessUnit: 'GFED Tech' })
     ]),
     orgNode("Jillian Chai", "Group Technology Chief of Staff and head of EVP"),
     orgNode("John Miller", "Group Chief Information Security Officer"),
@@ -3534,8 +3544,9 @@ function filterTable(query) {
 // ── BUSINESS UNIT FILTER ──────────────────────────────────────────────────────
 function getUniqueBUs() {
   const set = new Set();
-  Object.values(relationships).forEach(r => {
-    if (r && r.businessUnit && r.businessUnit.trim()) set.add(r.businessUnit.trim());
+  allPeople.forEach(person => {
+    const rel = getRelationship(person.name);
+    if (rel && rel.businessUnit && rel.businessUnit.trim()) set.add(rel.businessUnit.trim());
   });
   return Array.from(set).sort((a, b) => a.localeCompare(b));
 }

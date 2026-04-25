@@ -6,7 +6,7 @@ async function login(page) {
   await page.getByLabel('Password').fill('PS');
   await page.getByRole('button', { name: 'Sign In' }).click();
   await expect(page.locator('#mainApp')).toHaveClass(/authenticated/);
-  await expect(page.locator('#appVersion')).toContainText('Version v1.4.2');
+  await expect(page.locator('#appVersion')).toContainText('Version v1.4.4');
   await expect(page.locator('#relTableBody tr').first()).toBeVisible();
 }
 
@@ -86,5 +86,16 @@ test.describe('power map application', () => {
     await expect(page.locator('#workspaceRegion')).toHaveValue('US');
     await expect(page.locator('input.input-bu[data-name="Antoinette O\'Neill"]')).toHaveValue('CIO');
     await expect(page.locator('#workspaceInitiative')).toHaveValue('');
+  });
+
+  test('uses inferred branch business units in the BU dropdown and subtree', async ({ page }) => {
+    await login(page);
+
+    await expect(page.locator('#buFilter')).toContainText('GTSM');
+    await expect(page.locator('#buFilter')).toContainText('Chief Technology Office');
+
+    const loweRow = page.locator('#relTableBody tr').filter({ hasText: 'Jonathan Lowe' }).first();
+    await loweRow.getByRole('button', { name: 'Edit details' }).click();
+    await expect(page.locator('input.input-bu[data-name="Jonathan Lowe"]')).toHaveValue('GTSM');
   });
 });
