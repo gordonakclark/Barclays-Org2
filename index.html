@@ -13,10 +13,10 @@
     --barclays-navy: #0a1628;
     --barclays-navy-mid: #112244;
     --barclays-navy-light: #1a3060;
-    --barclays-gold: #c9a84c;
-    --barclays-gold-light: #e8cc7a;
-    --barclays-gold-pale: #f5e9c0;
-    --barclays-silver: #8899bb;
+    --barclays-gold: #00AEEF;
+    --barclays-gold-light: #66D7FF;
+    --barclays-gold-pale: #D9F6FF;
+    --barclays-silver: #8EB9CC;
     
     /* Accenture Brand Colors */
     --accenture-purple: #A100FF;
@@ -28,14 +28,14 @@
     --navy: #0a1628;
     --navy-mid: #112244;
     --navy-light: #1a3060;
-    --gold: #c9a84c;
-    --gold-light: #e8cc7a;
-    --gold-pale: #f5e9c0;
-    --silver: #8899bb;
-    --white: #f8f6f0;
-    --line-color: #2a4070;
-    --text-primary: #f0edd8;
-    --text-secondary: #8899bb;
+    --gold: #00AEEF;
+    --gold-light: #66D7FF;
+    --gold-pale: #D9F6FF;
+    --silver: #8EB9CC;
+    --white: #f4fbff;
+    --line-color: #25557A;
+    --text-primary: #E8F7FF;
+    --text-secondary: #8EB9CC;
     
     /* Score colours */
     --score-1: #c0392b;
@@ -77,7 +77,7 @@
   .login-container {
     background: rgba(17, 34, 68, 0.95);
     border: 2px solid;
-    border-image: linear-gradient(135deg, #A100FF 0%, #c9a84c 100%) 1;
+    border-image: linear-gradient(135deg, #A100FF 0%, #00AEEF 100%) 1;
     border-radius: 12px;
     padding: 40px 50px;
     min-width: 400px;
@@ -107,7 +107,7 @@
   .login-divider {
     width: 2px;
     height: 40px;
-    background: linear-gradient(180deg, #A100FF 0%, #c9a84c 100%);
+    background: linear-gradient(180deg, #A100FF 0%, #00AEEF 100%);
   }
 
   .login-eagle {
@@ -240,7 +240,7 @@
   .page-header {
     background: linear-gradient(135deg, #A100FF 0%, #0a1628 50%, #112244 100%);
     border-bottom: 2px solid;
-    border-image: linear-gradient(90deg, #A100FF 0%, #c9a84c 100%) 1;
+    border-image: linear-gradient(90deg, #A100FF 0%, #00AEEF 100%) 1;
     padding: 20px 32px 16px;
     position: sticky;
     top: 0;
@@ -267,7 +267,7 @@
   .brand-divider {
     width: 2px;
     height: 40px;
-    background: linear-gradient(180deg, #A100FF 0%, #c9a84c 100%);
+    background: linear-gradient(180deg, #A100FF 0%, #00AEEF 100%);
     opacity: 0.6;
   }
 
@@ -335,7 +335,7 @@
   .btn-control.active { 
     background: linear-gradient(135deg, rgba(161,0,255,0.3) 0%, rgba(201,168,76,0.3) 100%);
     border: 1px solid;
-    border-image: linear-gradient(90deg, #A100FF 0%, #c9a84c 100%) 1;
+    border-image: linear-gradient(90deg, #A100FF 0%, #00AEEF 100%) 1;
   }
 
   /* ── LAYOUT SPLIT ── */
@@ -1038,7 +1038,7 @@
     </form>
 
     <div class="login-footer">
-      <span style="color: #A100FF;">Accenture</span> × <span style="color: #c9a84c;">Barclays</span> | Authorized Access Only
+      <span style="color: #A100FF;">Accenture</span> × <span style="color: #00AEEF;">Barclays</span> | Authorized Access Only
     </div>
   </div>
 </div>
@@ -1164,7 +1164,7 @@
     
     <!-- Footer branding -->
     <div style="padding: 12px 16px; border-top: 1px solid rgba(161,0,255,0.15); background: rgba(10,22,40,0.8); font-size: 10px; color: var(--silver); text-align: center; letter-spacing: 0.5px;">
-      <span style="color: #A100FF;">Accenture</span> × <span style="color: #c9a84c;">Barclays</span> | Relationship Intelligence Platform
+      <span style="color: #A100FF;">Accenture</span> × <span style="color: #00AEEF;">Barclays</span> | Relationship Intelligence Platform
     </div>
   </div>
 
@@ -1291,7 +1291,7 @@
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.2.0';
+const APP_VERSION = 'v1.2.1';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -1451,7 +1451,7 @@ function getOverlayStyle(rel) {
   const styles = {
     org: { border: '', glow: '', tag: 'Org hierarchy' },
     influence: { border: '#A100FF', glow: `0 0 18px rgba(161,0,255,${(parseInt(rel.influence, 10) || 0) / 8})`, tag: `Influence ${rel.influence || '—'}` },
-    strategic: { border: '#c9a84c', glow: `0 0 18px rgba(201,168,76,${(parseInt(rel.strategicImportance, 10) || 0) / 8})`, tag: `Strategic ${rel.strategicImportance || '—'}` },
+    strategic: { border: '#00AEEF', glow: `0 0 18px rgba(0,174,239,${(parseInt(rel.strategicImportance, 10) || 0) / 8})`, tag: `Strategic ${rel.strategicImportance || '—'}` },
     engagement: { border: '#27ae60', glow: `0 0 18px rgba(39,174,96,${(parseInt(rel.engagementHealth, 10) || 0) / 8})`, tag: `Engagement ${rel.engagementHealth || '—'}` },
     budget: { border: '#0fa894', glow: `0 0 18px rgba(15,168,148,${(parseInt(rel.budgetControl, 10) || 0) / 8})`, tag: `Budget ${rel.budgetControl || '—'}` },
     support: {
