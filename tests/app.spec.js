@@ -6,7 +6,7 @@ async function login(page) {
   await page.getByLabel('Password').fill('PS');
   await page.getByRole('button', { name: 'Sign In' }).click();
   await expect(page.locator('#mainApp')).toHaveClass(/authenticated/);
-  await expect(page.locator('#appVersion')).toContainText('Version v1.2.1');
+  await expect(page.locator('#appVersion')).toContainText('Version v1.2.2');
   await expect(page.locator('#relTableBody tr').first()).toBeVisible();
 }
 
