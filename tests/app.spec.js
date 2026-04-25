@@ -6,7 +6,7 @@ async function login(page) {
   await page.getByLabel('Password').fill('PS');
   await page.getByRole('button', { name: 'Sign In' }).click();
   await expect(page.locator('#mainApp')).toHaveClass(/authenticated/);
-  await expect(page.locator('#appVersion')).toContainText('Version v1.4.0');
+  await expect(page.locator('#appVersion')).toContainText('Version v1.4.1');
   await expect(page.locator('#relTableBody tr').first()).toBeVisible();
 }
 
@@ -29,6 +29,7 @@ test.describe('power map application', () => {
     await row.getByRole('button', { name: 'Edit details' }).click();
     await expect(page.locator('#stakeholderModal')).toHaveClass(/open/);
     await expect(page.locator('#stakeholderModalTitle')).toHaveText('CS Venkatakrishnan');
+    await expect(page.locator('#workspaceFunction')).toHaveValue('Group Chief Executive Officer');
 
     await page.locator('#workspaceOwner').fill('Test Owner');
     await page.locator('#workspaceRegion').fill('UK');
@@ -74,5 +75,15 @@ test.describe('power map application', () => {
     await page.getByRole('button', { name: 'Preview import' }).click();
     await expect(page.locator('#orgImportValidationList')).toContainText('Added: Jane Example');
     await expect(page.locator('#applyOrgImportBtn')).toBeEnabled();
+  });
+
+  test('inherits business unit and region defaults from org metadata', async ({ page }) => {
+    await login(page);
+
+    const row = page.locator('#relTableBody tr').filter({ hasText: "Antoinette O'Neill" }).first();
+    await row.getByRole('button', { name: 'Edit details' }).click();
+    await expect(page.locator('#workspaceFunction')).toHaveValue('Chief Operating Officer, CIB');
+    await expect(page.locator('#workspaceRegion')).toHaveValue('US');
+    await expect(page.locator('#workspaceInitiative')).toHaveValue('');
   });
 });

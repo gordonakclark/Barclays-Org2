@@ -1370,7 +1370,7 @@
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.4.0';
+const APP_VERSION = 'v1.4.1';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -1452,15 +1452,74 @@ function sanitizeEngagementOwner(value) {
   return sanitizeShortText(value, 24);
 }
 
+function normalizeExistingRegion(value) {
+  const region = sanitizeShortText(value || '', 40).toUpperCase();
+  if (region === 'NYK' || region === 'US' || region === 'AMERICAS') return 'US';
+  if (region === 'LDN' || region === 'UK' || region === 'BBPLC' || region === 'BUK') return 'UK';
+  return sanitizeShortText(value || '', 40);
+}
+
+function inferRegionFromRole(role) {
+  const text = String(role || '').toUpperCase();
+  if (/\((NYK|US|AMERICAS)\)|\bNYK\b|\bUS\b|AMERICAS/.test(text)) return 'US';
+  if (/\((LDN|UK|BBPLC|BUK)\)|\bLDN\b|\bUK\b|BARCLAYS UK|BBPLC/.test(text)) return 'UK';
+  if (/\((HKG|APAC|ASIA PACIFIC|MUM|SINGAPORE|MEA|MENA)\)|\bHKG\b|\bAPAC\b|\bMUM\b|\bMEA\b|\bMENA\b|SINGAPORE/.test(text)) return 'APAC/MEA';
+  if (/EUROPE|EMEA/.test(text)) return 'EMEA';
+  return '';
+}
+
+function inferBusinessUnitFromRole(role) {
+  const text = String(role || '');
+  const patterns = [
+    { regex: /\bGroup CIO\b/i, value: 'CIO' },
+    { regex: /\bCIO\b/i, value: 'CIO' },
+    { regex: /\bMarkets\b/i, value: 'Markets' },
+    { regex: /\bInvestment Banking\b|\bIB\b/i, value: 'Investment Banking' },
+    { regex: /\bBanking\b/i, value: 'Banking' },
+    { regex: /\bRisk\b/i, value: 'Risk' },
+    { regex: /\bCompliance\b/i, value: 'Compliance' },
+    { regex: /\bFinance\b/i, value: 'Finance' },
+    { regex: /\bHR\b|Human Resources/i, value: 'HR' },
+    { regex: /\bBarclays UK\b|\bBUK\b/i, value: 'BUK' },
+    { regex: /\bUKCB\b|UK Corporate Bank/i, value: 'UKCB' },
+    { regex: /\bBX\b/i, value: 'BX' },
+    { regex: /\bPrivate Bank\b|PBWM/i, value: 'PBWM' },
+    { regex: /\bLegal\b|General Counsel/i, value: 'Legal' },
+    { regex: /\bInternal Auditor\b|Audit/i, value: 'Audit' },
+    { regex: /\bStrategy\b|Transformation/i, value: 'Strategy & Transformation' },
+    { regex: /\bTechnology\b|GTIS|GTSM|Chief Technology Office/i, value: 'Technology' }
+  ];
+  const match = patterns.find(pattern => pattern.regex.test(text));
+  return match ? match.value : '';
+}
+
+function getInheritedOrgMetadata(name) {
+  let current = stakeholderLookup[name] || {};
+  while (current && current.name) {
+    if (current.businessUnit || current.region) {
+      return {
+        businessUnit: current.businessUnit || '',
+        region: current.region || ''
+      };
+    }
+    const parentName = stakeholderParentMap[current.name];
+    current = parentName ? stakeholderLookup[parentName] : null;
+  }
+  return { businessUnit: '', region: '' };
+}
+
 function normalizeRelationship(name, rel = {}) {
   const person = stakeholderLookup[name] || {};
   const engagementOwner = sanitizeEngagementOwner(rel.engagementOwner || rel.initials || '');
+  const inherited = getInheritedOrgMetadata(name);
+  const inferredBusinessUnit = person.businessUnit || inferBusinessUnitFromRole(person.role || '');
+  const inferredRegion = person.region || inferRegionFromRole(person.role || '');
   return {
     initials: engagementOwner,
     score: sanitizeScore(rel.score || ''),
     socialStyle: sanitizeSocialStyle(rel.socialStyle || ''),
-    businessUnit: sanitizeBusinessUnit(rel.businessUnit || ''),
-    region: sanitizeShortText(rel.region || ''),
+    businessUnit: sanitizeBusinessUnit(rel.businessUnit || inferredBusinessUnit || inherited.businessUnit || ''),
+    region: normalizeExistingRegion(rel.region) || inferredRegion || inherited.region || '',
     function: sanitizeShortText(rel.function || person.role || '', 120),
     engagementOwner,
     initiative: sanitizeShortText(rel.initiative || '', 120),
@@ -1794,8 +1853,10 @@ function logout() {
 checkAuth();
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
-function orgNode(name, role, children = []) {
-  return children.length ? { name, role, children } : { name, role };
+function orgNode(name, role, children = [], metadata = {}) {
+  const node = { name, role, ...metadata };
+  if (children.length) node.children = children;
+  return node;
 }
 
 function annotateLevels(node, level = 0) {
@@ -1890,6 +1951,8 @@ function parseOrgCsv(text) {
 
   const stripManager = node => {
     const clean = { name: node.name, role: node.role };
+    if (node.businessUnit) clean.businessUnit = node.businessUnit;
+    if (node.region) clean.region = node.region;
     if (node.children.length) clean.children = node.children.map(stripManager);
     return clean;
   };
@@ -1909,7 +1972,13 @@ function parseOrgOutline(text) {
     const role = sanitizeShortText(parts.slice(1).join(' — ') || '(role not provided)', 220);
     const name = sanitizeShortText(left.replace(/\s*:\s.*$/, ''), 180);
     if (!name) return;
-    const node = { name, role };
+    const inferredRole = sanitizeShortText(parts.slice(1).join(' — ') || '(role not provided)', 220);
+    const node = {
+      name,
+      role: inferredRole,
+      businessUnit: inferBusinessUnitFromRole(inferredRole),
+      region: inferRegionFromRole(inferredRole)
+    };
     while (stack.length && stack[stack.length - 1].indent >= indent) stack.pop();
     if (!stack.length) {
       if (root) throw new Error('Outline produced multiple roots.');
@@ -2069,7 +2138,7 @@ function applyOrgImport() {
 
 const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive Officer", [
   orgNode("Craig Bright", "Group Co COO and Co CEO, BX", [
-    orgNode("Antoinette O'Neill", "Chief Operating Officer, CIB", [
+    orgNode("Antoinette O'Neill", "Chief Operating Officer, CIB (NYK)", [
       orgNode("Jonathan Lowe", "Head of Group Technology Service Management", [
         orgNode("Paul Austen", "Head of RtB Corporate Tech & Infra BI", [
           orgNode("Adam Tomlinson", "BX Tech / Cyber Resilience Lead"),
@@ -2438,7 +2507,7 @@ const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive
     orgNode("Nick Koukoumelidis", "Finance")
   ]),
   orgNode("Adeel Khan", "Global Head of Markets", [
-    orgNode("Michael Webb", "Global Head of Liquid Financing"),
+    orgNode("Michael Webb", "Global Head of Liquid Financing (NYK)"),
     orgNode("Hossein Zaimi", "Global Head of Macro"),
     orgNode("Paul Johny", "Global Markets Chief of Staff"),
     orgNode("Rahil Patel", "Business Manager - Markets"),
@@ -2955,7 +3024,13 @@ let allPeople = [];
 
 function flattenTree(node, parentName = '') {
   allPeople.push({ name: node.name, role: node.role, level: node.level });
-  stakeholderLookup[node.name] = { name: node.name, role: node.role, level: node.level };
+  stakeholderLookup[node.name] = {
+    name: node.name,
+    role: node.role,
+    level: node.level,
+    businessUnit: sanitizeBusinessUnit(node.businessUnit || ''),
+    region: sanitizeShortText(node.region || '', 40)
+  };
   stakeholderParentMap[node.name] = parentName;
   if (node.children) node.children.forEach(child => flattenTree(child, node.name));
 }
