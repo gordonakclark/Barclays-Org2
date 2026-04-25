@@ -6,7 +6,7 @@ async function login(page) {
   await page.getByLabel('Password').fill('PS');
   await page.getByRole('button', { name: 'Sign In' }).click();
   await expect(page.locator('#mainApp')).toHaveClass(/authenticated/);
-  await expect(page.locator('#appVersion')).toContainText('Version v1.2.4');
+  await expect(page.locator('#appVersion')).toContainText('Version v1.2.5');
   await expect(page.locator('#relTableBody tr').first()).toBeVisible();
 }
 
@@ -25,7 +25,8 @@ test.describe('power map application', () => {
     await login(page);
 
     const row = page.locator('#relTableBody tr').filter({ hasText: 'CS Venkatakrishnan' }).first();
-    await row.click();
+    await expect(row).toContainText('Edit details');
+    await row.getByRole('button', { name: 'Edit details' }).click();
     await expect(page.locator('#stakeholderModal')).toHaveClass(/open/);
     await expect(page.locator('#stakeholderModalTitle')).toHaveText('CS Venkatakrishnan');
 

@@ -763,6 +763,12 @@
   .search-wrap {
     padding: 10px 16px 0;
   }
+  .workspace-hint {
+    padding: 8px 16px 0;
+    font-size: 10px;
+    color: var(--silver);
+    letter-spacing: 0.4px;
+  }
   .filter-wrap {
     padding: 10px 16px 0;
     display: grid;
@@ -1114,6 +1120,7 @@
     <div class="search-wrap">
       <input class="search-input" type="text" id="searchInput" placeholder="Search people…" oninput="filterTable(this.value)">
     </div>
+    <div class="workspace-hint">Engagement Owner captures the account owner. Use <strong>Edit details</strong> to populate influence, actions, interaction history, and planning fields.</div>
 
     <div class="filter-wrap">
       <select class="filter-select" id="ownerFilter" onchange="filterTable(document.getElementById('searchInput').value)">
@@ -1144,11 +1151,12 @@
         <thead>
           <tr>
             <th style="width:26%">Barclays Person</th>
-            <th style="width:12%">Initials</th>
+            <th style="width:18%">Engagement Owner</th>
             <th style="width:10%">Score</th>
             <th style="width:10%">Style</th>
-            <th style="width:18%">Badge</th>
-            <th style="width:24%">Business Unit</th>
+            <th style="width:16%">Badge</th>
+            <th style="width:18%">Business Unit</th>
+            <th style="width:12%">Details</th>
           </tr>
         </thead>
         <tbody id="relTableBody"></tbody>
@@ -1300,7 +1308,7 @@
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.2.4';
+const APP_VERSION = 'v1.2.5';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -1376,16 +1384,21 @@ function sanitizeNumericRating(value) {
   return ['1', '2', '3', '4', '5'].includes(normal) ? normal : '';
 }
 
+function sanitizeEngagementOwner(value) {
+  return sanitizeShortText(value, 24);
+}
+
 function normalizeRelationship(name, rel = {}) {
   const person = stakeholderLookup[name] || {};
+  const engagementOwner = sanitizeEngagementOwner(rel.engagementOwner || rel.initials || '');
   return {
-    initials: sanitizeInitials(rel.initials || ''),
+    initials: engagementOwner,
     score: sanitizeScore(rel.score || ''),
     socialStyle: sanitizeSocialStyle(rel.socialStyle || ''),
     businessUnit: sanitizeBusinessUnit(rel.businessUnit || ''),
     region: sanitizeShortText(rel.region || ''),
     function: sanitizeShortText(rel.function || person.role || '', 120),
-    engagementOwner: sanitizeShortText(rel.engagementOwner || ''),
+    engagementOwner,
     initiative: sanitizeShortText(rel.initiative || '', 120),
     influence: sanitizeNumericRating(rel.influence || ''),
     budgetControl: sanitizeNumericRating(rel.budgetControl || ''),
@@ -2306,11 +2319,11 @@ function buildTable() {
     const inp = document.createElement('input');
     inp.className = 'input-initials';
     inp.type = 'text';
-    inp.maxLength = 4;
+    inp.maxLength = 24;
     inp.placeholder = 'e.g. PS';
-    inp.value = sanitizeInitials(rel.initials || '');
+    inp.value = sanitizeEngagementOwner(rel.engagementOwner || rel.initials || '');
     inp.dataset.name = person.name;
-    inp.addEventListener('input', () => { inp.value = sanitizeInitials(inp.value); updateRel(person.name); updateBadgePreview(tr, person.name); updateCount(); });
+    inp.addEventListener('input', () => { inp.value = sanitizeEngagementOwner(inp.value); updateRel(person.name); updateBadgePreview(tr, person.name); updateCount(); });
     tdInitials.appendChild(inp);
 
     const tdScore = document.createElement('td');
@@ -2363,6 +2376,17 @@ function buildTable() {
     tr.appendChild(tdSocial);
     tr.appendChild(tdPreview);
     tr.appendChild(tdBU);
+    const tdDetails = document.createElement('td');
+    const detailsBtn = document.createElement('button');
+    detailsBtn.type = 'button';
+    detailsBtn.className = 'btn-row';
+    detailsBtn.textContent = 'Edit details';
+    detailsBtn.addEventListener('click', event => {
+      event.stopPropagation();
+      openStakeholderWorkspace(person.name);
+    });
+    tdDetails.appendChild(detailsBtn);
+    tr.appendChild(tdDetails);
     tbody.appendChild(tr);
     updateBadgePreview(tr, person.name);
   });
@@ -2378,7 +2402,7 @@ function updateRel(name) {
   const selSocial = document.querySelector(`select.social-select[data-name="${CSS.escape(name)}"]`);
   if (!inp || !sel || !selSocial) return;
   const inpBU = document.querySelector(`input.input-bu[data-name="${CSS.escape(name)}"]`);
-  const initials = sanitizeInitials(inp.value);
+  const initials = sanitizeEngagementOwner(inp.value);
   const score = sanitizeScore(sel.value);
   const socialStyle = sanitizeSocialStyle(selSocial.value);
   const businessUnit = sanitizeBusinessUnit(inpBU ? inpBU.value : (relationships[name] && relationships[name].businessUnit) || '');
@@ -2389,6 +2413,7 @@ function updateRel(name) {
     relationships[name] = {
       ...existing,
       initials,
+      engagementOwner: initials,
       score,
       socialStyle,
       businessUnit
@@ -2540,7 +2565,7 @@ function populateWorkspaceFields(name) {
   if (subtitle) subtitle.textContent = `${person.role || 'Stakeholder'} · Power map workspace`;
 
   const fieldMap = {
-    workspaceOwner: rel.engagementOwner,
+    workspaceOwner: rel.engagementOwner || rel.initials,
     workspaceRegion: rel.region,
     workspaceFunction: rel.function || person.role || '',
     workspaceInitiative: rel.initiative,
@@ -2644,6 +2669,7 @@ function saveStakeholderWorkspace() {
   const base = ensureStakeholder(selectedStakeholder);
   relationships[selectedStakeholder] = normalizeRelationship(selectedStakeholder, {
     ...base,
+    initials: document.getElementById('workspaceOwner')?.value,
     engagementOwner: document.getElementById('workspaceOwner')?.value,
     region: document.getElementById('workspaceRegion')?.value,
     function: document.getElementById('workspaceFunction')?.value,
@@ -2712,12 +2738,12 @@ function closeExecutiveDashboard() {
 // ── EXPORT ────────────────────────────────────────────────────────────────────
 function exportCSV() {
   const rows = [[
-    'Name','Role','Accenture Initials','Relationship Score','Social Style','Business Unit','Region','Function','Engagement Owner','Influence','Budget Control','Sponsorship','Blocker Risk','Change Appetite','Strategic Importance','Engagement Health','Support Status','Sentiment','Confidence','Source','Objective','Next Action','Due Date','Last Touchpoint'
+    'Name','Role','Engagement Owner','Relationship Score','Social Style','Business Unit','Region','Function','Influence','Budget Control','Sponsorship','Blocker Risk','Change Appetite','Strategic Importance','Engagement Health','Support Status','Sentiment','Confidence','Source','Objective','Next Action','Due Date','Last Touchpoint'
   ]];
   allPeople.forEach(p => {
     const rel = getRelationship(p.name);
     rows.push([
-      p.name, p.role, rel.initials || '', rel.score || '', rel.socialStyle || '', rel.businessUnit || '', rel.region || '', rel.function || '', rel.engagementOwner || '', rel.influence || '', rel.budgetControl || '', rel.sponsorship || '', rel.blockerRisk || '', rel.changeAppetite || '', rel.strategicImportance || '', rel.engagementHealth || '', rel.supportStatus || '', rel.sentiment || '', rel.confidence || '', rel.source || '', rel.objective || '', rel.nextAction || '', rel.dueDate || '', rel.lastTouchpoint || ''
+      p.name, p.role, rel.engagementOwner || rel.initials || '', rel.score || '', rel.socialStyle || '', rel.businessUnit || '', rel.region || '', rel.function || '', rel.influence || '', rel.budgetControl || '', rel.sponsorship || '', rel.blockerRisk || '', rel.changeAppetite || '', rel.strategicImportance || '', rel.engagementHealth || '', rel.supportStatus || '', rel.sentiment || '', rel.confidence || '', rel.source || '', rel.objective || '', rel.nextAction || '', rel.dueDate || '', rel.lastTouchpoint || ''
     ]);
   });
   const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
