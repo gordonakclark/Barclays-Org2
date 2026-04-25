@@ -1370,7 +1370,7 @@
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.4.1';
+const APP_VERSION = 'v1.4.2';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -1387,6 +1387,7 @@ let selectedStakeholder = null;
 let workspaceInteractions = [];
 const stakeholderLookup = {};
 const stakeholderParentMap = {};
+const orgContextCache = {};
 let currentOrgData = null;
 let pendingOrgImport = null;
 
@@ -1493,7 +1494,20 @@ function inferBusinessUnitFromRole(role) {
   return match ? match.value : '';
 }
 
+function deriveOrgContext(node, inheritedContext = { businessUnit: '', region: '' }) {
+  const roleBusinessUnit = sanitizeBusinessUnit(node.businessUnit || inferBusinessUnitFromRole(node.role || '') || inheritedContext.businessUnit || '');
+  const roleRegion = normalizeExistingRegion(node.region || inferRegionFromRole(node.role || '') || inheritedContext.region || '');
+  orgContextCache[node.name] = {
+    businessUnit: roleBusinessUnit,
+    region: roleRegion
+  };
+  (node.children || []).forEach(child => deriveOrgContext(child, { businessUnit: roleBusinessUnit, region: roleRegion }));
+}
+
 function getInheritedOrgMetadata(name) {
+  if (orgContextCache[name]) {
+    return orgContextCache[name];
+  }
   let current = stakeholderLookup[name] || {};
   while (current && current.name) {
     if (current.businessUnit || current.region) {
@@ -1512,14 +1526,14 @@ function normalizeRelationship(name, rel = {}) {
   const person = stakeholderLookup[name] || {};
   const engagementOwner = sanitizeEngagementOwner(rel.engagementOwner || rel.initials || '');
   const inherited = getInheritedOrgMetadata(name);
-  const inferredBusinessUnit = person.businessUnit || inferBusinessUnitFromRole(person.role || '');
-  const inferredRegion = person.region || inferRegionFromRole(person.role || '');
+  const inferredBusinessUnit = inherited.businessUnit || person.businessUnit || inferBusinessUnitFromRole(person.role || '');
+  const inferredRegion = inherited.region || person.region || inferRegionFromRole(person.role || '');
   return {
     initials: engagementOwner,
     score: sanitizeScore(rel.score || ''),
     socialStyle: sanitizeSocialStyle(rel.socialStyle || ''),
-    businessUnit: sanitizeBusinessUnit(rel.businessUnit || inferredBusinessUnit || inherited.businessUnit || ''),
-    region: normalizeExistingRegion(rel.region) || inferredRegion || inherited.region || '',
+    businessUnit: sanitizeBusinessUnit(rel.businessUnit || inferredBusinessUnit || ''),
+    region: normalizeExistingRegion(rel.region) || inferredRegion || '',
     function: sanitizeShortText(rel.function || person.role || '', 120),
     engagementOwner,
     initiative: sanitizeShortText(rel.initiative || '', 120),
@@ -1869,11 +1883,13 @@ function resetOrgCaches() {
   allPeople = [];
   Object.keys(stakeholderLookup).forEach(key => delete stakeholderLookup[key]);
   Object.keys(stakeholderParentMap).forEach(key => delete stakeholderParentMap[key]);
+  Object.keys(orgContextCache).forEach(key => delete orgContextCache[key]);
   Object.keys(nodeMap).forEach(key => delete nodeMap[key]);
 }
 
 function rebuildOrgCaches() {
   resetOrgCaches();
+  deriveOrgContext(currentOrgData);
   flattenTree(currentOrgData);
 }
 
@@ -3719,6 +3735,7 @@ function collapseAll() {
 // ── INIT ──────────────────────────────────────────────────────────────────────
 // Wrapped in function to call after authentication
 async function initializeApp() {
+  rebuildOrgCaches();
   await loadGitHubUser();
   const success = await loadFromGitHub();
   renderChart();

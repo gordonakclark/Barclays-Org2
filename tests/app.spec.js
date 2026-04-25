@@ -6,7 +6,7 @@ async function login(page) {
   await page.getByLabel('Password').fill('PS');
   await page.getByRole('button', { name: 'Sign In' }).click();
   await expect(page.locator('#mainApp')).toHaveClass(/authenticated/);
-  await expect(page.locator('#appVersion')).toContainText('Version v1.4.1');
+  await expect(page.locator('#appVersion')).toContainText('Version v1.4.2');
   await expect(page.locator('#relTableBody tr').first()).toBeVisible();
 }
 
@@ -84,6 +84,7 @@ test.describe('power map application', () => {
     await row.getByRole('button', { name: 'Edit details' }).click();
     await expect(page.locator('#workspaceFunction')).toHaveValue('Chief Operating Officer, CIB');
     await expect(page.locator('#workspaceRegion')).toHaveValue('US');
+    await expect(page.locator('input.input-bu[data-name="Antoinette O\'Neill"]')).toHaveValue('CIO');
     await expect(page.locator('#workspaceInitiative')).toHaveValue('');
   });
 });
