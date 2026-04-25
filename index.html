@@ -808,6 +808,31 @@
     min-height: 84px;
     resize: vertical;
   }
+  .import-textarea {
+    min-height: 220px;
+    font-family: Consolas, 'Courier New', monospace;
+    white-space: pre;
+  }
+  .import-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .validation-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .validation-list li {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: 11px;
+  }
   .power-modal-backdrop {
     position: fixed;
     inset: 0;
@@ -1076,6 +1101,7 @@
   </div>
   <div class="header-controls">
     <div class="version-badge" id="appVersion"></div>
+    <button class="btn-control" onclick="openOrgImportModal()">Import Org</button>
     <select class="overlay-select" id="overlaySelect" onchange="setOverlayMode(this.value)" title="Change power-map overlay">
       <option value="org">Org hierarchy</option>
       <option value="influence">Influence heatmap</option>
@@ -1304,11 +1330,47 @@
   </div>
 </div>
 
+<div class="power-modal-backdrop" id="orgImportModal" onclick="if(event.target === this) closeOrgImportModal()">
+  <div class="power-modal">
+    <div class="power-modal-header">
+      <div>
+        <h2>Import Org Hierarchy</h2>
+        <p>Paste JSON, CSV (Name, Role, Manager), or an indented outline. Preview validation and diff before applying.</p>
+      </div>
+      <button class="security-modal-close" type="button" onclick="closeOrgImportModal()">Close</button>
+    </div>
+    <div class="power-modal-body">
+      <div class="workspace-card">
+        <h3>Source hierarchy</h3>
+        <textarea class="workspace-textarea import-textarea" id="orgImportInput" placeholder='Paste JSON tree, CSV with Name,Role,Manager, or an indented outline here.'></textarea>
+        <div class="workspace-inline-actions">
+          <button class="btn-sm btn-primary" type="button" onclick="previewOrgImport()">Preview import</button>
+          <button class="btn-sm btn-ghost" type="button" onclick="loadCurrentOrgIntoImport()">Load current org</button>
+          <span class="section-note">Supported formats: JSON tree, CSV, and outline.</span>
+        </div>
+      </div>
+      <div class="workspace-card" style="margin-top:16px;">
+        <h3>Validation & diff preview</h3>
+        <div class="import-summary" id="orgImportSummary">
+          <div class="metric-pill"><strong>0</strong><span>Added</span></div>
+          <div class="metric-pill"><strong>0</strong><span>Removed</span></div>
+          <div class="metric-pill"><strong>0</strong><span>Moved / changed</span></div>
+        </div>
+        <ul class="validation-list" id="orgImportValidationList"><li>Preview not run yet.</li></ul>
+      </div>
+      <div class="workspace-actions">
+        <button class="btn-sm btn-ghost" type="button" onclick="closeOrgImportModal()">Cancel</button>
+        <button class="btn-sm btn-primary" id="applyOrgImportBtn" type="button" onclick="applyOrgImport()" disabled>Apply hierarchy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div><!-- End mainApp -->
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.3.0';
+const APP_VERSION = 'v1.4.0';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -1325,6 +1387,8 @@ let selectedStakeholder = null;
 let workspaceInteractions = [];
 const stakeholderLookup = {};
 const stakeholderParentMap = {};
+let currentOrgData = null;
+let pendingOrgImport = null;
 
 document.getElementById('loginVersion').textContent = `Version ${APP_VERSION}`;
 document.getElementById('appVersion').textContent = `Version ${APP_VERSION}`;
@@ -1738,6 +1802,254 @@ function annotateLevels(node, level = 0) {
   node.level = level;
   if (node.children) node.children.forEach(child => annotateLevels(child, level + 1));
   return node;
+}
+
+function resetOrgCaches() {
+  allPeople = [];
+  Object.keys(stakeholderLookup).forEach(key => delete stakeholderLookup[key]);
+  Object.keys(stakeholderParentMap).forEach(key => delete stakeholderParentMap[key]);
+  Object.keys(nodeMap).forEach(key => delete nodeMap[key]);
+}
+
+function rebuildOrgCaches() {
+  resetOrgCaches();
+  flattenTree(currentOrgData);
+}
+
+function deepClone(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+function exportOrgTree(node) {
+  const copy = { name: node.name, role: node.role };
+  if (node.children && node.children.length) copy.children = node.children.map(exportOrgTree);
+  return copy;
+}
+
+function parseCsvLine(line) {
+  const values = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i += 1) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQuotes && line[i + 1] === '"') {
+        current += '"';
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (ch === ',' && !inQuotes) {
+      values.push(current.trim());
+      current = '';
+    } else {
+      current += ch;
+    }
+  }
+  values.push(current.trim());
+  return values.map(value => value.replace(/^"|"$/g, ''));
+}
+
+function parseOrgCsv(text) {
+  const lines = text.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+  if (!lines.length) throw new Error('CSV is empty.');
+  const headers = parseCsvLine(lines[0]).map(header => header.toLowerCase());
+  const nameIndex = headers.indexOf('name');
+  const roleIndex = headers.indexOf('role');
+  const managerIndex = headers.indexOf('manager');
+  if (nameIndex === -1 || roleIndex === -1 || managerIndex === -1) {
+    throw new Error('CSV must include Name, Role, and Manager columns.');
+  }
+
+  const rows = lines.slice(1).map(line => parseCsvLine(line));
+  const nodes = new Map();
+  const roots = [];
+  rows.forEach(row => {
+    const name = sanitizeShortText(row[nameIndex] || '', 180);
+    const role = sanitizeShortText(row[roleIndex] || '', 220);
+    const manager = sanitizeShortText(row[managerIndex] || '', 180);
+    if (!name || !role) return;
+    nodes.set(name, { name, role, manager, children: [] });
+  });
+
+  nodes.forEach(node => {
+    if (!node.manager) {
+      roots.push(node);
+      return;
+    }
+    const parent = nodes.get(node.manager);
+    if (parent) {
+      parent.children.push(node);
+    } else {
+      roots.push(node);
+    }
+  });
+
+  if (!roots.length) throw new Error('CSV import did not produce a root node.');
+  if (roots.length > 1) throw new Error('CSV import produced multiple roots. Ensure only one row has a blank Manager.');
+
+  const stripManager = node => {
+    const clean = { name: node.name, role: node.role };
+    if (node.children.length) clean.children = node.children.map(stripManager);
+    return clean;
+  };
+  return stripManager(roots[0]);
+}
+
+function parseOrgOutline(text) {
+  const lines = text.split(/\r?\n/).filter(line => line.trim());
+  if (!lines.length) throw new Error('Outline is empty.');
+  const stack = [];
+  let root = null;
+  lines.forEach(rawLine => {
+    const indent = rawLine.match(/^\s*/)[0].length;
+    const cleaned = rawLine.trim().replace(/^[-•]\s*/, '');
+    const parts = cleaned.split(' — ');
+    const left = parts[0] || '';
+    const role = sanitizeShortText(parts.slice(1).join(' — ') || '(role not provided)', 220);
+    const name = sanitizeShortText(left.replace(/\s*:\s.*$/, ''), 180);
+    if (!name) return;
+    const node = { name, role };
+    while (stack.length && stack[stack.length - 1].indent >= indent) stack.pop();
+    if (!stack.length) {
+      if (root) throw new Error('Outline produced multiple roots.');
+      root = node;
+    } else {
+      const parent = stack[stack.length - 1].node;
+      parent.children = parent.children || [];
+      parent.children.push(node);
+    }
+    stack.push({ indent, node });
+  });
+  if (!root) throw new Error('Outline import did not produce a root node.');
+  return root;
+}
+
+function parseImportedOrg(text) {
+  const trimmed = text.trim();
+  if (!trimmed) throw new Error('No hierarchy pasted.');
+  if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+    const parsed = JSON.parse(trimmed);
+    return Array.isArray(parsed) ? parsed[0] : parsed;
+  }
+  const firstLine = trimmed.split(/\r?\n/)[0].toLowerCase();
+  if (firstLine.includes('name') && firstLine.includes('role') && firstLine.includes('manager')) {
+    return parseOrgCsv(trimmed);
+  }
+  return parseOrgOutline(trimmed);
+}
+
+function walkOrg(node, parentName = '', map = new Map()) {
+  map.set(node.name, { role: node.role, parentName });
+  (node.children || []).forEach(child => walkOrg(child, node.name, map));
+  return map;
+}
+
+function validateOrgTree(root) {
+  const issues = [];
+  const seen = new Set();
+  const visit = (node, trail = new Set()) => {
+    if (!node.name || !node.role) issues.push('Every node must include name and role.');
+    if (seen.has(node.name)) issues.push(`Duplicate stakeholder found: ${node.name}`);
+    seen.add(node.name);
+    if (trail.has(node.name)) issues.push(`Cycle detected at ${node.name}.`);
+    const nextTrail = new Set(trail);
+    nextTrail.add(node.name);
+    (node.children || []).forEach(child => visit(child, nextTrail));
+  };
+  visit(root);
+  return issues;
+}
+
+function buildOrgDiffSummary(newRoot) {
+  const currentMap = walkOrg(currentOrgData);
+  const newMap = walkOrg(newRoot);
+  const added = [];
+  const removed = [];
+  const changed = [];
+
+  newMap.forEach((value, key) => {
+    if (!currentMap.has(key)) {
+      added.push(key);
+    } else {
+      const existing = currentMap.get(key);
+      if (existing.parentName !== value.parentName || existing.role !== value.role) {
+        changed.push(`${key} (${existing.parentName || 'root'} → ${value.parentName || 'root'})`);
+      }
+    }
+  });
+
+  currentMap.forEach((_, key) => {
+    if (!newMap.has(key)) removed.push(key);
+  });
+
+  return { added, removed, changed };
+}
+
+function updateOrgImportPreview(validationMessages, diff) {
+  const summary = document.getElementById('orgImportSummary');
+  const validationList = document.getElementById('orgImportValidationList');
+  const applyButton = document.getElementById('applyOrgImportBtn');
+  if (summary) {
+    summary.innerHTML = `
+      <div class="metric-pill"><strong>${diff.added.length}</strong><span>Added</span></div>
+      <div class="metric-pill"><strong>${diff.removed.length}</strong><span>Removed</span></div>
+      <div class="metric-pill"><strong>${diff.changed.length}</strong><span>Moved / changed</span></div>`;
+  }
+  if (validationList) {
+    const items = [
+      ...validationMessages.map(message => `<li>${escapeHtml(message)}</li>`),
+      ...diff.added.slice(0, 6).map(name => `<li>Added: ${escapeHtml(name)}</li>`),
+      ...diff.removed.slice(0, 6).map(name => `<li>Removed: ${escapeHtml(name)}</li>`),
+      ...diff.changed.slice(0, 6).map(item => `<li>Changed: ${escapeHtml(item)}</li>`)
+    ];
+    validationList.innerHTML = items.length ? items.join('') : '<li>No differences detected.</li>';
+  }
+  if (applyButton) applyButton.disabled = validationMessages.length > 0;
+}
+
+function openOrgImportModal() {
+  document.getElementById('orgImportModal')?.classList.add('open');
+}
+
+function closeOrgImportModal() {
+  document.getElementById('orgImportModal')?.classList.remove('open');
+}
+
+function loadCurrentOrgIntoImport() {
+  const input = document.getElementById('orgImportInput');
+  if (!input) return;
+  input.value = JSON.stringify(exportOrgTree(currentOrgData), null, 2);
+}
+
+function previewOrgImport() {
+  const input = document.getElementById('orgImportInput');
+  if (!input) return;
+  try {
+    const parsed = annotateLevels(parseImportedOrg(input.value));
+    const validationMessages = validateOrgTree(parsed);
+    const diff = buildOrgDiffSummary(parsed);
+    pendingOrgImport = validationMessages.length ? null : parsed;
+    updateOrgImportPreview(validationMessages, diff);
+    showNotification(validationMessages.length ? 'Import preview found validation issues.' : 'Import preview ready.', validationMessages.length ? 'warning' : 'success');
+  } catch (error) {
+    pendingOrgImport = null;
+    updateOrgImportPreview([error.message], { added: [], removed: [], changed: [] });
+    showNotification(error.message, 'error');
+  }
+}
+
+function applyOrgImport() {
+  if (!pendingOrgImport) {
+    showNotification('Preview and resolve validation issues before applying the hierarchy.', 'warning');
+    return;
+  }
+  currentOrgData = annotateLevels(deepClone(pendingOrgImport));
+  rebuildOrgCaches();
+  renderChart();
+  buildTable();
+  closeOrgImportModal();
+  showNotification('Imported org hierarchy applied locally. Save to GitHub to publish it.', 'success');
 }
 
 const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive Officer", [
@@ -2257,6 +2569,7 @@ const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive
     orgNode("Saj Abbas", "Head of Group Chief Executive Office - Governance")
   ])
 ]));
+currentOrgData = deepClone(data);
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 // relationships: { "Person Name": { initials: "PS", score: "3", socialStyle: "Ex" } }
@@ -3172,11 +3485,11 @@ function applyBUFilter(bu) {
   if (!chart) return;
   if (!bu) {
     // Show full org; strip any filter styling.
-    renderChartTree(data);
+    renderChartTree(currentOrgData);
     chart.querySelectorAll('.box').forEach(b => { b.classList.remove('bu-dim'); b.classList.remove('bu-match'); });
     return;
   }
-  const pruned = pruneTreeByBU(data, bu);
+  const pruned = pruneTreeByBU(currentOrgData, bu);
   if (!pruned) {
     Object.keys(nodeMap).forEach(k => delete nodeMap[k]);
     chart.innerHTML = '<div style="padding:60px 40px;color:var(--silver);text-align:center;font-size:13px;letter-spacing:0.5px;">No people assigned to business unit "' + bu.replace(/</g,'&lt;') + '"</div>';
@@ -3281,7 +3594,7 @@ function renderChart() {
   const chart = document.getElementById('chart');
   chart.innerHTML = '';
   Object.keys(nodeMap).forEach(k => delete nodeMap[k]);
-  const root = buildNode(data, true);
+  const root = buildNode(currentOrgData, true);
   root.style.cssText = 'display:flex;flex-direction:column;align-items:center';
   chart.appendChild(root);
   // Apply any existing relationships

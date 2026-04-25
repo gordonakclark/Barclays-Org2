@@ -6,7 +6,7 @@ async function login(page) {
   await page.getByLabel('Password').fill('PS');
   await page.getByRole('button', { name: 'Sign In' }).click();
   await expect(page.locator('#mainApp')).toHaveClass(/authenticated/);
-  await expect(page.locator('#appVersion')).toContainText('Version v1.3.0');
+  await expect(page.locator('#appVersion')).toContainText('Version v1.4.0');
   await expect(page.locator('#relTableBody tr').first()).toBeVisible();
 }
 
@@ -63,5 +63,16 @@ test.describe('power map application', () => {
     await expect(page.locator('#dashboardContent')).toContainText('AI-assisted insights');
     await expect(page.locator('#dashboardContent')).toContainText('Missing stakeholder coverage');
     await expect(page.locator('#dashboardContent')).toContainText('Next best action:');
+  });
+
+  test('previews an org import before applying it', async ({ page }) => {
+    await login(page);
+
+    await page.getByRole('button', { name: 'Import Org' }).click();
+    await expect(page.locator('#orgImportModal')).toHaveClass(/open/);
+    await page.locator('#orgImportInput').fill('Name,Role,Manager\nCS Venkatakrishnan,Group Chief Executive Officer,\nJane Example,Chief of Staff,CS Venkatakrishnan');
+    await page.getByRole('button', { name: 'Preview import' }).click();
+    await expect(page.locator('#orgImportValidationList')).toContainText('Added: Jane Example');
+    await expect(page.locator('#applyOrgImportBtn')).toBeEnabled();
   });
 });
