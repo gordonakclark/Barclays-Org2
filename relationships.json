@@ -202,7 +202,7 @@
       "score": "3",
       "socialStyle": "Ex",
       "businessUnit": "BUK",
-      "region": "",
+      "region": "US",
       "function": "CIO Wholesale Onboarding, GFCO and CRM",
       "engagementOwner": "AH",
       "initiative": "",
@@ -231,7 +231,7 @@
       "score": "2",
       "socialStyle": "An",
       "businessUnit": "BUK",
-      "region": "",
+      "region": "US",
       "function": "CIO Consumer Banking, Payments and Group Controls Technology",
       "engagementOwner": "GAKC",
       "initiative": "",
@@ -256,9 +256,13 @@
       "changeHistory": []
     }
   },
-  "lastUpdated": "2026-04-25T20:00:15.749Z",
+  "lastUpdated": "2026-04-25T20:58:18.067Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-25T20:58:18.067Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-25T20:00:15.749Z"
