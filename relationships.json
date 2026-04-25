@@ -116,7 +116,7 @@
     "Craig Bright": {
       "initials": "PS",
       "score": "4",
-      "socialStyle": "Dr",
+      "socialStyle": "An",
       "businessUnit": "IB",
       "region": "",
       "function": "Group Chief Information Officer",
@@ -156,7 +156,7 @@
       "score": "5",
       "socialStyle": "An",
       "businessUnit": "CIO",
-      "region": "",
+      "region": "US",
       "function": "Chief Operating Officer, CIB",
       "engagementOwner": "GAKC",
       "initiative": "",
@@ -248,9 +248,13 @@
       "changeHistory": []
     }
   },
-  "lastUpdated": "2026-04-25T19:46:44.440Z",
+  "lastUpdated": "2026-04-25T20:00:05.240Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-25T20:00:05.240Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-25T19:46:44.440Z"
