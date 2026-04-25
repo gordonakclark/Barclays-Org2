@@ -1291,7 +1291,7 @@
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.2.2';
+const APP_VERSION = 'v1.2.3';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -1445,6 +1445,82 @@ function daysSince(dateValue) {
 
 function calculateExposureScore(rel) {
   return ['influence', 'budgetControl', 'sponsorship', 'strategicImportance'].reduce((sum, key) => sum + (parseInt(rel[key], 10) || 0), 0);
+}
+
+function isCriticalStakeholder(person, rel) {
+  return person.level <= 2
+    || (parseInt(rel.influence, 10) || 0) >= 4
+    || (parseInt(rel.sponsorship, 10) || 0) >= 4
+    || (parseInt(rel.strategicImportance, 10) || 0) >= 4;
+}
+
+function getRecommendedAction(name, rel) {
+  const staleDays = daysSince(rel.lastTouchpoint);
+  if (!rel.engagementOwner) return 'Assign an engagement owner and confirm accountability.';
+  if (!rel.nextAction) return 'Create a concrete next action with due date and success outcome.';
+  if (rel.supportStatus === 'Blocker' || (parseInt(rel.blockerRisk, 10) || 0) >= 4) return 'Escalate via sponsor cover and prepare a mitigation plan before the next touchpoint.';
+  if (rel.supportStatus === 'Risk') return 'Run a targeted follow-up to address concerns and move sentiment back to neutral.';
+  if (staleDays !== null && staleDays > 30) return `Reconnect within ${Math.min(staleDays, 45)} days with a fresh value story and meeting request.`;
+  if ((parseInt(rel.sponsorship, 10) || 0) >= 4) return 'Use this stakeholder to broker introductions across adjacent decision-makers.';
+  if ((parseInt(rel.influence, 10) || 0) >= 4 && (parseInt(rel.score, 10) || 0) <= 2) return 'Increase executive exposure with a proof point and sponsor-led outreach.';
+  return rel.nextAction || 'Maintain momentum with the current action plan.';
+}
+
+function getMissingStakeholderSuggestions(all) {
+  return all
+    .filter(item => isCriticalStakeholder(item.person, item.rel))
+    .filter(item => !(item.rel.engagementOwner || item.rel.influence || item.rel.score || item.rel.nextAction || item.rel.notes || item.rel.interactions?.length))
+    .slice(0, 6);
+}
+
+function getWeakCoverageInsights(all) {
+  const insights = [];
+  const byBusinessUnit = {};
+  const byOwner = {};
+
+  all.forEach(item => {
+    const bu = item.rel.businessUnit || 'Unassigned BU';
+    byBusinessUnit[bu] = byBusinessUnit[bu] || { total: 0, owned: 0, sponsored: 0 };
+    byBusinessUnit[bu].total += 1;
+    if (item.rel.engagementOwner) byBusinessUnit[bu].owned += 1;
+    if ((parseInt(item.rel.sponsorship, 10) || 0) >= 4) byBusinessUnit[bu].sponsored += 1;
+
+    if (item.rel.engagementOwner) {
+      byOwner[item.rel.engagementOwner] = (byOwner[item.rel.engagementOwner] || 0) + 1;
+    }
+  });
+
+  Object.entries(byBusinessUnit).forEach(([bu, stats]) => {
+    if (stats.total >= 2 && stats.owned / stats.total < 0.35) {
+      insights.push(`Coverage is weak in ${bu}: only ${stats.owned} of ${stats.total} mapped stakeholders have an owner.`);
+    }
+    if (stats.total >= 2 && stats.sponsored === 0) {
+      insights.push(`No strong sponsor is mapped in ${bu}; identify an internal champion or alternate route.`);
+    }
+  });
+
+  Object.entries(byOwner).forEach(([owner, count]) => {
+    if (count >= 5) {
+      insights.push(`${owner} owns ${count} stakeholders; consider redistributing coverage to reduce key-person dependency.`);
+    }
+  });
+
+  return insights.slice(0, 6);
+}
+
+function getAiAssistedInsights(all) {
+  const missingStakeholders = getMissingStakeholderSuggestions(all);
+  const weakCoverage = getWeakCoverageInsights(all);
+  const nextBestActions = all
+    .filter(item => isCriticalStakeholder(item.person, item.rel))
+    .sort((a, b) => calculateExposureScore(b.rel) - calculateExposureScore(a.rel))
+    .slice(0, 5)
+    .map(item => ({
+      name: item.person.name,
+      action: getRecommendedAction(item.person.name, item.rel)
+    }));
+
+  return { missingStakeholders, weakCoverage, nextBestActions };
 }
 
 function getOverlayStyle(rel) {
@@ -2433,6 +2509,7 @@ function getWorkspaceInsightItems(name, rel) {
   if (staleDays !== null && staleDays > 30) items.push(`Stakeholder is stale: last touchpoint was ${staleDays} days ago.`);
   if ((parseInt(rel.blockerRisk, 10) || 0) >= 4) items.push('High blocker risk: prepare an alternate sponsor and mitigation plan.');
   if ((parseInt(rel.sponsorship, 10) || 0) >= 4) items.push('Strong sponsor: consider using this stakeholder as an introduction path.');
+  items.push(`AI next best action: ${getRecommendedAction(name, rel)}`);
   if (!items.length) items.push('No immediate alerts. Continue current engagement plan.');
   return items;
 }
@@ -2591,10 +2668,11 @@ function saveStakeholderWorkspace() {
 function openExecutiveDashboard() {
   const all = allPeople.map(person => ({ person, rel: getRelationship(person.name) }));
   const strongestSponsors = all.filter(item => parseInt(item.rel.sponsorship, 10) >= 4).sort((a, b) => calculateExposureScore(b.rel) - calculateExposureScore(a.rel)).slice(0, 5);
-  const atRisk = all.filter(item => item.rel.supportStatus === 'Risk' || item.rel.supportStatus === 'Blocker' || parseInt(item.rel.blockerRisk, 10) >= 4).slice(0, 6);
-  const stale = all.filter(item => (daysSince(item.rel.lastTouchpoint) || 0) > 30).sort((a, b) => (daysSince(b.rel.lastTouchpoint) || 0) - (daysSince(a.rel.lastTouchpoint) || 0)).slice(0, 6);
-  const coverageGaps = all.filter(item => !item.rel.engagementOwner || !item.rel.nextAction).slice(0, 6);
+  const atRisk = all.filter(item => item.rel.supportStatus === 'Risk' || item.rel.supportStatus === 'Blocker' || parseInt(item.rel.blockerRisk, 10) >= 4).sort((a, b) => calculateExposureScore(b.rel) - calculateExposureScore(a.rel)).slice(0, 6);
+  const stale = all.filter(item => isCriticalStakeholder(item.person, item.rel) && (daysSince(item.rel.lastTouchpoint) || 0) > 30).sort((a, b) => (daysSince(b.rel.lastTouchpoint) || 0) - (daysSince(a.rel.lastTouchpoint) || 0)).slice(0, 6);
+  const coverageGaps = all.filter(item => isCriticalStakeholder(item.person, item.rel) && (!item.rel.engagementOwner || !item.rel.nextAction)).slice(0, 6);
   const alerts = all.filter(item => (!item.rel.engagementOwner || !item.rel.nextAction || ((daysSince(item.rel.lastTouchpoint) || 0) > 45) || (item.rel.dueDate && new Date(item.rel.dueDate) < new Date()))).slice(0, 8);
+  const aiInsights = getAiAssistedInsights(all);
   const content = document.getElementById('dashboardContent');
   if (!content) return;
   content.innerHTML = `
@@ -2609,6 +2687,11 @@ function openExecutiveDashboard() {
       <div class="dashboard-card"><h3>At-risk accounts</h3><ul class="list-compact">${atRisk.length ? atRisk.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(item.rel.supportStatus || 'Risk')} · Blocker risk ${escapeHtml(item.rel.blockerRisk || '—')}</small></li>`).join('') : '<li>No at-risk stakeholders flagged.</li>'}</ul></div>
       <div class="dashboard-card"><h3>Inactive critical stakeholders</h3><ul class="list-compact">${stale.length ? stale.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(String(daysSince(item.rel.lastTouchpoint)))} days since last touchpoint</small></li>`).join('') : '<li>No stale relationships found.</li>'}</ul></div>
       <div class="dashboard-card" style="grid-column: 1 / -1;"><h3>Notifications</h3><ul class="list-compact">${alerts.length ? alerts.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(getWorkspaceInsightItems(item.person.name, item.rel)[0])}</small></li>`).join('') : '<li>No urgent notifications.</li>'}</ul></div>
+      <div class="dashboard-card" style="grid-column: 1 / -1;"><h3>AI-assisted insights</h3><ul class="list-compact">${[
+        ...aiInsights.missingStakeholders.map(item => `<li>Missing stakeholder coverage: ${escapeHtml(item.person.name)}<small>${escapeHtml(item.person.role)} · Add an owner, influence score, and next action.</small></li>`),
+        ...aiInsights.weakCoverage.map(item => `<li>Weak coverage detected<small>${escapeHtml(item)}</small></li>`),
+        ...aiInsights.nextBestActions.map(item => `<li>Next best action: ${escapeHtml(item.name)}<small>${escapeHtml(item.action)}</small></li>`)
+      ].join('') || '<li>No AI-assisted insights available yet.</li>'}</ul></div>
     </div>`;
   document.getElementById('dashboardModal')?.classList.add('open');
 }

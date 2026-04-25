@@ -6,7 +6,7 @@ async function login(page) {
   await page.getByLabel('Password').fill('PS');
   await page.getByRole('button', { name: 'Sign In' }).click();
   await expect(page.locator('#mainApp')).toHaveClass(/authenticated/);
-  await expect(page.locator('#appVersion')).toContainText('Version v1.2.2');
+  await expect(page.locator('#appVersion')).toContainText('Version v1.2.3');
   await expect(page.locator('#relTableBody tr').first()).toBeVisible();
 }
 
@@ -57,5 +57,10 @@ test.describe('power map application', () => {
     await expect(page.locator('#dashboardModal')).toHaveClass(/open/);
     await expect(page.locator('#dashboardContent')).toContainText('Coverage gaps');
     await expect(page.locator('#dashboardContent')).toContainText('Strongest sponsors');
+    await expect(page.locator('#dashboardContent')).toContainText('At-risk accounts');
+    await expect(page.locator('#dashboardContent')).toContainText('Inactive critical stakeholders');
+    await expect(page.locator('#dashboardContent')).toContainText('AI-assisted insights');
+    await expect(page.locator('#dashboardContent')).toContainText('Missing stakeholder coverage');
+    await expect(page.locator('#dashboardContent')).toContainText('Next best action:');
   });
 });
