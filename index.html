@@ -1308,7 +1308,7 @@
 
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
-const APP_VERSION = 'v1.2.5';
+const APP_VERSION = 'v1.3.0';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -1730,193 +1730,533 @@ function logout() {
 checkAuth();
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
-const data = {
-  name: "CS Venkatakrishnan", role: "Group Chief Executive Officer", level: 0,
-  children: [
-    { name: "Anna Cross", role: "Group Finance Director", level: 1 },
-    {
-      name: "Craig Bright", role: "Group Chief Information Officer", level: 1,
-      children: [
-        { name: "Jillian Chai", role: "Group Technology Chief of Staff and head of EVP", level: 2 },
-        {
-          name: "Antoinette O'Neill", role: "Chief Operating Officer, CIB", level: 2,
-          children: [
-            {
-              name: "Paul Beresford", role: "CIO Consumer Banking, Payments and Group Controls Technology", level: 3,
-              children: [
-                { name: "Neil Welsh", role: "MD : CBP Technology", level: 4 },
-                { name: "Mark Watling", role: "CIO Barclaycard Payment", level: 4 },
-                { name: "Lily Wang", role: "CIO Wholesale Onboarding, GFCO and CRM", level: 4 },
-                { name: "Gareth Hall", role: "CIO Global Fraud Tech", level: 4 },
-                { name: "Jia-Yan Gu", role: "Head of X-Barclays Digital Platform Engineering", level: 4 },
-                { name: "Duncan Bankhead", role: "Head of Architecture", level: 4 },
-                { name: "Paul Clark", role: "CIO for Payments Acceptance", level: 4 },
-                { name: "Sophie Jones", role: "Central Portfolio Office Lead GTIS and CTO", level: 4 },
-                { name: "Emma Charters", role: "Executive Assistant to Paul Beresford", level: 4 },
-                { name: "Anestis Karagiannidis", role: "MD, Head of Operations, Performance & Strategy Execution", level: 4 }
-              ]
-            },
-            {
-              name: "Stephen Flaherty", role: "CTO & Head of Group Technology Infrastructure Services", level: 3,
-              children: [
-                { name: "Stephen Johnston", role: "MD - Distinguished Engineer - Advanced Engineering", level: 4 },
-                { name: "Ben George", role: "Data Distinguished Engineer", level: 4 },
-                { name: "Ramon Ali", role: "Head of Infrastructure Engineering", level: 4 },
-                { name: "Russell Wakefield", role: "GTIS Head of Service Delivery BX", level: 4 },
-                { name: "Paulo De Sa", role: "MD, Workplace & Collaboration Services", level: 4 },
-                { name: "Amy Williams", role: "Head of Core Infrastructure Platform | Radbroke Site Lead", level: 4 },
-                { name: "David Richards", role: "Head of Enterprise Foundation Platforms", level: 4 },
-                { name: "Riaan Postma", role: "Head of Architecture & Platform Engineering", level: 4 },
-                { name: "Vicky Sumner", role: "Portfolio and Strategy Director", level: 4 },
-                { name: "Kristen Bennie", role: "Group Head of Innovation and Partnerships", level: 4 },
-                { name: "Santashil Palchaudhuri", role: "CTO India, Head of AppliedAI", level: 4 },
-                { name: "Michael Rozycki", role: "Network Transformation Lead", level: 4 },
-                { name: "Richard Thomas", role: "Head of Service Delivery for Consumer Banking and Payments", level: 4 },
-                { name: "William Lyvers", role: "Distinguished Engineer - Head of Application Engineering", level: 4 },
-                { name: "Chris Kozlowski", role: "Platform Services and Site Reliability Engineering", level: 4 }
-              ]
-            },
-            {
-              name: "Jonathan Lowe", role: "Head of Group Technology Service Management", level: 3,
-              children: [
-                { name: "Paul Austen", role: "Head of RtB Corporate Tech & Infra BI", level: 4 },
-                { name: "Craig Williams", role: "Head of Technology Command Centres", level: 4 },
-                { name: "Iain MacLeod", role: "Group Technology Service Management", level: 4 },
-                { name: "Leanne Wakefield", role: "Head of Colleague Operations", level: 4 },
-                { name: "Alan Muses", role: "GTSM Head of Markets & Investment Bank", level: 4 },
-                { name: "Jered Powell", role: "GTSM Head of Consumer Banking and Payments", level: 4 },
-                { name: "Kwan Choi", role: "GTSM – Global Head of RFT, FT and Data Platform", level: 4 },
-                { name: "Shaurav Choudhury", role: "GTSM Head of Corporate Banking & Global Payments", level: 4 },
-                { name: "Alison Irving", role: "GTSM Strategy & Performance Management", level: 4 },
-                { name: "Dhana Damodaram", role: "MD – GTSM Head of BUK", level: 4 },
-                { name: "Cassandra Waugh", role: "PA – Head of GTSM & Group Technology Strategy", level: 4 }
-              ]
-            },
-            { name: "Alison Hedges", role: "Head of CIB Tech Strategy and Transformation", level: 3 },
-            { name: "Sheryl Brissett-Sanchez", role: "EA to Antoinette O'Neill", level: 3 }
-          ]
-        },
-        { name: "Stuart Baker", role: "Group Head of Control", level: 2 },
-        {
-          name: "Steve Beasty", role: "COO, Barclays UK", level: 2,
-          children: [
-            { name: "Jan Muralitharan", role: "Chief Information Officer Barclays UK", level: 3 },
-            { name: "Vanessa Murden", role: "Head of Physical Operations", level: 3 },
-            { name: "Mark Watkinson", role: "Head of Execution Oversight and Delivery, BUK", level: 3 },
-            { name: "Gillian Wylie", role: "Head of BUK Transformation, Method & Delivery", level: 3 },
-            { name: "Anna Cleland", role: "Head of Acquisition & Engagement", level: 3 },
-            { name: "Dionne Pinsent", role: "Executive Assistant to Steve Beasty", level: 3 }
-          ]
-        },
-        {
-          name: "John Miller", role: "Group Chief Information Security Officer", level: 2,
-          children: [
-            { name: "Joanna Patrick", role: "Head of CISO Change Portfolio Delivery", level: 3 },
-            { name: "Colleen Rose", role: "Chief Information Security Officer BUK", level: 3 },
-            { name: "Ian Moseley", role: "Head of Cyber Posture & Assurance", level: 3 },
-            { name: "Michael Jones", role: "Group CISO Chief of Staff", level: 3 },
-            { name: "Becky Pinkard", role: "Head of Cyber Operations", level: 3 },
-            { name: "Andrew Pickering", role: "Group Technology and Functions CISO", level: 3 },
-            { name: "Roberto Armenteros", role: "Head of Proactive Defence", level: 3 },
-            { name: "Rohit Arora", role: "Head of Data and AI Security", level: 3 },
-            { name: "Liza Russell", role: "US Consumer Bank, Investment Bank, and Americas CISO", level: 3 },
-            { name: "Gloria DeBenedictis", role: "Executive Assistant to John Miller", level: 3 },
-            { name: "Nicole Phillips", role: "EA to Gary Smolyanskiy, Tejas Nadkarni & William McWeeny", level: 3 }
-          ]
-        },
-        { name: "Leonhard Mueller", role: "Operations Leader - MD", level: 2 },
-        { name: "Lauren Bennett", role: "EA to Craig Bright", level: 2 }
-      ]
-    },
-    {
-      name: "Anne Marie Darling", role: "Group Co-COO and Co-CEO, BX", level: 1,
-      children: [
-        { name: "Malcolm Brooke", role: "Group COO Chief of Staff", level: 2 },
-        {
-          name: "Georges Lauchard", role: "Global Markets and Wholesale Lending COO", level: 2,
-          children: [
-            {
-              name: "Andrew Longmuir", role: "Head of Global Markets Operations", level: 3,
-              children: [
-                { name: "Matthew Keys-Lumley", role: "Global Head of Network Management, Treasury, and Cost Operations", level: 4 },
-                { name: "Paul Eblett", role: "Head of Client & Colleague Services", level: 4 },
-                { name: "Nicholas Searle", role: "(role not listed)", level: 4 },
-                { name: "Brian Williams", role: "Director - Global Head of Network & Data Management Services", level: 4 },
-                { name: "Sue McMillan", role: "Director - TTRO", level: 4 },
-                { name: "Christopher Chalmers", role: "Director - GMO Service Management, Control & Resiliency", level: 4 },
-                { name: "Paul Zedlovich", role: "Global Head Security Services & Asset Servicing", level: 4 },
-                { name: "Joanne Brower", role: "MD - Global Head of Markets Operations Service Performance", level: 4 },
-                { name: "Nina Tait", role: "Greater China & Australia CIB Operations, APAC", level: 4 },
-                { name: "Munawar Hussain", role: "Head of Operations, Middle East", level: 4 },
-                { name: "Anand Rajasekaran", role: "Director, Head of Securities Settlements - India", level: 4 },
-                { name: "Corinne Goh", role: "Executive Assistant", level: 4 },
-                { name: "Natalie Whyte", role: "Executive Assistant to Andrew Longmuir", level: 4 }
-              ]
-            },
-            { name: "Carl Brown", role: "Co CIO Markets Pre-Trade Technology", level: 3 },
-            { name: "Paul C Sampat", role: "Co CIO Markets Pre-Trade Technology", level: 3 },
-            { name: "James Clark", role: "MD - Global Head of CIB Planning and Execution", level: 3 },
-            { name: "Craig Day", role: "CIB CDO", level: 3 },
-            { name: "Luke Khanna", role: "Head of Strategy & Transformation, Global Markets", level: 3 },
-            { name: "Darragh Dempsey", role: "Global Head of Wholesale Lending Operations", level: 3 },
-            { name: "Alexander Harrison", role: "COO, APACMEA & Country CEO, Singapore", level: 3 },
-            {
-              name: "Austin Fernandes", role: "MD, CIO Global Markets Sales & Post Trade Technology", level: 3,
-              children: [
-                { name: "Rohit Prabhu", role: "MD, Global Head of Collateral and PDS Technology", level: 4 },
-                { name: "Vandhana Srinivas", role: "MD CIO Wholesale Lending", level: 4 },
-                { name: "Maria Buckley", role: "MD - Head of Reference Data Technology", level: 4 },
-                { name: "Ilia Berman", role: "CIO Investment Banking Technology & Head of CIB Digital Strategy", level: 4 },
-                { name: "Larisa Kvetnoy", role: "Head of Core Svcs & Post Trade Arch", level: 4 },
-                { name: "Harsha Yale", role: "Post Trade Tech Data Management", level: 4 },
-                { name: "Chris Wells", role: "MD - Head of Markets Regulatory Technology", level: 4 },
-                { name: "Nirav Shah", role: "Director - Head of Confirms Tech and Markets Process Automation", level: 4 },
-                { name: "Nidhi Khanna", role: "Head of Strategy & Transformation", level: 4 },
-                { name: "Jignesh Patel", role: "Global Markets Sales & Post Trade Technology", level: 4 },
-                { name: "Anand Singh", role: "Head of Data Platform Engineering", level: 4 },
-                { name: "Anastasia Ivanova", role: "Change Delivery Manager", level: 4 },
-                { name: "Adam Shadbolt", role: "Head of Securities Settlements Technology", level: 4 }
-              ]
-            },
-            { name: "Daron Bowes", role: "MD, Algo & Electronic Trading Technology", level: 3 },
-            { name: "Mary Ambrecht", role: "Head of Trading Controls Programme", level: 3 },
-            { name: "Louise Smith", role: "EA to Georges Lauchard", level: 3 }
-          ]
-        },
-        { name: "Sara O'Keane", role: "Chief of Staff to Anne Marie Darling", level: 2 },
-        {
-          name: "Steve Allen", role: "Chief Operating Officer, Corporate, Cards & Payments", level: 2,
-          children: [
-            { name: "Pete Bridge", role: "MD - Head of IB & UKC Financial Crime Execution", level: 3 },
-            { name: "Zoe Smithson", role: "Director, Strategy & Execution, DE&I and Colleague Engagement", level: 3 },
-            { name: "Judith Currie", role: "MD, COO Corporate Banking", level: 3 },
-            { name: "Paul Jury", role: "COO Barclaycard Payments & Merchant Services", level: 3 },
-            { name: "Saket Sharma", role: "CIO, Corporate & Investment Bank Tech", level: 3 },
-            { name: "Vicky West", role: "PA to Steve Allen", level: 3 },
-            { name: "Ryan Hayward", role: "Head of Strategic Investments for Europe and Asia", level: 3 }
-          ]
-        },
-        { name: "Alastair Blackwell", role: "Chief Operating Officer (COO) for BX, Risk & Finance", level: 2 },
-        { name: "Sarah DeGuilio", role: "Executive Assistant", level: 2 }
-      ]
-    },
-    { name: "Vim Maru", role: "CEO, Barclays UK", level: 1 },
-    { name: "Denny Nealon", role: "CEO, US Consumer Bank & BBDE", level: 1 },
-    { name: "Matt Hammerstein", role: "CEO, UK Corporate Bank and Head of Public Policy", level: 1 },
-    { name: "Sasha Wiggins", role: "CEO, Private Bank and Wealth Management", level: 1 },
-    { name: "Taalib Shaah", role: "Group Chief Risk Officer", level: 1 },
-    { name: "Matthew Fitzwater", role: "Group Chief Compliance Officer", level: 1 },
-    { name: "Stephen Shapiro", role: "Group General Counsel", level: 1 },
-    { name: "Gijs Borghouts", role: "Chief Internal Auditor, Barclays PLC", level: 1 },
-    { name: "Tristram Roberts", role: "Group HR Director", level: 1 },
-    { name: "Stephen Dainton", role: "BBPLC President and Head of IB Management", level: 1 },
-    { name: "Paul Compton", role: "Chairman of Investment Banking", level: 1 },
-    { name: "Adeel Khan", role: "Global Head of Markets", level: 1 },
-    { name: "Cathal Deasy", role: "Global Co-Head of Banking", level: 1 },
-    { name: "Taylor Wright", role: "Global Co-Head of Banking", level: 1 },
-    { name: "Anita Tanna", role: "Group Chief of Staff", level: 1 }
-  ]
-};
+function orgNode(name, role, children = []) {
+  return children.length ? { name, role, children } : { name, role };
+}
+
+function annotateLevels(node, level = 0) {
+  node.level = level;
+  if (node.children) node.children.forEach(child => annotateLevels(child, level + 1));
+  return node;
+}
+
+const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive Officer", [
+  orgNode("Craig Bright", "Group Co COO and Co CEO, BX", [
+    orgNode("Antoinette O'Neill", "Chief Operating Officer, CIB", [
+      orgNode("Jonathan Lowe", "Head of Group Technology Service Management", [
+        orgNode("Paul Austen", "Head of RtB Corporate Tech & Infra BI", [
+          orgNode("Adam Tomlinson", "BX Tech / Cyber Resilience Lead"),
+          orgNode("David Riley", "Director of Technology, Cyber & Data Resilience")
+        ]),
+        orgNode("Iain MacLeod", "Group Technology Service Management"),
+        orgNode("Craig Williams", "Head of Technology Command Centres", [
+          orgNode("Richard Porter", "Head of Global Command Centres"),
+          orgNode("Asha Cullen", "CISO for Risk, Finance, Treasury & Functions"),
+          orgNode("Stuart Livesey", "GTSM Service Director"),
+          orgNode("Stuart Dunn", "Head of Platform, Monitoring and Tooling"),
+          orgNode("Zoe Dyson", "Transformation Lead")
+        ]),
+        orgNode("Cassandra Waugh", "PA to Head of GTSM & Group Technology Strategy"),
+        orgNode("Shaurav Choudhury", "GTSM Head of Corporate Banking & Global Payments", [
+          orgNode("Ian Moran", "Tech Lead L2 Cash & Channels")
+        ]),
+        orgNode("Dhana D", "MD, GTSM Head of BUK"),
+        orgNode("Alison Irving", "GTSM Strategy & Performance Management"),
+        orgNode("Jered Powell", "GTSM Head of Consumer Banking and Payments"),
+        orgNode("Alan Muses", "GTSM Head of Markets & Investment Bank"),
+        orgNode("Leanne Wakefield", "Head of Colleague Operations"),
+        orgNode("Kwan Choi", "Global Head of RFT, FT and Data Platform")
+      ]),
+      orgNode("Sheryl Sanchez", "Executive Assistant to Antoinette O'Neill"),
+      orgNode("Paul Beresford", "CIO Consumer Banking, Payments and Group Controls Technology", [
+        orgNode("Lily Wang", "CIO Wholesale Onboarding, GFCO and CRM", [
+          orgNode("Peter O'Riordan", "Director, Head of Financial Crime Screening Technology"),
+          orgNode("Alison Brennan", "Technology Controls Lead", [
+            orgNode("Hannah Cooper", "TC01 Controls and Regulatory Engagement Lead")
+          ]),
+          orgNode("Michael Barlow", "Head of KYC Technology", [
+            orgNode("David Sage", "Tech Delivery Lead"),
+            orgNode("Fadzai Mandaza", "Business Analyst"),
+            orgNode("Mayukh Basu", "Wholesale Onboarding and Group FCO")
+          ]),
+          orgNode("Gautam Verma", "Head of IB CRM & Core CRM Platform", [
+            orgNode("Krishna Malladi", "DEV Lead"),
+            orgNode("Raghavendra Rao", "VP, Delivery Manager (Quantexa & Compliance Data Science)"),
+            orgNode("Mukul Bhat", "Project Manager (KYC & Onboarding)"),
+            orgNode("Ravi Kant", "Engineering Technology Lead"),
+            orgNode("Kalpana Nautiyal", "BI Design Office"),
+            orgNode("Monson Mathew", "VP Solutions Architect"),
+            orgNode("Pierre Grenon", "Lead Software Engineer (Knowledge Graph)")
+          ]),
+          orgNode("Jayashree Tyagi", "Head of TM Technology", [
+            orgNode("Siddhartha Mahapatra", "VP, Delivery Lead (Correspondent Banking AML TM)"),
+            orgNode("Mairi Henderson", "Programme Manager (AML TM)"),
+            orgNode("Venkatesan Atv", "Solution Architect (TC01 Transaction Monitoring)"),
+            orgNode("Abhishek Bhasin", "VP, Programme Manager (Correspondent Banking AML TM)"),
+            orgNode("Murthy Sivaramakrishnan", "VP, AML Program Manager"),
+            orgNode("Karthik Selvamuniandi", "TM Information Architect"),
+            orgNode("Jagan Kurapati", "Change Delivery Manager (VP)"),
+            orgNode("Pagdalu Rajat Naidu", "Programme Manager (AML)")
+          ]),
+          orgNode("Krish Ramanmenon", "Director, Head of IB CRM, Analytics, & Client Management")
+        ]),
+        orgNode("Mark Watling", "CIO Barclaycard Payment", [
+          orgNode("Gavin Kay", "Programme Director", [
+            orgNode("Kelly Higgins", "Head of Acquiring Portfolio Office"),
+            orgNode("Kevin Gregory", "Programme Lead"),
+            orgNode("Matthew Maedge", "BPA Control Portfolio Lead"),
+            orgNode("Deana Chrisp", "Project Manager"),
+            orgNode("Christiaan Pretorius", "Technical Designer"),
+            orgNode("Tom Lyons", "Production Assurance"),
+            orgNode("Dino Canuti", "Programme Manager")
+          ]),
+          orgNode("Matthew Turner", "Release Train Engineer", [
+            orgNode("Aws Dhahir", "VP Engineering Manager"),
+            orgNode("Vijayashanthi Chandrasekar", "Quality Engineer"),
+            orgNode("Chris Drake", "Engineering Manager"),
+            orgNode("Ranjeet Mishra", "Engineering Manager"),
+            orgNode("John Eves", "DevOps Manager"),
+            orgNode("Maarut Chandegra", "Engineering Manager"),
+            orgNode("Ryan Bennitt", "Senior Software Engineer"),
+            orgNode("Steve Vorley", "DevOps Engineer"),
+            orgNode("Christopher Rose", "Platform Lead"),
+            orgNode("Andrea Lai", "DevOps Tech Lead")
+          ]),
+          orgNode("Caroline Frost", "Head of Portfolio Controls Office", [
+            orgNode("Darren Houghton", "Control Lead"),
+            orgNode("Simon Goodenough", "BX Management Office (VP)"),
+            orgNode("Anisha Boany", "PMO (AVP)"),
+            orgNode("Bobby Sharples", "Business Architect (BP Tech and Change)"),
+            orgNode("James Cosford", "Portfolio Metrics & Reporting Lead"),
+            orgNode("Paul Gibson", "Strategy & Planning"),
+            orgNode("Kevin Ireland", "PMO Planning Manager"),
+            orgNode("Smriti Bagla", "Business Analyst (BA4)")
+          ]),
+          orgNode("Julie Morjaria", "Director, Head of Payments Core Functions & Issuing", [
+            orgNode("Mark Street", "Head of A&D"),
+            orgNode("Christopher Sayer", "Head of Portfolio Management (MSTC)"),
+            orgNode("Dawn Chilvers", "Portfolio Finance Lead"),
+            orgNode("Helen Evans", "Senior Project Manager"),
+            orgNode("Anees Molakaday", "Lead Solutions Architect"),
+            orgNode("Glenn Johnson", "Programme Manager"),
+            orgNode("Darryl Bull", "VP, Business Analyst")
+          ]),
+          orgNode("Kelly Pickford", "Design Services Lead (Acquiring)", [
+            orgNode("Mark Jaeger", "Design Services Team Manager (Platform & Infrastructure)"),
+            orgNode("Melvyn Hoddell", "Senior Business Analyst"),
+            orgNode("Satheesh Swaminathan", "Change Delivery Manager (AVP)"),
+            orgNode("Naresh Chhonker", "Solution Architect (VP)"),
+            orgNode("Elvira Mungeh", "Business Analyst (AVP)"),
+            orgNode("Anuj Kumar", "Solution Architect"),
+            orgNode("Rajesh Verma", "Solution Architect"),
+            orgNode("Elizabeth Rimmington", "Data Architect"),
+            orgNode("Ziaul Hassan", "Network Architect"),
+            orgNode("Mohammad Rahin", "Senior Software Architect")
+          ]),
+          orgNode("Tracy Neilson", "PA to Mark Watling")
+        ]),
+        orgNode("Duncan Bankhead", "Head of Architecture", [
+          orgNode("Vincent Nobile", "Solution Architect"),
+          orgNode("Manisha Sharma", "Director, Principal Engineer (Consumer Banking, Payments)"),
+          orgNode("Helen Wiltshire", "Architect (CTO Advanced Engineering)"),
+          orgNode("Balaji Iyer", "Lead Fraud Architect", [
+            orgNode("Michael Begley", "Data Architect"),
+            orgNode("Mike Hubber", "Data Architect"),
+            orgNode("Bibhas Dutta", "Solution Architect"),
+            orgNode("Bianca Dakamela Ncube", "Developer"),
+            orgNode("Simon Williams", "Chief Technology Office"),
+            orgNode("Rohit Soman", "Solutions Architect"),
+            orgNode("Jo Stephenson", "Solutions Architect"),
+            orgNode("Rakesh Mahapatra", "Fraud Analytics Strategy Technology")
+          ]),
+          orgNode("Tom Gaffey", "Solution Architect", [
+            orgNode("Vivek Nighot", "Technical Lead (Insider Threat)"),
+            orgNode("Paul Wilde", "Physical Security Technology Infrastructure & Data Architect (VP)")
+          ]),
+          orgNode("Douglas McNab", "TC09 Solution Architect"),
+          orgNode("Hemant Bhatia", "Architecture & Enterprise Solutions Director"),
+          orgNode("Tony Howard", "VP, CCO CTO Architect"),
+          orgNode("Oliver Forbes", "Chief Technology Office"),
+          orgNode("Oreoluwa Ajibade", "GTIS"),
+          orgNode("Colin Mackay", "PB&WM CTO Architect"),
+          orgNode("Calum Woods", "Lead Analyst")
+        ]),
+        orgNode("Gareth Hall", "CIO Global Fraud Tech", [
+          orgNode("Abdul Yusuff", "Director, Head of L3 Support USCB", [
+            orgNode("Manoj Puthiyaveetil", "VP, L3 Lead (Fraud Strategy Analytics and Tech)")
+          ]),
+          orgNode("Jordan Taylor", "Director, Core Infrastructure Programmes", [
+            orgNode("Kimberly Atkins", "Technical Delivery Lead (IDV & Application Fraud)"),
+            orgNode("Daniel Hill", "Product Owner (Fraud Tech)"),
+            orgNode("Eoin O'Brien", "Execution Manager"),
+            orgNode("Chen Kucyn", "Fraud Analytics Strategy Technology"),
+            orgNode("Alistair Allan", "Fraud Analytics Strategy Technology"),
+            orgNode("Natasha Hills", "Fraud Strategy Manager"),
+            orgNode("Jared Langley", "Product Manager (Debit & Corporate Credit Card Disputes)"),
+            orgNode("Anand Panchal", "Product Manager (Fraud Case Manager)"),
+            orgNode("Sadia Mughal", "Lead Product Owner"),
+            orgNode("Andrew Nelson", "Senior Business Analyst")
+          ]),
+          orgNode("Joanne Sloan", "Head of PMO", [
+            orgNode("Nazia Shabbir Shaikh", "Portfolio Analyst"),
+            orgNode("Timothy Sagwe", "Fraud Analytics Strategy Technology"),
+            orgNode("Calum Hardy", "Analyst"),
+            orgNode("Georgia Meadowcroft", "PMO"),
+            orgNode("Gail Locke", "PMO Lead (Strategic Resourcing & Reporting)"),
+            orgNode("Cheryl Maling", "Project Manager")
+          ]),
+          orgNode("Natasha Solesbury", "Product Manager (Fraud Data Product)", [
+            orgNode("Grant Ward", "Lead Data Analyst"),
+            orgNode("Vanchinathan Palanisamy", "Product Owner"),
+            orgNode("Bhavesh Mistry", "Senior Data Manager"),
+            orgNode("Amit Choubey", "Fraud Analytics Strategy Technology"),
+            orgNode("Scott MacKay", "Data Analyst"),
+            orgNode("Lynn Nock", "PA"),
+            orgNode("Anthony White", "Change Delivery Manager"),
+            orgNode("Joe Taylor", "Data Analyst"),
+            orgNode("Jamie Quean", "Data Analyst")
+          ]),
+          orgNode("Paul Fryer", "Product Manager (Credit Card Disputes)", [
+            orgNode("Smriti Srivastava", "Business Analyst (AVP)"),
+            orgNode("Naresh Sharma", "VP, Product Owner"),
+            orgNode("Luke Zekavica", "Fraud Product Owner"),
+            orgNode("Elijah Woodward", "Product Owner (Fraud Servicing)"),
+            orgNode("Rajul Gupta", "Product Owner"),
+            orgNode("Arya Prakash", "Business Design Analyst"),
+            orgNode("Samantha Risborough", "Product Analyst"),
+            orgNode("Aimee Redfern", "Fraud Product Owner")
+          ]),
+          orgNode("Vikas Patil", "Product Owner"),
+          orgNode("Ashley Elliott", "PA to Gareth Hall")
+        ]),
+        orgNode("Emma Charters", "Executive Assistant to Paul Beresford"),
+        orgNode("Sophie Jones", "Central Portfolio Office Lead (GTIS and CTO)", [
+          orgNode("Sara Monteith-Knight", "Personal Assistant"),
+          orgNode("Susan Hulme", "BX Cyber Security Manager"),
+          orgNode("Sarah Chaloner", "Portfolio Manager"),
+          orgNode("Asif Hussain", "AVP Project Manager"),
+          orgNode("Louise Cummins", "Senior Business Design Analyst")
+        ]),
+        orgNode("Neil Welsh", "MD, CBP Technology", [
+          orgNode("Scott McGarvey", "Control", [
+            orgNode("Hubert Bannerman-Williams", "Business Analyst"),
+            orgNode("Pooja Ravikumar", "Control"),
+            orgNode("Nagashruthi Seran", "ServiceNow Developer"),
+            orgNode("Richard Darroch", "VP, Project Manager"),
+            orgNode("David Jardine", "VP, Senior Project Manager"),
+            orgNode("Aravind Rajasekaran", "Product Owner"),
+            orgNode("Nnamdi Ihekweazu", "Business Analyst"),
+            orgNode("Alban Niba Ambe", "Optimisation Manager"),
+            orgNode("Murali S", "ServiceNow Senior Developer"),
+            orgNode("Richa Kaur", "Control")
+          ]),
+          orgNode("Fiona Hele", "Portfolio Management (PB Tech)", [
+            orgNode("Joel Hodes", "Control"),
+            orgNode("Sophie Doucet", "Control"),
+            orgNode("Rukmini Kalidindi", "Control"),
+            orgNode("Simon Champion", "Control"),
+            orgNode("Sharek Ullah", "Control"),
+            orgNode("Alan Dickson", "Control"),
+            orgNode("Lee Child", "Business Analyst (VP)"),
+            orgNode("Anita Parrott", "Business Analyst (VP)"),
+            orgNode("Philip Swann", "Control"),
+            orgNode("Mohammad Baghbaderani", "Control")
+          ]),
+          orgNode("Paul Kennerley", "Global Head of Physical Security Technology Run and Operations", [
+            orgNode("Andy Kirtland", "Global Deputy Head CSO Tech Application Delivery & Support"),
+            orgNode("Maria Dunleavy", "IAM Physical Security Technology Run and Operations Engineer"),
+            orgNode("Vincent Porteous", "Headend Technology Systems Engineer"),
+            orgNode("Tasso Bimplis", "Physical Security Technology Run and Operations Engineer"),
+            orgNode("Emma Yearsley", "Project Manager"),
+            orgNode("Megan Thwaites", "Early Careers (Cyber & Security)"),
+            orgNode("Kieran Salt", "Global Security"),
+            orgNode("Tony Ruddick", "Headend Technology Systems Engineer"),
+            orgNode("Phillip Hall", "Insider Threat Liaison"),
+            orgNode("Lewis Farnan-Jones", "Physical Security Technology Run and Operations Engineer & CCTV Product Manager")
+          ]),
+          orgNode("Steve Ramsden", "Programme Manager (Resilience Tech)", [
+            orgNode("Dominic Rose", "Data Visualisation Analyst"),
+            orgNode("Joseph Thompson", "Project Manager"),
+            orgNode("Cath Moores", "Group Resilience"),
+            orgNode("Christopher Ollier", "Resilience Tooling & Data Support"),
+            orgNode("Stephen Buckley", "Group Resilience"),
+            orgNode("Reece Holden", "Chief Information Security Office"),
+            orgNode("Paul Baston", "Project Manager"),
+            orgNode("Kevin Wright", "Data Analyst"),
+            orgNode("Millie Roberts", "Early Careers (Cyber & Security)")
+          ]),
+          orgNode("David Bell", "Programme Manager (Germany PCD)", [
+            orgNode("Mario Foerster", "Head of IT Run"),
+            orgNode("Drazen Despotovic", "Head of Test and Release Management"),
+            orgNode("Konstantina Firmin", "Sales & Service Operations"),
+            orgNode("Nadja Laugwitz", "Senior Continuous Improvement Teamlead"),
+            orgNode("Cem Florian Schreitz", "Principal Test Manager"),
+            orgNode("Ronja Berg", "Customer Experience Lead"),
+            orgNode("Gabriele Duranti", "Digital Customer Journey Lead (VP)"),
+            orgNode("David Tyson", "Senior Change Manager (Germany Cards Platform)"),
+            orgNode("Moritz Schneider", "Testmanager")
+          ]),
+          orgNode("Pat Leason", "Operational Rigour (VP)")
+        ])
+      ]),
+      orgNode("Stephen Flaherty", "Chief Technology Officer & Head of Group Technology Infrastructure Services", [
+        orgNode("Michael Rozycki", "Network Transformation Lead"),
+        orgNode("Amy Williams", "Head of Core Infrastructure Platform | Radbroke Site Lead"),
+        orgNode("Riaan Postma", "Head of Architecture & Platform Engineering", [
+          orgNode("Jason Gerroll", "GTSM"),
+          orgNode("Tejas Nadkarni", "Director, Head of Core Platform Delivery (CIB Technology)"),
+          orgNode("Peter Mcelwaine-Johnn", "Enterprise Architect"),
+          orgNode("Paluku Lusi", "PMO Regional Lead EMEA")
+        ]),
+        orgNode("Russell Wakefield", "GTIS Head of Service Delivery BX", [
+          orgNode("Tarik Nasser", "Head of Engagement & Delivery (Markets CIB)"),
+          orgNode("Imran Haq", "Head of Efficiency & Optimisation"),
+          orgNode("Paula Donoghue", "Head of Service Delivery, BUK"),
+          orgNode("Andrew Bell", "BX SD Lead Architect"),
+          orgNode("Anshuman Bhardwaj", "GTIS Service Delivery Director"),
+          orgNode("Mohit Katiyar", "Service Delivery Director"),
+          orgNode("Chris Jay", "Tech Infra FinOps Principal Engineer"),
+          orgNode("Tatiana Gitman", "Head of Business Engagement")
+        ]),
+        orgNode("Ben George", "Data Distinguished Engineer"),
+        orgNode("Vicky Sumner", "Portfolio and Strategy Director"),
+        orgNode("Ramon Ali", "Head of Infrastructure Engineering"),
+        orgNode("Meggy Chung", "MD, Head of Global Enterprise Data Platform"),
+        orgNode("Stephen Johnston", "MD, Distinguished Engineer (Cloud, AI, Automation)"),
+        orgNode("Kristen Bennie", "Group Head of Innovation and Partnerships"),
+        orgNode("Santashil Palchaudhuri", "GTIS"),
+        orgNode("William Lyvers", "Distinguished Engineer, Head of Application Engineering")
+      ]),
+      orgNode("Alison Hedges", "Head of CIB Tech Strategy and Transformation", [
+        orgNode("Rebecca Hands", "Change Delivery Director (Group Tech EVP)", [
+          orgNode("Severine Hankinson", "Learning Manager"),
+          orgNode("Samantha Waugh", "Colleague Engagement Manager"),
+          orgNode("James Maher", "Transformation Analyst"),
+          orgNode("Jumu Choudhury-Simeoni", "Reward Specialist"),
+          orgNode("Amy Roberts", "SPM People Lead"),
+          orgNode("Emma Moreton", "Group Technology Comms & Engagement"),
+          orgNode("Graham Milnes", "Communications Business Partner"),
+          orgNode("Helen Dytham", "Head of Learning"),
+          orgNode("Sophie Ellis", "SPM Transformation Manager")
+        ]),
+        orgNode("Anne Simpson", "CIB COO, Strategy & Governance", [
+          orgNode("Victoria Lawlor", "AVP")
+        ])
+      ]),
+      orgNode("Rakesh Prasad", "CIO Functions Technology", [
+        orgNode("Saurabh Gosain", "MD, CIO Group Sustainability", [
+          orgNode("Rebecca Tuff", "Head of CIO Sustainability Change Execution and PPCR Tech"),
+          orgNode("Saravanan Sivanesan", "Global Delivery Lead (Climate Change Technology)"),
+          orgNode("Alistair Bradley", "Head of Technology Office of Sustainability"),
+          orgNode("Prakash Roshan", "Sustainability Technology Director"),
+          orgNode("Umair Ali", "Director, Group Sustainability CIO Office"),
+          orgNode("Lucinda Bligh", "Group Sustainability Portfolio Lead"),
+          orgNode("Audrey Roff", "Executive Assistant"),
+          orgNode("Kristen Leggiero", "Engagement Lead")
+        ]),
+        orgNode("Richard Grabowsky", "Head of Functions Central Technology", [
+          orgNode("Leigh Cummings", "Head of Legal Technology"),
+          orgNode("Prasad Tantry", "Head of Procurement Technology"),
+          orgNode("Stefano Prini", "Head of RFT Process Automation & Tax Technology"),
+          orgNode("Phil Underwood", "CRES Functions Technology Lead"),
+          orgNode("Lakshmi Narayanan", "Head of BIA, BCS & BX Mgmt Office Tech")
+        ]),
+        orgNode("Paulo De Sa", "MD, Workplace & Collaboration Services", [
+          orgNode("David Main", "Programme Director (GTIS)")
+        ]),
+        orgNode("Dheeraj Agrawal", "Functions Technology", [
+          orgNode("Romulus Dias", "Director, Head of Functions Central Technology India"),
+          orgNode("Raj Palepu", "Director, Head of Compliance Technology (India) & Global Head of eComms Technology"),
+          orgNode("Anupam Sharma", "Director, Head of Functions Data CoE, HR Tech and IAM India"),
+          orgNode("K S Savitha", "Functions Data Delivery Lead"),
+          orgNode("Subramanian Srinivasan", "Compliance Chief Data Architect")
+        ]),
+        orgNode("Sabina Isak", "MD, CIO Functions Digital Channels and Business Process Automation", [
+          orgNode("Saqib Ashraf", "Director, Head of Functions Digital Channels Transformation and Governance"),
+          orgNode("Amit Singh", "Head of Business Process Automation CoE and PPCR"),
+          orgNode("Hemal Borkhataria", "Head of Digital Colleague Experience (Barclays Now)"),
+          orgNode("Munish Kumar", "Head of Banking & Employee Compliance Technology"),
+          orgNode("Naved Surve", "Director, Head of Functions Digital Colleague Engagement and PMO")
+        ]),
+        orgNode("Alyson Hudson", "MD, CIO HR Technology"),
+        orgNode("Amol Joshi", "Head of Engineering (IAM)"),
+        orgNode("Sara Gettings", "Director, Head of Functions Technology Portfolio & Governance"),
+        orgNode("Elise Sakala", "VP, Communications Lead"),
+        orgNode("Andrea Muha", "Executive Assistant / Administration Manager (FT CIO)")
+      ])
+    ]),
+    orgNode("Jillian Chai", "Group Technology Chief of Staff and head of EVP"),
+    orgNode("John Miller", "Group Chief Information Security Officer"),
+    orgNode("Steve Beasty", "COO, Barclays UK"),
+    orgNode("Stuart Baker", "Group Head of Control"),
+    orgNode("Leonhard Mueller", "Operations Leader - MD"),
+    orgNode("Lauren Bennett", "EA to Craig Bright")
+  ]),
+  orgNode("Anne Marie Darling", "Group Co COO and Co CEO, BX", [
+    orgNode("Malcolm Brooke", "Group COO Chief of Staff"),
+    orgNode("Sara O'Keane", "Chief of Staff to Anne Marie Darling"),
+    orgNode("Georges Lauchard", "Global Markets and Wholesale Lending COO"),
+    orgNode("Steve Allen", "COO, Corporate, Cards & Payments"),
+    orgNode("Alastair Blackwell", "COO for BX, Risk & Finance"),
+    orgNode("Sarah DeGuilio", "Executive Assistant")
+  ]),
+  orgNode("Anna Cross", "Group Finance Director", [
+    orgNode("Steven Ewart", "Group Controller"),
+    orgNode("Gerbrand Muller", "Group Head of Finance - Sustainability and ESG"),
+    orgNode("Claire Peel", "Barclays UK CFO"),
+    orgNode("Richard Craine", "Group Tax Director"),
+    orgNode("Marina Shchukina", "Head of Investor Relations"),
+    orgNode("Daniel Fairclough", "Group Treasurer"),
+    orgNode("Shaheda Moosa", "Chief of Staff to Group Finance Director"),
+    orgNode("Nick Koukoumelidis", "Finance")
+  ]),
+  orgNode("Adeel Khan", "Global Head of Markets", [
+    orgNode("Michael Webb", "Global Head of Liquid Financing"),
+    orgNode("Hossein Zaimi", "Global Head of Macro"),
+    orgNode("Paul Johny", "Global Markets Chief of Staff"),
+    orgNode("Rahil Patel", "Business Manager - Markets"),
+    orgNode("Matthew Collison", "Managing Director - Head of Cross Markets"),
+    orgNode("Scott McDavid", "Global Head of Equities"),
+    orgNode("Andrew Mogavero", "Global Head of Credit Products"),
+    orgNode("Ronnie Wexler", "Global Head of Equities Distribution"),
+    orgNode("Chetan Vohra", "Securitised Products"),
+    orgNode("Jean-Francois Mastrangelo", "Pan Markets"),
+    orgNode("Peter Ward", "Global Head of Electronic Trading"),
+    orgNode("Richard Cunningham", "Chairman of Global Markets and Global Head of Senior Relationship Management"),
+    orgNode("Kristen Macleod", "Managing Director - Global Head of Macro Distribution"),
+    orgNode("Paul Degen", "Managing Director - Global Markets")
+  ]),
+  orgNode("Taalib Shaah", "Group Chief Risk Officer", [
+    orgNode("Kirsty Fitzgerald", "MD, Risk Services"),
+    orgNode("Olaf Springer", "Head of QA"),
+    orgNode("Billy Suid", "Head of Climate Risk, Managing Director"),
+    orgNode("Olivier Vigneron", "Risk"),
+    orgNode("Matthew Stevens", "Chief Risk Officer, Barclays UK"),
+    orgNode("Rob Spears", "Investment Bank CRO"),
+    orgNode("John Fernquest", "Head of Risk Services / Risk Chief of Staff"),
+    orgNode("Milo Carver", "Group Senior Credit Officer / Group Credit Risk Director"),
+    orgNode("Kamal Gianchandani", "MD, Asia CRO"),
+    orgNode("Lisa Farkovits", "Head of Model Risk Management")
+  ]),
+  orgNode("Tristram Roberts", "Group HR Director", [
+    orgNode("Louisa Chapple", "MD, HR Director for BX"),
+    orgNode("Melissa Wilkinson", "Group HR Business Manager"),
+    orgNode("Sarah Grice", "Group Head of Talent"),
+    orgNode("Natalie Hattrell", "Co Head of Colleague Experience & Group Head of Inclusion and Opportunity"),
+    orgNode("Gavin Haynes", "Global Head of Employee Relations"),
+    orgNode("James Coleman", "Co Head Reward & Performance"),
+    orgNode("Jules Ingleby", "Co Head Reward & Performance"),
+    orgNode("Tim Jones", "HR Director, BBPLC"),
+    orgNode("Antonia Cowdry", "HR Director, BUK"),
+    orgNode("Ryan Godwin", "Head of People Analytics and Culture"),
+    orgNode("Mark Ashton-Rigby", "Adviser to Group Chief Executive")
+  ]),
+  orgNode("Cathal Deasy", "Global Co Head of Banking", [
+    orgNode("Alex Ham", "Banking Coverage & Structuring"),
+    orgNode("Philip Bowkley", "International Corporate Banking"),
+    orgNode("Alisdair Gayne", "Head of EMEA Investment Banking"),
+    orgNode("Daniel Hanna", "Global Head of Sustainable Finance"),
+    orgNode("George Osborne", "Head of Investment Banking Management Office"),
+    orgNode("Spyros Svoronos", "Global Head of Industrials Investment Banking"),
+    orgNode("Eric Federman", "Managing Director"),
+    orgNode("Mark Zanoli", "Managing Director"),
+    orgNode("Avinash Thakur", "MD, Head of Capital Markets Financing, Asia Pacific"),
+    orgNode("Andrew Woeber", "MD, Global Head of Mergers & Acquisitions"),
+    orgNode("Michael Cormier", "Global Head of Energy Transition Group"),
+    orgNode("Miles Millard", "Investment Banking Coverage Leadership (MD)"),
+    orgNode("Gary Posternack", "Chairman of Global M&A"),
+    orgNode("Alexander Lynch", "Global Chairman of Investment Banking")
+  ]),
+  orgNode("Taylor Wright", "Global Co Head of Banking", [
+    orgNode("Tom Johnson", "Global Co Head of Capital Markets"),
+    orgNode("Arif Vohra", "Global Co Head of Financial Institutions Group"),
+    orgNode("Travis Barnes", "Global Co Head of Capital Markets"),
+    orgNode("Marc Warm", "Banking Coverage & Structuring"),
+    orgNode("Kristin DeClark", "Global Head of Technology"),
+    orgNode("Joel Fleck", "Managing Director"),
+    orgNode("Ricardo Fernandez", "Head of Mexico Investment Banking"),
+    orgNode("Tim Hartzell", "Managing Director - Global Head of Portfolio Mgmt"),
+    orgNode("Rick Landgarten", "Global Head of Healthcare & Real Estate Groups"),
+    orgNode("Lowell Strug", "Global Head of Consumer and Retail Group"),
+    orgNode("Christian Oberle", "Head of Americas Financial Sponsors Group"),
+    orgNode("Martin Ragde", "Chief of Staff, IB & BBPLC"),
+    orgNode("Marilyn Mohamed", "Executive Assistant")
+  ]),
+  orgNode("Stephen Dainton", "BBPLC President and Head of IB Mgmt", [
+    orgNode("Francesco Ceccato", "CEO, Barclays Europe"),
+    orgNode("Richard Haworth", "CEO, Americas"),
+    orgNode("Rebecca Anderton-Davies", "Chief of Staff (MD)"),
+    orgNode("Lynley Ashby", "Chief of Staff (MD)"),
+    orgNode("Katie Smith", "EA to Stephen Dainton"),
+    orgNode("Bradley Rogoff", "Head of Research"),
+    orgNode("Jaideep Khanna", "CEO, Barclays Asia Pacific"),
+    orgNode("Walid Mezher", "Co CEO Middle East and Head of Markets, MEA"),
+    orgNode("Khaled ElDabag", "CEO & Head of Investment Banking MENA Region"),
+    orgNode("Stephen Lessing", "Chairman of Senior Relationship Management")
+  ]),
+  orgNode("Paul Compton", "Chairman of Investment Banking", [
+    orgNode("Karen Katigbak", "AVP & EA to Paul Compton")
+  ]),
+  orgNode("Matt Hammerstein", "CEO, UK Corporate Bank and Head of PPCR"),
+  orgNode("Denny Nealon", "CEO, US Consumer Bank & BBDE"),
+  orgNode("Vim Maru", "CEO, Barclays UK", [
+    orgNode("Jatin Patel", "Retail Banking"),
+    orgNode("Steve Weston", "Head of Everyday Money Management"),
+    orgNode("Manuel Baldasano", "Head of Customer & Digital"),
+    orgNode("Abdul Qureshi", "Head of Growth and Specialist Propositions"),
+    orgNode("Nicola Eggers", "Chief of Staff to Vim Maru"),
+    orgNode("Louise Turner", "EA to CEO, BUK")
+  ]),
+  orgNode("Sasha Wiggins", "CEO, Private Bank and Wealth Management", [
+    orgNode("Jane Sedgwick", "Global Head of Credit"),
+    orgNode("Mohammad Syed", "Head of PBWM UK and Crown Dependencies"),
+    orgNode("Annabelle Bryde", "Head of PBWM UK & Crown Dependencies (International)"),
+    orgNode("Wayne Hawkes", "PBWM Business Area Leader (MD)"),
+    orgNode("David Upton", "Chief of Staff, PBWM"),
+    orgNode("Rishi Shah", "Global Head of Banking, Private Bank"),
+    orgNode("Sarah Taiani", "EA to CEO of PB & WM")
+  ]),
+  orgNode("Matthew Fitzwater", "Group Chief Compliance Officer", [
+    orgNode("Christopher Singh", "Group Head of CWR Compliance"),
+    orgNode("Dafydd Davies", "Head of BIA Services"),
+    orgNode("Holly Osmond", "Group Chief Compliance Office"),
+    orgNode("Judith Mowat", "Global Head of Compliance Assurance"),
+    orgNode("Kate Vetch", "Compliance"),
+    orgNode("Octavia Knox Cartwright", "Group Head of LRR Risk Oversight"),
+    orgNode("Michael Christodoulides", "BUK Chief Compliance Officer"),
+    orgNode("Golam Mainuddin", "COO, Group Compliance"),
+    orgNode("Kara Hultin", "Head of Operational Risk for BBPLC (MD)"),
+    orgNode("Faye Wilkins", "Assistant to Matthew Fitzwater"),
+    orgNode("Lisa Hollinger", "Head of Business Management and CEO Office (WM&I)")
+  ]),
+  orgNode("Stephen Shapiro", "Group General Counsel", [
+    orgNode("David Mackenzie", "Global Head of EIP"),
+    orgNode("Melissa Hardisty", "Chief of Staff to the Group General Counsel"),
+    orgNode("Laura Muir", "General Counsel for Group Centre Legal"),
+    orgNode("Philip Aiken", "General Counsel, Legal Risk, Governance and Control"),
+    orgNode("James Meadows", "Americas General Counsel / Global Head of Litigation, Investigations & Enforcement"),
+    orgNode("Kevin Thurm", "Controls Professional (MD)"),
+    orgNode("Crystal Lalime", "General Counsel, Barclays International")
+  ]),
+  orgNode("Gijs Borghouts", "Chief Internal Auditor, Barclays PLC"),
+  orgNode("Wally Adeyemo", "Group Strategy and Transformation", [
+    orgNode("Tom Hoskin", "Head of Corporate Communications"),
+    orgNode("Simon Tahaney", "Head of UK Regulatory Relations"),
+    orgNode("Kitty Ussher", "MD, Group Head of Policy Development"),
+    orgNode("Nina Bibby", "Group Chief Marketing Officer"),
+    orgNode("Greg Passeri", "Group Head of Transformation"),
+    orgNode("Peter Gordon", "Managing Director, Government Relations"),
+    orgNode("KC Harris", "Director, Strategic Policy Group"),
+    orgNode("Sara Mitchell", "Business Manager"),
+    orgNode("Brendan Reilly", "Head of Regulatory Affairs & Public Policy, Americas"),
+    orgNode("Sabine Dittrich", "Public Policy and Corporate Responsibility"),
+    orgNode("John Laws", "Head of Government and Regulatory Relations and Policy, Asia Pacific"),
+    orgNode("Deborah Goldfarb", "Managing Director, Citizenship")
+  ]),
+  orgNode("Anita Tanna", "Group Chief of Staff", [
+    orgNode("Saj Abbas", "Head of Group Chief Executive Office - Governance")
+  ])
+]));
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 // relationships: { "Person Name": { initials: "PS", score: "3", socialStyle: "Ex" } }
