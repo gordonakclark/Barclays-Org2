@@ -344,7 +344,7 @@
       "score": "",
       "socialStyle": "",
       "businessUnit": "GTSM",
-      "region": "US",
+      "region": "UK",
       "function": "Head of RtB Corporate Tech & Infra BI",
       "engagementOwner": "",
       "initiative": "",
@@ -416,9 +416,13 @@
       ]
     }
   },
-  "lastUpdated": "2026-04-26T14:24:12.161Z",
+  "lastUpdated": "2026-04-26T16:52:37.534Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T16:52:37.534Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T14:24:12.161Z"
@@ -474,10 +478,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-25T16:01:00.100Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-25T15:50:28.168Z"
     }
   ]
 }
