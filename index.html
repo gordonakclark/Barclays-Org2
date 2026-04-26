@@ -3713,6 +3713,7 @@ function populateBUFilter() {
 function pruneTreeByBU(node, bu) {
   const rel = getRelationship(node.name);
   const selfMatches = !!(rel && rel.businessUnit && rel.businessUnit.trim() === bu);
+  if (selfMatches) return deepClone(node);
   const prunedChildren = (node.children || [])
     .map(ch => pruneTreeByBU(ch, bu))
     .filter(Boolean);

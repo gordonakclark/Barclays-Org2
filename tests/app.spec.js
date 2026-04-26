@@ -108,6 +108,8 @@ test.describe('power map application', () => {
     await page.locator('#buFilter').selectOption('GTSM');
     await expect(page.locator('#chart')).toContainText('Jonathan Lowe');
     await expect(page.locator('#chart')).toContainText('Paul Austen');
+    await expect(page.locator('#chart')).toContainText('Iain MacLeod');
+    await expect(page.locator('#chart')).toContainText('Cassandra Waugh');
     await expect(page.locator('#chart')).not.toContainText('Amy Williams');
   });
 
