@@ -650,11 +650,53 @@
           "newStakeholder": true
         }
       ]
+    },
+    "Peter Lloyd Brown": {
+      "initials": "GAKC",
+      "score": "2",
+      "socialStyle": "An",
+      "businessUnit": "GTIS",
+      "region": "US",
+      "function": "Head of Cloud Platforms",
+      "engagementOwner": "GAKC",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T16:58:41.564Z",
+          "score": "2",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
     }
   },
-  "lastUpdated": "2026-04-26T16:58:28.171Z",
+  "lastUpdated": "2026-04-26T16:58:41.564Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T16:58:41.564Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T16:58:28.171Z"
@@ -710,10 +752,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-25T21:01:26.753Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-25T20:58:18.067Z"
     }
   ]
 }
