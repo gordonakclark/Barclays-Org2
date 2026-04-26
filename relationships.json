@@ -612,11 +612,53 @@
           "newStakeholder": true
         }
       ]
+    },
+    "David Richards": {
+      "initials": "TR",
+      "score": "4",
+      "socialStyle": "An",
+      "businessUnit": "GTIS",
+      "region": "US",
+      "function": "Head of Enterprise Foundation Platforms",
+      "engagementOwner": "TR",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T16:58:28.171Z",
+          "score": "4",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
     }
   },
-  "lastUpdated": "2026-04-26T16:58:14.488Z",
+  "lastUpdated": "2026-04-26T16:58:28.171Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T16:58:28.171Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T16:58:14.488Z"
@@ -672,10 +714,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-25T20:58:18.067Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-25T20:00:15.749Z"
     }
   ]
 }
