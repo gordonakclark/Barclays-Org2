@@ -916,11 +916,53 @@
           "newStakeholder": true
         }
       ]
+    },
+    "Georges Lauchard": {
+      "initials": "PS",
+      "score": "",
+      "socialStyle": "",
+      "businessUnit": "COO",
+      "region": "",
+      "function": "Global Markets and Wholesale Lending COO",
+      "engagementOwner": "PS",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T17:06:04.571Z",
+          "score": "",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
     }
   },
-  "lastUpdated": "2026-04-26T17:05:39.751Z",
+  "lastUpdated": "2026-04-26T17:06:04.571Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T17:06:04.571Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T17:05:39.751Z"
@@ -976,10 +1018,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-26T16:53:06.457Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-26T16:52:37.534Z"
     }
   ]
 }
