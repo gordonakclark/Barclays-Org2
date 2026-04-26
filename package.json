@@ -1,6 +1,6 @@
 {
   "name": "barclays-org2",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "private": true,
   "scripts": {
     "test:e2e": "playwright test"
