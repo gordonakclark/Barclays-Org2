@@ -87,7 +87,7 @@
       "initials": "PS",
       "score": "3",
       "socialStyle": "Dr",
-      "businessUnit": "BUK",
+      "businessUnit": "CFO",
       "region": "",
       "function": "Group Finance Director",
       "engagementOwner": "PS",
@@ -264,13 +264,13 @@
       "changeHistory": []
     },
     "Jonathan Lowe": {
-      "initials": "GAKC",
+      "initials": "PR",
       "score": "3",
       "socialStyle": "Dr",
       "businessUnit": "GTSM",
       "region": "US",
       "function": "Head of Group Technology Service Management",
-      "engagementOwner": "GAKC",
+      "engagementOwner": "PR",
       "initiative": "",
       "influence": "",
       "budgetControl": "",
@@ -338,11 +338,53 @@
           "newStakeholder": true
         }
       ]
+    },
+    "Paul Austen": {
+      "initials": "",
+      "score": "",
+      "socialStyle": "",
+      "businessUnit": "GTSM",
+      "region": "US",
+      "function": "Head of RtB Corporate Tech & Infra BI",
+      "engagementOwner": "",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T14:21:36.937Z",
+          "score": "",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
     }
   },
-  "lastUpdated": "2026-04-26T13:31:58.531Z",
+  "lastUpdated": "2026-04-26T14:21:36.937Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T14:21:36.937Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T13:31:58.531Z"
@@ -398,10 +440,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-25T15:35:51.368Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-25T14:15:53.013Z"
     }
   ]
 }
