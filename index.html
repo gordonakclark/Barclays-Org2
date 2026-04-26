@@ -2647,7 +2647,50 @@ const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive
   orgNode("Anne Marie Darling", "Group Co COO and Co CEO, BX", [
     orgNode("Malcolm Brooke", "Group COO Chief of Staff"),
     orgNode("Sara O'Keane", "Chief of Staff to Anne Marie Darling"),
-    orgNode("Georges Lauchard", "Global Markets and Wholesale Lending COO"),
+    orgNode("Georges Lauchard", "Global Markets and Wholesale Lending COO", [
+      orgNode("Andrew Longmuir", "Head of Global Markets Operations", [
+        orgNode("Matthew Keys Lumley", "Global Head of Network Management, Treasury & Cost Operations", [
+          orgNode("Sara Loftus", "VP, Relationship Manager, Network Management"),
+          orgNode("Daniela Biondi", "VP, Treasury Operations (Intraday Liquidity)"),
+          orgNode("Austin Mirams", "VP, Treasury Operations (Funding)")
+        ]),
+        orgNode("Robert Kameen", "VP, Treasury Operations (US)"),
+        orgNode("David Forsyth", "Director, Cash Settlements as a Service & GBS"),
+        orgNode("Anand Rajasekaran", "Director, Securities Settlements, Asset Servicing, FX & Treasury (India)"),
+        orgNode("Christopher Chalmers", "Director, GMO Service Management, Control & Resiliency", [
+          orgNode("Theresa Bradley", "Colleague Services, Global Markets Ops (Glasgow)"),
+          orgNode("Tony Leighton", "GMO Delivery Management, PCIR Programme Lead")
+        ]),
+        orgNode("Sue McMillan", "Director, TTRO"),
+        orgNode("Rebecca Fishwick", "Director, Head of DFX Settlements"),
+        orgNode("Sebastian Koe", "FIS Operations (US)"),
+        orgNode("Ajit Salkar", "Markets Post Trade (India)"),
+        orgNode("Daniel Levison", "OTC Post Trade (US)"),
+        orgNode("Christopher Klein", "FIS Operations (US)"),
+        orgNode("Travis Lile", "BA1 Analyst, Markets Post Trade (US)"),
+        orgNode("Nick Pribac", "FIS Static Operations (US)"),
+        orgNode("Kushagra Baghel", "Markets Post Trade (India)"),
+        orgNode("Vanshika Choudhary", "Markets Post Trade (India)"),
+        orgNode("Kunal Shet", "Markets Post Trade (India)"),
+        orgNode("HwaJeong Nam", "Markets Post Trade (US)"),
+        orgNode("Prasad Kulkarni", "APAC Margins (India)"),
+        orgNode("Mohini Parbalkar", "OTC Clearing (India)")
+      ]),
+      orgNode("Luke Khanna", "Head of Strategy & Transformation, Global Markets & Wholesale Lending COO", [
+        orgNode("Gavin Maartens", "Comms Lead, Global Markets & Wholesale Lending COO")
+      ]),
+      orgNode("Austin Fernandes", "MD, CIO Global Markets Sales & Post Trade Technology / CIO CIB Technology Americas"),
+      orgNode("James Clark", "MD, Global Head of CIB Planning & Execution", [
+        orgNode("Andrew Peck", "MD, Head of Payments Central Infrastructure Renewal (PCIR)")
+      ]),
+      orgNode("Carl Brown", "Co CIO, Markets Pre Trade Technology"),
+      orgNode("Paul C. Sampat", "Co CIO, Markets Pre Trade Technology", [
+        orgNode("Peter Williams", "Head of Liquid Financing Technology"),
+        orgNode("Michael Irving", "Head of Architecture"),
+        orgNode("Eliza D. Tam", "Head of Specialised Infrastructure")
+      ]),
+      orgNode("Louise Smith", "EA to Georges Lauchard")
+    ]),
     orgNode("Steve Allen", "COO, Corporate, Cards & Payments"),
     orgNode("Alastair Blackwell", "COO for BX, Risk & Finance"),
     orgNode("Sarah DeGuilio", "Executive Assistant")
@@ -3144,25 +3187,6 @@ async function refreshFromGitHub() {
     applyAll();
   }
   return success;
-}
-
-// Auto-sync from GitHub periodically
-let autoSyncTimer = null;
-function startAutoSync() {
-  if (autoSyncTimer) clearInterval(autoSyncTimer);
-  autoSyncTimer = setInterval(async () => {
-    await loadFromGitHub();
-    buildTable();
-    applyAll();
-  }, 120000); // Every 2 minutes
-  console.log('Auto-sync enabled (every 120s)');
-}
-
-function stopAutoSync() {
-  if (autoSyncTimer) {
-    clearInterval(autoSyncTimer);
-    autoSyncTimer = null;
-  }
 }
 
 // Setup GitHub token dialog
@@ -3954,9 +3978,8 @@ async function initializeApp() {
 
   if (success) {
     showNotification(getGitHubToken()
-      ? 'Data loaded from GitHub - multi-user sync enabled!'
+      ? 'Data loaded from GitHub at startup.'
       : 'Data loaded from GitHub in read-only mode. Setup a token to save changes.', getGitHubToken() ? 'success' : 'info');
-    startAutoSync(); // Auto-refresh every 30 seconds
   } else {
     showNotification('Using local data. Setup GitHub token to enable saves and shared sync.', 'warning');
   }
