@@ -376,11 +376,53 @@
           "newStakeholder": true
         }
       ]
+    },
+    "Craig Williams": {
+      "initials": "TR",
+      "score": "3",
+      "socialStyle": "Dr",
+      "businessUnit": "GTSM",
+      "region": "US",
+      "function": "Head of Technology Command Centres",
+      "engagementOwner": "TR",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T14:24:12.161Z",
+          "score": "3",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
     }
   },
-  "lastUpdated": "2026-04-26T14:21:36.937Z",
+  "lastUpdated": "2026-04-26T14:24:12.161Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T14:24:12.161Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T14:21:36.937Z"
@@ -436,10 +478,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-25T15:50:28.168Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-25T15:35:51.368Z"
     }
   ]
 }
