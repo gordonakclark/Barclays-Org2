@@ -6,7 +6,7 @@ async function login(page) {
   await page.getByLabel('Password').fill('PS');
   await page.getByRole('button', { name: 'Sign In' }).click();
   await expect(page.locator('#mainApp')).toHaveClass(/authenticated/);
-  await expect(page.locator('#appVersion')).toContainText('Version v1.4.5');
+  await expect(page.locator('#appVersion')).toContainText('Version v1.4.6');
   await expect(page.locator('#relTableBody tr').first()).toBeVisible();
 }
 
@@ -26,10 +26,11 @@ test.describe('power map application', () => {
 
     const row = page.locator('#relTableBody tr').filter({ hasText: 'CS Venkatakrishnan' }).first();
     await expect(row).toContainText('Edit details');
-    await row.getByRole('button', { name: 'Edit details' }).click();
+    await row.locator('.person-name-button').click();
     await expect(page.locator('#stakeholderModal')).toHaveClass(/open/);
     await expect(page.locator('#stakeholderModalTitle')).toHaveText('CS Venkatakrishnan');
     await expect(page.locator('#workspaceFunction')).toHaveValue('Group Chief Executive Officer');
+    await expect(row).toContainText('CEO');
 
     await page.locator('#workspaceOwner').fill('Test Owner');
     await page.locator('#workspaceRegion').fill('UK');
@@ -84,7 +85,7 @@ test.describe('power map application', () => {
     await row.getByRole('button', { name: 'Edit details' }).click();
     await expect(page.locator('#workspaceFunction')).toHaveValue('Chief Operating Officer, CIB');
     await expect(page.locator('#workspaceRegion')).toHaveValue('US');
-    await expect(page.locator('input.input-bu[data-name="Antoinette O\'Neill"]')).toHaveValue('CIO');
+    await expect(page.locator('select.input-bu-select[data-name="Antoinette O\'Neill"]')).toHaveValue('CIO');
     await expect(page.locator('#workspaceInitiative')).toHaveValue('');
   });
 
@@ -93,9 +94,13 @@ test.describe('power map application', () => {
 
     await expect(page.locator('#buFilter')).toContainText('GTSM');
     await expect(page.locator('#buFilter')).toContainText('Chief Technology Office');
+    await expect(page.locator('#tableBuFilter')).toContainText('GTSM');
+
+    await expect(page.locator('#brandReinventionMetric')).toContainText('Total Enterprise Reinvention');
 
     const loweRow = page.locator('#relTableBody tr').filter({ hasText: 'Jonathan Lowe' }).first();
     await loweRow.getByRole('button', { name: 'Edit details' }).click();
-    await expect(page.locator('input.input-bu[data-name="Jonathan Lowe"]')).toHaveValue('GTSM');
+    await expect(page.locator('select.input-bu-select[data-name="Jonathan Lowe"]')).toHaveValue('GTSM');
+    await expect(page.locator('#tableBuFilter')).toHaveValue('');
   });
 });
