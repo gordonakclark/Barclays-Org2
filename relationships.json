@@ -1068,11 +1068,53 @@
           "newStakeholder": true
         }
       ]
+    },
+    "Cassandra Waugh": {
+      "initials": "AJ",
+      "score": "3",
+      "socialStyle": "Am",
+      "businessUnit": "GTSM",
+      "region": "US",
+      "function": "PA to Head of GTSM & Group Technology Strategy",
+      "engagementOwner": "AJ",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T19:21:50.295Z",
+          "score": "3",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
     }
   },
-  "lastUpdated": "2026-04-26T19:21:31.337Z",
+  "lastUpdated": "2026-04-26T19:21:50.295Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T19:21:50.295Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T19:21:31.337Z"
@@ -1128,10 +1170,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-26T16:58:41.564Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-26T16:58:28.171Z"
     }
   ]
 }
