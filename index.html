@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Barclays Group Leadership ÔÇö Organisation Chart</title>
+<title>Barclays Group Leadership — Organisation Chart</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -60,7 +60,7 @@
     overflow-x: hidden;
   }
 
-  /* ÔöÇÔöÇ LOGIN SCREEN ÔöÇÔöÇ */
+  /* ── LOGIN SCREEN ── */
   #loginScreen {
     position: fixed;
     top: 0;
@@ -233,7 +233,7 @@
     display: block;
   }
 
-  /* ÔöÇÔöÇ PAGE HEADER ÔöÇÔöÇ */
+  /* ── PAGE HEADER ── */
   .page-header {
     background: linear-gradient(135deg, #07111f 0%, #0a1628 52%, #103c5d 100%);
     border-bottom: 2px solid;
@@ -260,18 +260,7 @@
     align-items: center;
     gap: 16px;
   }
-  .brand-logo-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .brand-metric {
-    font-size: 10px;
-    color: var(--silver);
-    letter-spacing: 1.1px;
-    text-transform: uppercase;
-  }
-
+  
   .brand-divider {
     width: 2px;
     height: 40px;
@@ -358,13 +347,13 @@
     border-image: linear-gradient(90deg, #A100FF 0%, #00AEEF 100%) 1;
   }
 
-  /* ÔöÇÔöÇ LAYOUT SPLIT ÔöÇÔöÇ */
+  /* ── LAYOUT SPLIT ── */
   .app-body {
     display: flex;
     height: calc(100vh - 68px);
   }
 
-  /* ÔöÇÔöÇ SIDE PANEL ÔöÇÔöÇ */
+  /* ── SIDE PANEL ── */
   .side-panel {
     width: 560px;
     min-width: 460px;
@@ -508,19 +497,6 @@
     font-size: 11px; font-weight: 500; color: #c8d8f8;
     max-width: 130px; line-height: 1.3;
   }
-  .person-name-button {
-    background: transparent;
-    border: 0;
-    color: inherit;
-    font: inherit;
-    padding: 0;
-    text-align: left;
-    cursor: pointer;
-  }
-  .person-name-button:hover .person-name-cell {
-    color: var(--gold-light);
-    text-decoration: underline;
-  }
   .person-role-cell {
     font-size: 9.5px; color: var(--silver); line-height: 1.3;
     max-width: 130px;
@@ -547,8 +523,7 @@
   }
   .input-initials::placeholder { color: rgba(255,255,255,0.2); font-weight: 300; letter-spacing: 0; text-transform: none; }
 
-  .input-bu,
-  .input-bu-select {
+  .input-bu {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 4px;
@@ -561,14 +536,12 @@
     letter-spacing: 0.3px;
     transition: border-color 0.2s;
   }
-  .input-bu:focus,
-  .input-bu-select:focus {
+  .input-bu:focus {
     outline: none;
     border-color: var(--gold);
     background: rgba(201,168,76,0.08);
   }
   .input-bu::placeholder { color: rgba(255,255,255,0.25); font-weight: 300; }
-  .input-bu-select option { background: #0a1628; color: var(--text-primary); }
 
   /* Business Unit filter dim/highlight */
   .box.bu-dim { opacity: 0.55; filter: grayscale(0.4); transition: opacity 0.25s, filter 0.25s, box-shadow 0.25s; }
@@ -644,7 +617,7 @@
     letter-spacing: 0.5px;
   }
 
-  /* ÔöÇÔöÇ CHART AREA ÔöÇÔöÇ */
+  /* ── CHART AREA ── */
   .chart-area {
     flex: 1;
     overflow: auto;
@@ -667,7 +640,7 @@
     width: 100%;
   }
 
-  /* ÔöÇÔöÇ ORG CHART ÔöÇÔöÇ */
+  /* ── ORG CHART ── */
   .node { display: flex; flex-direction: column; align-items: center; }
 
   .box {
@@ -690,7 +663,7 @@
     display: flex; align-items: center; justify-content: center;
   }
 
-  /* ÔöÇÔöÇ RELATIONSHIP BADGE on box ÔöÇÔöÇ */
+  /* ── RELATIONSHIP BADGE on box ── */
   .rel-badge {
     position: absolute;
     top: -10px; left: -4px;
@@ -1058,7 +1031,7 @@
 </head>
 <body>
 
-<!-- ÔöÇÔöÇ LOGIN SCREEN ÔöÇÔöÇ -->
+<!-- ── LOGIN SCREEN ── -->
 <div id="loginScreen">
   <div class="login-container">
     <div class="login-header">
@@ -1068,7 +1041,7 @@
         <div class="login-eagle"></div>
       </div>
       <h1 class="login-title">Barclays Group Leadership</h1>
-      <p class="login-subtitle">Organisation Chart ┬À Reinvention Workspace ┬À Secure Access</p>
+      <p class="login-subtitle">Organisation Chart · Reinvention Workspace · Secure Access</p>
       <div class="version-badge" id="loginVersion"></div>
     </div>
 
@@ -1105,27 +1078,24 @@
     </form>
 
     <div class="login-footer">
-      <span style="color: #A100FF;">Accenture</span> ├ù <span style="color: #00AEEF;">Barclays</span> | Authorized Access Only
+      <span style="color: #A100FF;">Accenture</span> × <span style="color: #00AEEF;">Barclays</span> | Authorized Access Only
     </div>
   </div>
 </div>
 
-<!-- ÔöÇÔöÇ MAIN APP ÔöÇÔöÇ -->
+<!-- ── MAIN APP ── -->
 <div id="mainApp">
 
-<!-- ÔöÇÔöÇ HEADER ÔöÇÔöÇ -->
+<!-- ── HEADER ── -->
 <div class="page-header">
   <div class="header-brand">
     <div class="brand-logos">
-      <div class="brand-logo-stack">
-        <div class="accenture-logo"><span class="accenture-word">accenture</span><span class="accenture-chevron">&gt;</span></div>
-        <div class="brand-metric" id="brandReinventionMetric">Total Enterprise Reinvention</div>
-      </div>
+      <div class="accenture-logo"><span class="accenture-word">accenture</span><span class="accenture-chevron">&gt;</span></div>
       <div class="brand-divider"></div>
       <div class="eagle-icon"></div>
       <div class="header-text">
         <h1>Barclays Group Leadership</h1>
-        <p>Organisation Chart ┬À GitHub Sync</p>
+        <p>Organisation Chart · Total Enterprise Reinvention · GitHub Sync</p>
       </div>
     </div>
   </div>
@@ -1142,17 +1112,17 @@
     </select>
     <button class="btn-control" onclick="openExecutiveDashboard()">Executive Dashboard</button>
     <button class="btn-control" onclick="toggleSecurityModal(true)">Security & Audit</button>
-    <button class="btn-control active" id="togglePanel" onclick="togglePanel()">ÔùÇ Contacts</button>
+    <button class="btn-control active" id="togglePanel" onclick="togglePanel()">◀ Contacts</button>
     <button class="btn-control" onclick="expandAll()">Expand All</button>
     <button class="btn-control" onclick="collapseAll()">Collapse All</button>
     <select class="btn-control" id="buFilter" onchange="applyBUFilter(this.value)" style="margin-left: 10px; cursor: pointer;" title="Filter org chart by Business Unit">
       <option value="">All Business Units</option>
     </select>
-    <button class="btn-control" onclick="logout()" style="margin-left: 10px;">­ƒöÆ Logout</button>
+    <button class="btn-control" onclick="logout()" style="margin-left: 10px;">🔒 Logout</button>
   </div>
 </div>
 
-<!-- ÔöÇÔöÇ BODY ÔöÇÔöÇ -->
+<!-- ── BODY ── -->
 <div class="app-body">
 
   <!-- SIDE PANEL -->
@@ -1161,27 +1131,24 @@
       <h2 style="background: linear-gradient(135deg, #A100FF 0%, #C44EFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Accenture Key Contacts</h2>
       <p>Enter relationship data, influence signals, and next actions for each Barclays stakeholder. Changes sync to GitHub for reinvention planning and team collaboration.</p>
       <div class="score-legend">
-        <span class="score-pill" style="background:#c0392b22;color:#e57060;border:1px solid #c0392b44">1 ÔÇö Minimal</span>
-        <span class="score-pill" style="background:#e67e2222;color:#e8a04a;border:1px solid #e67e2244">2 ÔÇö Developing</span>
-        <span class="score-pill" style="background:#c9a80022;color:#e0c020;border:1px solid #c9a80044">3 ÔÇö Established</span>
-        <span class="score-pill" style="background:#27ae6022;color:#4dc87a;border:1px solid #27ae6044">4 ÔÇö Strong</span>
-        <span class="score-pill" style="background:#0fa89422;color:#20d4be;border:1px solid #0fa89444">5 ÔÇö Strategic</span>
+        <span class="score-pill" style="background:#c0392b22;color:#e57060;border:1px solid #c0392b44">1 — Minimal</span>
+        <span class="score-pill" style="background:#e67e2222;color:#e8a04a;border:1px solid #e67e2244">2 — Developing</span>
+        <span class="score-pill" style="background:#c9a80022;color:#e0c020;border:1px solid #c9a80044">3 — Established</span>
+        <span class="score-pill" style="background:#27ae6022;color:#4dc87a;border:1px solid #27ae6044">4 — Strong</span>
+        <span class="score-pill" style="background:#0fa89422;color:#20d4be;border:1px solid #0fa89444">5 — Strategic</span>
       </div>
       <div style="margin-top:10px;font-size:10px;color:var(--silver);letter-spacing:0.5px;">
         <strong style="color:var(--text-primary)">Social Styles:</strong> 
-        An (Analytical) ┬À Dr (Driver) ┬À Ex (Expressive) ┬À Am (Amiable)
+        An (Analytical) · Dr (Driver) · Ex (Expressive) · Am (Amiable)
       </div>
     </div>
 
     <div class="search-wrap">
-      <input class="search-input" type="text" id="searchInput" placeholder="Search peopleÔÇª" oninput="filterTable(this.value)">
+      <input class="search-input" type="text" id="searchInput" placeholder="Search people…" oninput="filterTable(this.value)">
     </div>
     <div class="workspace-hint">Engagement Owner captures the account owner. Use <strong>Edit details</strong> to populate influence, actions, interaction history, and planning fields.</div>
 
     <div class="filter-wrap">
-      <select class="filter-select" id="tableBuFilter" onchange="filterTable(document.getElementById('searchInput').value)">
-        <option value="">All Business Units</option>
-      </select>
       <select class="filter-select" id="ownerFilter" onchange="filterTable(document.getElementById('searchInput').value)">
         <option value="">All Owners</option>
       </select>
@@ -1232,7 +1199,7 @@
 
     <!-- GitHub Token Setup -->
     <div style="padding: 10px 16px; border-top: 1px solid rgba(161,0,255,0.15); background: rgba(10,22,40,0.9);">
-      <button class="btn-sm btn-ghost" onclick="showTokenSetup()" style="width: 100%;">­ƒöæ Setup GitHub Token (First Time Only)</button>
+      <button class="btn-sm btn-ghost" onclick="showTokenSetup()" style="width: 100%;">🔑 Setup GitHub Token (First Time Only)</button>
       <div id="tokenStorageHint" style="font-size: 9px; color: var(--silver); margin-top: 6px; text-align: center; line-height: 1.4;">
         Required once to enable saving. Token stored for this browser session only.
       </div>
@@ -1240,13 +1207,13 @@
     
     <!-- Footer branding -->
     <div style="padding: 12px 16px; border-top: 1px solid rgba(161,0,255,0.15); background: rgba(10,22,40,0.8); font-size: 10px; color: var(--silver); text-align: center; letter-spacing: 0.5px;">
-      <span style="color: #A100FF;">Accenture</span> ├ù <span style="color: #00AEEF;">Barclays</span> | Relationship Intelligence Platform
+      <span style="color: #A100FF;">Accenture</span> × <span style="color: #00AEEF;">Barclays</span> | Relationship Intelligence Platform
     </div>
   </div>
 
   <!-- CHART -->
   <div class="chart-area">
-    <p class="scroll-hint">Ôåö Scroll to explore ┬À Click any box to expand/collapse</p>
+    <p class="scroll-hint">↔ Scroll to explore · Click any box to expand/collapse</p>
     <div class="chart-wrapper">
       <div id="chart"></div>
     </div>
@@ -1267,7 +1234,7 @@
         <div class="security-line" id="securityModeDisplay">Mode: Read-only until token is configured</div>
         <div class="security-line" id="syncStatusDisplay">Last sync: Not yet loaded</div>
         <div class="security-line" id="lastUpdatedDisplay">Last update: No remote audit information</div>
-        <ol class="security-history" id="recentHistoryList"><li>ÔÇö</li></ol>
+        <ol class="security-history" id="recentHistoryList"><li>—</li></ol>
       </div>
     </div>
   </div>
@@ -1402,8 +1369,8 @@
 </div><!-- End mainApp -->
 
 <script>
-// ÔöÇÔöÇ AUTHENTICATION ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
-const APP_VERSION = 'v1.4.6';
+// ── AUTHENTICATION ────────────────────────────────────────────────────────────
+const APP_VERSION = 'v1.4.5';
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -1449,7 +1416,7 @@ function createRangeOptions(selectId, includeBlank = false) {
   if (!select) return;
   const values = includeBlank ? [''] : [];
   values.push('1', '2', '3', '4', '5');
-  select.innerHTML = values.map(value => `<option value="${value}">${value || 'ÔÇö'}</option>`).join('');
+  select.innerHTML = values.map(value => `<option value="${value}">${value || '—'}</option>`).join('');
 }
 
 function initializeWorkspaceControls() {
@@ -1465,7 +1432,7 @@ function initializeWorkspaceControls() {
   Object.entries(optionSets).forEach(([id, values]) => {
     const select = document.getElementById(id);
     if (!select) return;
-    select.innerHTML = values.map(value => `<option value="${value}">${value || 'ÔÇö'}</option>`).join('');
+    select.innerHTML = values.map(value => `<option value="${value}">${value || '—'}</option>`).join('');
   });
 }
 
@@ -1484,20 +1451,6 @@ function sanitizeNumericRating(value) {
 
 function sanitizeEngagementOwner(value) {
   return sanitizeShortText(value, 24);
-}
-
-function formatDisplayedRole(role) {
-  return String(role || '')
-    .replace(/Chief Information Officer/gi, 'CIO')
-    .replace(/Chief Technology Officer/gi, 'CTO')
-    .replace(/Chief Operating Officer/gi, 'COO')
-    .replace(/Chief Financial Officer/gi, 'CFO')
-    .replace(/Chief Executive Officer/gi, 'CEO')
-    .replace(/Chief of Staff/gi, 'CoS')
-    .replace(/Executive Assistant/gi, 'EA')
-    .replace(/Managing Director/gi, 'MD')
-    .replace(/Group Technology Infrastructure Services/gi, 'GTIS')
-    .replace(/Group Technology Service Management/gi, 'GTSM');
 }
 
 function normalizeExistingRegion(value) {
@@ -1742,10 +1695,10 @@ function getAiAssistedInsights(all) {
 function getOverlayStyle(rel) {
   const styles = {
     org: { border: '', glow: '', tag: 'Org hierarchy' },
-    influence: { border: '#A100FF', glow: `0 0 18px rgba(161,0,255,${(parseInt(rel.influence, 10) || 0) / 8})`, tag: `Influence ${rel.influence || 'ÔÇö'}` },
-    strategic: { border: '#00AEEF', glow: `0 0 18px rgba(0,174,239,${(parseInt(rel.strategicImportance, 10) || 0) / 8})`, tag: `Strategic ${rel.strategicImportance || 'ÔÇö'}` },
-    engagement: { border: '#27ae60', glow: `0 0 18px rgba(39,174,96,${(parseInt(rel.engagementHealth, 10) || 0) / 8})`, tag: `Engagement ${rel.engagementHealth || 'ÔÇö'}` },
-    budget: { border: '#0fa894', glow: `0 0 18px rgba(15,168,148,${(parseInt(rel.budgetControl, 10) || 0) / 8})`, tag: `Budget ${rel.budgetControl || 'ÔÇö'}` },
+    influence: { border: '#A100FF', glow: `0 0 18px rgba(161,0,255,${(parseInt(rel.influence, 10) || 0) / 8})`, tag: `Influence ${rel.influence || '—'}` },
+    strategic: { border: '#00AEEF', glow: `0 0 18px rgba(0,174,239,${(parseInt(rel.strategicImportance, 10) || 0) / 8})`, tag: `Strategic ${rel.strategicImportance || '—'}` },
+    engagement: { border: '#27ae60', glow: `0 0 18px rgba(39,174,96,${(parseInt(rel.engagementHealth, 10) || 0) / 8})`, tag: `Engagement ${rel.engagementHealth || '—'}` },
+    budget: { border: '#0fa894', glow: `0 0 18px rgba(15,168,148,${(parseInt(rel.budgetControl, 10) || 0) / 8})`, tag: `Budget ${rel.budgetControl || '—'}` },
     support: {
       border: rel.supportStatus === 'Blocker' ? '#c0392b' : rel.supportStatus === 'Risk' ? '#e67e22' : rel.supportStatus === 'Supporter' ? '#27ae60' : '#7088aa',
       glow: rel.supportStatus === 'Blocker' ? '0 0 18px rgba(192,57,43,0.45)' : rel.supportStatus === 'Risk' ? '0 0 18px rgba(230,126,34,0.4)' : rel.supportStatus === 'Supporter' ? '0 0 18px rgba(39,174,96,0.4)' : '0 0 0 transparent',
@@ -1772,7 +1725,7 @@ function updateSecurityPanel() {
   if (currentUserDisplay) currentUserDisplay.textContent = `GitHub user: ${currentGitHubUser}`;
   if (securityModeDisplay) {
     securityModeDisplay.textContent = token
-      ? 'Mode: Session token only ┬À saves throttled and audited'
+      ? 'Mode: Session token only · saves throttled and audited'
       : 'Mode: Read-only until token is configured';
   }
   if (syncStatusDisplay) {
@@ -1788,8 +1741,8 @@ function updateSecurityPanel() {
   if (recentHistoryList) {
     const items = Array.isArray(relationshipMeta.history) ? relationshipMeta.history.slice(0, 5) : [];
     recentHistoryList.innerHTML = items.length
-      ? items.map(item => `<li>${escapeHtml(item.by || 'Unknown')} ┬À ${escapeHtml(formatTimestamp(item.at))}</li>`).join('')
-      : '<li>ÔÇö</li>';
+      ? items.map(item => `<li>${escapeHtml(item.by || 'Unknown')} · ${escapeHtml(formatTimestamp(item.at))}</li>`).join('')
+      : '<li>—</li>';
   }
   if (tokenStorageHint) {
     tokenStorageHint.textContent = token
@@ -1802,7 +1755,7 @@ function setSaveUiState() {
   const saveBtn = document.getElementById('saveBtn');
   if (!saveBtn) return;
   saveBtn.disabled = saveInProgress;
-  saveBtn.textContent = saveInProgress ? 'SavingÔÇª' : 'Save to GitHub';
+  saveBtn.textContent = saveInProgress ? 'Saving…' : 'Save to GitHub';
 }
 
 function toggleSecurityModal(forceOpen) {
@@ -1923,7 +1876,7 @@ function logout() {
 // Run auth check on page load
 checkAuth();
 
-// ÔöÇÔöÇ DATA ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ── DATA ──────────────────────────────────────────────────────────────────────
 function orgNode(name, role, children = [], metadata = {}) {
   const node = { name, role, ...metadata };
   if (children.length) node.children = children;
@@ -2039,13 +1992,13 @@ function parseOrgOutline(text) {
   let root = null;
   lines.forEach(rawLine => {
     const indent = rawLine.match(/^\s*/)[0].length;
-    const cleaned = rawLine.trim().replace(/^[-ÔÇó]\s*/, '');
-    const parts = cleaned.split(' ÔÇö ');
+    const cleaned = rawLine.trim().replace(/^[-•]\s*/, '');
+    const parts = cleaned.split(' — ');
     const left = parts[0] || '';
-    const role = sanitizeShortText(parts.slice(1).join(' ÔÇö ') || '(role not provided)', 220);
+    const role = sanitizeShortText(parts.slice(1).join(' — ') || '(role not provided)', 220);
     const name = sanitizeShortText(left.replace(/\s*:\s.*$/, ''), 180);
     if (!name) return;
-    const inferredRole = sanitizeShortText(parts.slice(1).join(' ÔÇö ') || '(role not provided)', 220);
+    const inferredRole = sanitizeShortText(parts.slice(1).join(' — ') || '(role not provided)', 220);
     const node = {
       name,
       role: inferredRole,
@@ -2131,7 +2084,7 @@ function buildOrgDiffSummary(newRoot) {
     } else {
       const existing = currentMap.get(key);
       if (existing.parentName !== value.parentName || existing.role !== value.role) {
-        changed.push(`${key} (${existing.parentName || 'root'} ÔåÆ ${value.parentName || 'root'})`);
+        changed.push(`${key} (${existing.parentName || 'root'} → ${value.parentName || 'root'})`);
       }
     }
   });
@@ -2735,11 +2688,11 @@ const data = annotateLevels(orgNode("CS Venkatakrishnan", "Group Chief Executive
 ]));
 currentOrgData = deepClone(data);
 
-// ÔöÇÔöÇ STATE ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ── STATE ─────────────────────────────────────────────────────────────────────
 // relationships: { "Person Name": { initials: "PS", score: "3", socialStyle: "Ex" } }
 let relationships = {};
 
-// ÔöÇÔöÇ GITHUB CONFIGURATION ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ── GITHUB CONFIGURATION ──────────────────────────────────────────────────────
 const GITHUB_CONFIG = {
   owner: 'gordonakclark',
   repo: 'Barclays-Org2',
@@ -2928,7 +2881,7 @@ async function saveToGitHub() {
     }
 
     const currentFile = await getResponse.json();
-    console.log('Ô£à Current SHA:', currentFile.sha);
+    console.log('✅ Current SHA:', currentFile.sha);
 
     // Step 2: Parse existing data
     let existingData = {};
@@ -2984,7 +2937,7 @@ async function saveToGitHub() {
     }
 
     const result = await putResponse.json();
-    console.log('Ô£à Save successful! New SHA:', result.content.sha);
+    console.log('✅ Save successful! New SHA:', result.content.sha);
 
     // Update storage
     localStorage.setItem('github-sha', result.content.sha);
@@ -2997,12 +2950,12 @@ async function saveToGitHub() {
     persistLocalBackup();
     updateSecurityPanel();
 
-    showNotification('Ô£à Successfully saved to GitHub!', 'success');
+    showNotification('✅ Successfully saved to GitHub!', 'success');
     return true;
 
   } catch (error) {
     console.error('Save error:', error);
-    showNotification(`ÔØî ${error.message}`, 'error');
+    showNotification(`❌ ${error.message}`, 'error');
 
     persistLocalBackup();
     return false;
@@ -3029,8 +2982,8 @@ function startAutoSync() {
     await loadFromGitHub();
     buildTable();
     applyAll();
-  }, 120000); // Every 2 minutes
-  console.log('Auto-sync enabled (every 120s)');
+  }, 30000); // Every 30 seconds
+  console.log('Auto-sync enabled (every 30s)');
 }
 
 function stopAutoSync() {
@@ -3117,16 +3070,15 @@ function flattenTree(node, parentName = '') {
 flattenTree(data);
 initializeWorkspaceControls();
 
-// ÔöÇÔöÇ SCORE COLOURS ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ── SCORE COLOURS ─────────────────────────────────────────────────────────────
 const scoreBgClass = ['','score-bg-1','score-bg-2','score-bg-3','score-bg-4','score-bg-5'];
 const scoreHex = ['','#c0392b','#e67e22','#b8960a','#27ae60','#0fa894'];
 const scoreTextHex = ['','#fff','#fff','#000','#fff','#fff'];
 
-// ÔöÇÔöÇ BUILD TABLE ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ── BUILD TABLE ───────────────────────────────────────────────────────────────
 function buildTable() {
   const tbody = document.getElementById('relTableBody');
   tbody.innerHTML = '';
-  const availableBus = getUniqueBUs();
   allPeople.forEach(person => {
     const rel = getRelationship(person.name);
     const tr = document.createElement('tr');
@@ -3137,15 +3089,7 @@ function buildTable() {
     });
 
     const tdName = document.createElement('td');
-    const nameButton = document.createElement('button');
-    nameButton.type = 'button';
-    nameButton.className = 'person-name-button';
-    nameButton.innerHTML = `<div class="person-name-cell">${escapeHtml(person.name)}</div><div class="person-role-cell">${escapeHtml(formatDisplayedRole(person.role))}</div>`;
-    nameButton.addEventListener('click', event => {
-      event.stopPropagation();
-      openStakeholderWorkspace(person.name);
-    });
-    tdName.appendChild(nameButton);
+    tdName.innerHTML = `<div class="person-name-cell">${person.name}</div><div class="person-role-cell">${person.role}</div>`;
 
     const tdInitials = document.createElement('td');
     const inp = document.createElement('input');
@@ -3162,7 +3106,7 @@ function buildTable() {
     const sel = document.createElement('select');
     sel.className = 'score-select';
     sel.dataset.name = person.name;
-    ['ÔÇö','1','2','3','4','5'].forEach((v, i) => {
+    ['—','1','2','3','4','5'].forEach((v, i) => {
       const opt = document.createElement('option');
       opt.value = i === 0 ? '' : v;
       opt.textContent = v;
@@ -3176,7 +3120,7 @@ function buildTable() {
     const selSocial = document.createElement('select');
     selSocial.className = 'social-select';
     selSocial.dataset.name = person.name;
-    ['ÔÇö','An','Dr','Ex','Am'].forEach((v, i) => {
+    ['—','An','Dr','Ex','Am'].forEach((v, i) => {
       const opt = document.createElement('option');
       opt.value = i === 0 ? '' : v;
       opt.textContent = v;
@@ -3191,12 +3135,15 @@ function buildTable() {
     tdName.appendChild(document.createElement('span')); // spacer
 
     const tdBU = document.createElement('td');
-    const inpBU = document.createElement('select');
-    inpBU.className = 'input-bu-select';
-    inpBU.innerHTML = ['<option value="">ÔÇö</option>'].concat(availableBus.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`)).join('');
+    const inpBU = document.createElement('input');
+    inpBU.className = 'input-bu';
+    inpBU.type = 'text';
+    inpBU.placeholder = 'e.g. BUK, CIB, BX';
+    inpBU.setAttribute('list', 'bu-suggestions');
     inpBU.value = sanitizeBusinessUnit(rel.businessUnit || '');
     inpBU.dataset.name = person.name;
-    inpBU.addEventListener('change', () => { updateRel(person.name); updateCount(); populateBUFilter(); filterTable(document.getElementById('searchInput')?.value || ''); });
+    inpBU.addEventListener('input', () => { inpBU.value = sanitizeBusinessUnit(inpBU.value); updateRel(person.name); updateCount(); });
+    inpBU.addEventListener('change', () => { populateBUFilter(); });
     tdBU.appendChild(inpBU);
 
     tr.appendChild(tdName);
@@ -3230,7 +3177,7 @@ function updateRel(name) {
   const sel = document.querySelector(`select.score-select[data-name="${CSS.escape(name)}"]`);
   const selSocial = document.querySelector(`select.social-select[data-name="${CSS.escape(name)}"]`);
   if (!inp || !sel || !selSocial) return;
-  const inpBU = document.querySelector(`select.input-bu-select[data-name="${CSS.escape(name)}"]`);
+  const inpBU = document.querySelector(`input.input-bu[data-name="${CSS.escape(name)}"]`);
   const initials = sanitizeEngagementOwner(inp.value);
   const score = sanitizeScore(sel.value);
   const socialStyle = sanitizeSocialStyle(selSocial.value);
@@ -3260,11 +3207,11 @@ function updateBadgePreview(tr, name) {
   const rel = relationships[name];
   const cell = tr.querySelector('.preview-cell');
   if (!rel || (!rel.initials && !rel.score && !rel.socialStyle)) {
-    cell.innerHTML = `<span class="badge-preview empty">ÔÇö</span>`;
+    cell.innerHTML = `<span class="badge-preview empty">—</span>`;
     return;
   }
   const text = [rel.initials, rel.score, rel.socialStyle].filter(Boolean).join(':');
-  const badgeText = text ? `[${text}]` : 'ÔÇö';
+  const badgeText = text ? `[${text}]` : '—';
   const sc = parseInt(rel.score) || 0;
   const bgC = sc ? scoreHex[sc] : '#444';
   const txC = sc ? scoreTextHex[sc] : '#fff';
@@ -3274,12 +3221,10 @@ function updateBadgePreview(tr, name) {
 function updateCount() {
   const n = Object.keys(relationships).length;
   document.getElementById('assignedCount').textContent = `${n} assigned`;
-  const brandMetric = document.getElementById('brandReinventionMetric');
-  if (brandMetric) brandMetric.textContent = `Total Enterprise Reinvention ┬À ${n} tracked`;
 }
 
-// ÔöÇÔöÇ CHART BADGE UPDATE ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
-// nodeMap: name ÔåÆ box DOM element (built during renderChart)
+// ── CHART BADGE UPDATE ────────────────────────────────────────────────────────
+// nodeMap: name → box DOM element (built during renderChart)
 const nodeMap = {};
 
 function updateChartBadge(name) {
@@ -3318,7 +3263,7 @@ function updateChartBadge(name) {
   const badge = document.createElement('div');
   badge.className = `rel-badge ${sc ? scoreBgClass[sc] : ''}`;
   if (!sc) { badge.style.background = '#444'; badge.style.color = '#fff'; }
-  badge.textContent = [text, overlayLabel].filter(Boolean).join(' ┬À ');
+  badge.textContent = [text, overlayLabel].filter(Boolean).join(' · ');
   box.appendChild(badge);
 }
 
@@ -3383,7 +3328,7 @@ function renderInteractionList() {
   const list = document.getElementById('interactionList');
   if (!list) return;
   list.innerHTML = workspaceInteractions.length
-    ? workspaceInteractions.map(item => `<li><strong>${escapeHtml(item.type || 'Note')}</strong> ┬À ${escapeHtml(formatTimestamp(item.date))}<small>${escapeHtml(item.summary || '')}</small></li>`).join('')
+    ? workspaceInteractions.map(item => `<li><strong>${escapeHtml(item.type || 'Note')}</strong> · ${escapeHtml(formatTimestamp(item.date))}<small>${escapeHtml(item.summary || '')}</small></li>`).join('')
     : '<li>No interactions yet.</li>';
 }
 
@@ -3393,7 +3338,7 @@ function populateWorkspaceFields(name) {
   const title = document.getElementById('stakeholderModalTitle');
   const subtitle = document.getElementById('stakeholderModalSubtitle');
   if (title) title.textContent = name;
-  if (subtitle) subtitle.textContent = `${person.role || 'Stakeholder'} ┬À Power map workspace`;
+  if (subtitle) subtitle.textContent = `${person.role || 'Stakeholder'} · Power map workspace`;
 
   const fieldMap = {
     workspaceOwner: rel.engagementOwner || rel.initials,
@@ -3452,18 +3397,18 @@ function populateWorkspaceFields(name) {
   }
 
   if (changeTracking) {
-    const historyItems = (rel.changeHistory || []).slice(0, 4).map(item => `${formatTimestamp(item.at)} ┬À score ${item.score || 'ÔÇö'} ┬À influence ${item.influence || 'ÔÇö'} ┬À ${item.supportStatus || 'Neutral'}`);
+    const historyItems = (rel.changeHistory || []).slice(0, 4).map(item => `${formatTimestamp(item.at)} · score ${item.score || '—'} · influence ${item.influence || '—'} · ${item.supportStatus || 'Neutral'}`);
     changeTracking.innerHTML = historyItems.length
       ? historyItems.map(item => `<div class="heat-tag">${escapeHtml(item)}</div>`).join('')
       : 'No tracked change history yet. Save changes to start trend tracking.';
   }
 
   if (pathInsight) {
-    pathInsight.innerHTML = `<strong>Spotlight path:</strong> ${escapeHtml(path.join(' ÔåÆ ')) || 'No path available.'}`;
+    pathInsight.innerHTML = `<strong>Spotlight path:</strong> ${escapeHtml(path.join(' → ')) || 'No path available.'}`;
   }
 
   if (scenario) {
-    scenario.innerHTML = `<strong>Scenario planning:</strong> ${escapeHtml(alternates.length ? `Alternate sponsors: ${alternates.map(item => item.name).join(', ')}` : 'Single-point dependency detected ÔÇö no alternate sponsors currently assigned.')}`;
+    scenario.innerHTML = `<strong>Scenario planning:</strong> ${escapeHtml(alternates.length ? `Alternate sponsors: ${alternates.map(item => item.name).join(', ')}` : 'Single-point dependency detected — no alternate sponsors currently assigned.')}`;
   }
 
   if (insights) {
@@ -3549,12 +3494,12 @@ function openExecutiveDashboard() {
     </div>
     <div class="dashboard-grid" style="margin-top:16px;">
       <div class="dashboard-card"><h3>Coverage gaps</h3><ul class="list-compact">${coverageGaps.length ? coverageGaps.map(item => `<li>${escapeHtml(item.person.name)}<small>Missing engagement owner</small></li>`).join('') : '<li>Coverage looks healthy.</li>'}</ul></div>
-      <div class="dashboard-card"><h3>Strongest sponsors</h3><ul class="list-compact">${strongestSponsors.length ? strongestSponsors.map(item => `<li>${escapeHtml(item.person.name)}<small>Sponsorship ${escapeHtml(item.rel.sponsorship)} ┬À Influence ${escapeHtml(item.rel.influence || 'ÔÇö')}</small></li>`).join('') : '<li>No sponsor data yet.</li>'}</ul></div>
-      <div class="dashboard-card"><h3>At-risk accounts</h3><ul class="list-compact">${atRisk.length ? atRisk.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(item.rel.supportStatus || 'Risk')} ┬À Blocker risk ${escapeHtml(item.rel.blockerRisk || 'ÔÇö')}</small></li>`).join('') : '<li>No at-risk stakeholders flagged.</li>'}</ul></div>
+      <div class="dashboard-card"><h3>Strongest sponsors</h3><ul class="list-compact">${strongestSponsors.length ? strongestSponsors.map(item => `<li>${escapeHtml(item.person.name)}<small>Sponsorship ${escapeHtml(item.rel.sponsorship)} · Influence ${escapeHtml(item.rel.influence || '—')}</small></li>`).join('') : '<li>No sponsor data yet.</li>'}</ul></div>
+      <div class="dashboard-card"><h3>At-risk accounts</h3><ul class="list-compact">${atRisk.length ? atRisk.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(item.rel.supportStatus || 'Risk')} · Blocker risk ${escapeHtml(item.rel.blockerRisk || '—')}</small></li>`).join('') : '<li>No at-risk stakeholders flagged.</li>'}</ul></div>
       <div class="dashboard-card"><h3>Inactive critical stakeholders</h3><ul class="list-compact">${stale.length ? stale.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(String(daysSince(item.rel.lastTouchpoint)))} days since last touchpoint</small></li>`).join('') : '<li>No stale relationships found.</li>'}</ul></div>
       <div class="dashboard-card" style="grid-column: 1 / -1;"><h3>Notifications</h3><ul class="list-compact">${alerts.length ? alerts.map(item => `<li>${escapeHtml(item.person.name)}<small>${escapeHtml(getWorkspaceInsightItems(item.person.name, item.rel)[0])}</small></li>`).join('') : '<li>No urgent notifications.</li>'}</ul></div>
       <div class="dashboard-card" style="grid-column: 1 / -1;"><h3>AI-assisted insights</h3><ul class="list-compact">${[
-        ...aiInsights.missingStakeholders.map(item => `<li>Missing stakeholder coverage: ${escapeHtml(item.person.name)}<small>${escapeHtml(item.person.role)} ┬À Add an owner, influence score, and next action.</small></li>`),
+        ...aiInsights.missingStakeholders.map(item => `<li>Missing stakeholder coverage: ${escapeHtml(item.person.name)}<small>${escapeHtml(item.person.role)} · Add an owner, influence score, and next action.</small></li>`),
         ...aiInsights.weakCoverage.map(item => `<li>Weak coverage detected<small>${escapeHtml(item)}</small></li>`),
         ...aiInsights.nextBestActions.map(item => `<li>Next best action: ${escapeHtml(item.name)}<small>${escapeHtml(item.action)}</small></li>`)
       ].join('') || '<li>No AI-assisted insights available yet.</li>'}</ul></div>
@@ -3566,7 +3511,7 @@ function closeExecutiveDashboard() {
   document.getElementById('dashboardModal')?.classList.remove('open');
 }
 
-// ÔöÇÔöÇ EXPORT ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ── EXPORT ────────────────────────────────────────────────────────────────────
 function exportCSV() {
   const rows = [[
     'Name','Role','Engagement Owner','Relationship Score','Social Style','Business Unit','Region','Function','Influence','Budget Control','Sponsorship','Blocker Risk','Change Appetite','Strategic Importance','Engagement Health','Support Status','Sentiment','Confidence','Source','Objective','Next Action','Due Date','Last Touchpoint'
@@ -3583,10 +3528,9 @@ function exportCSV() {
   a.download = 'barclays_accenture_relationships.csv'; a.click();
 }
 
-// ÔöÇÔöÇ TABLE SEARCH ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ── TABLE SEARCH ──────────────────────────────────────────────────────────────
 function filterTable(query) {
   const q = query.toLowerCase();
-  const buFilter = document.getElementById('tableBuFilter')?.value || '';
   const ownerFilter = document.getElementById('ownerFilter')?.value || '';
   const supportFilter = document.getElementById('supportFilter')?.value || '';
   const regionFilter = document.getElementById('regionFilter')?.value || '';
@@ -3596,16 +3540,15 @@ function filterTable(query) {
     const rel = getRelationship(name);
     const hay = (name + ' ' + (rel.businessUnit || '') + ' ' + (rel.region || '') + ' ' + (rel.function || '') + ' ' + (rel.engagementOwner || '')).toLowerCase();
     const matchesSearch = hay.includes(q);
-    const matchesBu = !buFilter || rel.businessUnit === buFilter;
     const matchesOwner = !ownerFilter || rel.engagementOwner === ownerFilter;
     const matchesSupport = !supportFilter || rel.supportStatus === supportFilter;
     const matchesRegion = !regionFilter || rel.region === regionFilter;
     const matchesInfluence = !influenceFilter || (parseInt(rel.influence, 10) || 0) >= influenceFilter;
-    tr.style.display = matchesSearch && matchesBu && matchesOwner && matchesSupport && matchesRegion && matchesInfluence ? '' : 'none';
+    tr.style.display = matchesSearch && matchesOwner && matchesSupport && matchesRegion && matchesInfluence ? '' : 'none';
   });
 }
 
-// ÔöÇÔöÇ BUSINESS UNIT FILTER ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ── BUSINESS UNIT FILTER ──────────────────────────────────────────────────────
 function getUniqueBUs() {
   const set = new Set();
   allPeople.forEach(person => {
@@ -3616,17 +3559,21 @@ function getUniqueBUs() {
 }
 
 function populateBUFilter() {
+  const sel = document.getElementById('buFilter');
+  if (!sel) return;
+  const current = sel.value;
   const bus = getUniqueBUs();
-  const populateSelect = (id, label) => {
-    const select = document.getElementById(id);
-    if (!select) return;
-    const current = select.value;
-    select.innerHTML = '<option value="">' + label + '</option>' +
-      bus.map(b => `<option value="${b.replace(/"/g,'&quot;')}">${b}</option>`).join('');
-    if (bus.includes(current)) select.value = current;
-  };
-  populateSelect('buFilter', 'All Business Units');
-  populateSelect('tableBuFilter', 'All Business Units');
+  sel.innerHTML = '<option value="">All Business Units</option>' +
+    bus.map(b => `<option value="${b.replace(/"/g,'&quot;')}">${b}</option>`).join('');
+  // Refresh datalist suggestions for the BU column
+  let dl = document.getElementById('bu-suggestions');
+  if (!dl) {
+    dl = document.createElement('datalist');
+    dl.id = 'bu-suggestions';
+    document.body.appendChild(dl);
+  }
+  dl.innerHTML = bus.map(b => `<option value="${b.replace(/"/g,'&quot;')}">`).join('');
+  if (bus.includes(current)) sel.value = current;
 }
 
 // Build a pruned copy of the org tree containing only nodes that either match
@@ -3684,16 +3631,16 @@ function applyBUFilter(bu) {
   });
 }
 
-// ÔöÇÔöÇ PANEL TOGGLE ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ── PANEL TOGGLE ──────────────────────────────────────────────────────────────
 function togglePanel() {
   const panel = document.getElementById('sidePanel');
   const btn = document.getElementById('togglePanel');
   const collapsed = panel.classList.toggle('collapsed');
-  btn.textContent = collapsed ? 'ÔûÂ Contacts' : 'ÔùÇ Contacts';
+  btn.textContent = collapsed ? '▶ Contacts' : '◀ Contacts';
   btn.classList.toggle('active', !collapsed);
 }
 
-// ÔöÇÔöÇ ORG CHART RENDER ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ── ORG CHART RENDER ──────────────────────────────────────────────────────────
 function buildNode(node, isRoot = false) {
   const hasChildren = node.children && node.children.length > 0;
   const nodeDiv = document.createElement('div');
@@ -3711,21 +3658,11 @@ function buildNode(node, isRoot = false) {
   const nameEl = document.createElement('div');
   nameEl.className = 'name';
   nameEl.textContent = node.name;
-  nameEl.style.cursor = 'pointer';
-  nameEl.addEventListener('click', event => {
-    event.stopPropagation();
-    openStakeholderWorkspace(node.name);
-  });
   box.appendChild(nameEl);
 
   const roleEl = document.createElement('div');
   roleEl.className = 'role';
-  roleEl.textContent = formatDisplayedRole(node.role);
-  roleEl.style.cursor = 'pointer';
-  roleEl.addEventListener('click', event => {
-    event.stopPropagation();
-    openStakeholderWorkspace(node.name);
-  });
+  roleEl.textContent = node.role;
   box.appendChild(roleEl);
 
   // Register in nodeMap for live updates
@@ -3734,13 +3671,13 @@ function buildNode(node, isRoot = false) {
   if (hasChildren) {
     const badge = document.createElement('div');
     badge.className = 'toggle-badge';
-    badge.textContent = 'ÔêÆ';
+    badge.textContent = '−';
     box.appendChild(badge);
     box.addEventListener('click', () => {
       const section = nodeDiv.querySelector(':scope > .children-section');
       if (section) {
         const collapsed = section.classList.toggle('collapsed');
-        badge.textContent = collapsed ? '+' : 'ÔêÆ';
+        badge.textContent = collapsed ? '+' : '−';
       }
     });
   }
@@ -3793,7 +3730,7 @@ function renderChart() {
 
 function expandAll() {
   document.querySelectorAll('.children-section').forEach(s => s.classList.remove('collapsed'));
-  document.querySelectorAll('.toggle-badge').forEach(b => b.textContent = 'ÔêÆ');
+  document.querySelectorAll('.toggle-badge').forEach(b => b.textContent = '−');
 }
 
 function collapseAll() {
@@ -3809,11 +3746,11 @@ function collapseAll() {
   if (topSection) {
     topSection.classList.remove('collapsed');
     const badge = document.querySelector('.level-0 > .box .toggle-badge');
-    if (badge) badge.textContent = 'ÔêÆ';
+    if (badge) badge.textContent = '−';
   }
 }
 
-// ÔöÇÔöÇ INIT ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ── INIT ──────────────────────────────────────────────────────────────────────
 // Wrapped in function to call after authentication
 async function initializeApp() {
   rebuildOrgCaches();
