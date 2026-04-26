@@ -1294,6 +1294,7 @@
             <h3>Influence model & action plan</h3>
             <div class="workspace-fields">
               <div class="workspace-field"><label>Engagement owner</label><input class="workspace-input" id="workspaceOwner"></div>
+              <div class="workspace-field"><label>Business Unit</label><select class="workspace-select" id="workspaceBusinessUnit"></select></div>
               <div class="workspace-field"><label>Region</label><input class="workspace-input" id="workspaceRegion"></div>
               <div class="workspace-field"><label>Function</label><input class="workspace-input" id="workspaceFunction"></div>
               <div class="workspace-field"><label>Initiative alignment</label><input class="workspace-input" id="workspaceInitiative"></div>
@@ -1462,6 +1463,13 @@ function initializeWorkspaceControls() {
   ['workspaceInfluence', 'workspaceBudget', 'workspaceSponsorship', 'workspaceBlocker', 'workspaceChangeAppetite', 'workspaceStrategic', 'workspaceEngagement', 'workspaceConfidence']
     .forEach(id => createRangeOptions(id, true));
 
+  const businessUnitSelect = document.getElementById('workspaceBusinessUnit');
+  if (businessUnitSelect) {
+    businessUnitSelect.innerHTML = ['<option value="">Select Business Unit...</option>']
+      .concat(CANONICAL_BUSINESS_UNITS.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`))
+      .join('');
+  }
+
   const optionSets = {
     workspaceSupport: ['', 'Supporter', 'Neutral', 'Risk', 'Blocker'],
     workspaceSentiment: ['', 'Positive', 'Mixed', 'Negative'],
@@ -1617,17 +1625,43 @@ function getInheritedOrgMetadata(name) {
   return { businessUnit: '', region: '' };
 }
 
+const HARDCODED_BU_MANAGERS = {
+  'Anna Cross': 'CFO',
+  'Adeel Khan': 'IB',
+  'Taalib Shaah': 'CRO',
+  'Tristram Roberts': 'HR',
+  'Cathal Deasy': 'IB',
+  'Stephen Dainton': 'IB',
+  'Matt Hammerstein': 'UKCB',
+  'Denny Nealon': 'USCB',
+  'Vim Maru': 'BUK',
+  'Sasha Wiggins': 'PBWM',
+  'Matthew Fitzwater': 'Compliance',
+  'Stephen Shapiro': 'Legal',
+  'Wally Adeyemo': 'COO'
+};
+
+function getManagerBusinessUnitOverride(name) {
+  let currentName = name;
+  while (currentName) {
+    if (HARDCODED_BU_MANAGERS[currentName]) return HARDCODED_BU_MANAGERS[currentName];
+    currentName = stakeholderParentMap[currentName] || '';
+  }
+  return '';
+}
+
 function normalizeRelationship(name, rel = {}) {
   const person = stakeholderLookup[name] || {};
   const engagementOwner = sanitizeEngagementOwner(rel.engagementOwner || rel.initials || '');
   const inherited = getInheritedOrgMetadata(name);
-  const inferredBusinessUnit = normalizeBusinessUnitValue(person.businessUnit || inherited.businessUnit || rel.businessUnit || '', person.role || '') || inferBusinessUnitFromRole(person.role || '') || inherited.businessUnit;
+  const managerOverrideBusinessUnit = getManagerBusinessUnitOverride(name);
+  const inferredBusinessUnit = managerOverrideBusinessUnit || normalizeBusinessUnitValue(person.businessUnit || inherited.businessUnit || rel.businessUnit || '', person.role || '') || inferBusinessUnitFromRole(person.role || '') || inherited.businessUnit;
   const inferredRegion = person.region || inferRegionFromRole(person.role || '') || inherited.region;
   return {
     initials: engagementOwner,
     score: sanitizeScore(rel.score || ''),
     socialStyle: sanitizeSocialStyle(rel.socialStyle || ''),
-    businessUnit: normalizeBusinessUnitValue(rel.businessUnit || inferredBusinessUnit || '', person.role || ''),
+    businessUnit: managerOverrideBusinessUnit || normalizeBusinessUnitValue(rel.businessUnit || inferredBusinessUnit || '', person.role || ''),
     region: normalizeExistingRegion(rel.region) || inferredRegion || '',
     function: sanitizeShortText(rel.function || person.role || '', 120),
     engagementOwner,
@@ -3433,6 +3467,7 @@ function populateWorkspaceFields(name) {
 
   const fieldMap = {
     workspaceOwner: rel.engagementOwner || rel.initials,
+    workspaceBusinessUnit: rel.businessUnit,
     workspaceRegion: rel.region,
     workspaceFunction: rel.function || person.role || '',
     workspaceInitiative: rel.initiative,
@@ -3538,6 +3573,7 @@ function saveStakeholderWorkspace() {
     ...base,
     initials: document.getElementById('workspaceOwner')?.value,
     engagementOwner: document.getElementById('workspaceOwner')?.value,
+    businessUnit: document.getElementById('workspaceBusinessUnit')?.value,
     region: document.getElementById('workspaceRegion')?.value,
     function: document.getElementById('workspaceFunction')?.value,
     initiative: document.getElementById('workspaceInitiative')?.value,
@@ -3664,6 +3700,7 @@ function populateBUFilter() {
   };
   populateSelect('buFilter', 'All Business Units');
   populateSelect('tableBuFilter', 'All Business Units');
+  populateSelect('workspaceBusinessUnit', 'Select Business Unit...');
 }
 
 // Build a pruned copy of the org tree containing only nodes that either match

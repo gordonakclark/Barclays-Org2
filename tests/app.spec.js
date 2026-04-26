@@ -84,6 +84,7 @@ test.describe('power map application', () => {
     const row = page.locator('#relTableBody tr').filter({ hasText: "Antoinette O'Neill" }).first();
     await row.getByRole('button', { name: 'Edit details' }).click();
     await expect(page.locator('#workspaceFunction')).toHaveValue('Chief Operating Officer, CIB');
+    await expect(page.locator('#workspaceBusinessUnit')).toHaveValue('CIO');
     await expect(page.locator('#workspaceRegion')).toHaveValue('US');
     await expect(page.locator('select.input-bu-select[data-name="Antoinette O\'Neill"]')).toHaveValue('CIO');
     await expect(page.locator('#workspaceInitiative')).toHaveValue('');
@@ -119,5 +120,39 @@ test.describe('power map application', () => {
       return select ? select.value : '';
     }));
     expect(assignments.every(value => expected.includes(value))).toBeTruthy();
+
+    const workspaceOptions = await page.locator('#workspaceBusinessUnit option').evaluateAll(nodes => nodes.map(node => node.textContent.trim()).filter(Boolean));
+    expect(workspaceOptions).toEqual(['Select Business Unit...', ...expected]);
+  });
+
+  test('applies executive subtree business unit overrides', async ({ page }) => {
+    await login(page);
+
+    const assignments = await page.locator('#relTableBody tr').evaluateAll(rows => Object.fromEntries(rows.map(row => {
+      const name = row.getAttribute('data-name');
+      const select = row.querySelector('select.input-bu-select');
+      return [name, select ? select.value : ''];
+    })));
+
+    expect(assignments['Anna Cross']).toBe('CFO');
+    expect(assignments['Steven Ewart']).toBe('CFO');
+    expect(assignments['Adeel Khan']).toBe('IB');
+    expect(assignments['Michael Webb']).toBe('IB');
+    expect(assignments['Taalib Shaah']).toBe('CRO');
+    expect(assignments['Kirsty Fitzgerald']).toBe('CRO');
+    expect(assignments['Tristram Roberts']).toBe('HR');
+    expect(assignments['Louisa Chapple']).toBe('HR');
+    expect(assignments['Matt Hammerstein']).toBe('UKCB');
+    expect(assignments['Denny Nealon']).toBe('USCB');
+    expect(assignments['Vim Maru']).toBe('BUK');
+    expect(assignments['Nicola Eggers']).toBe('BUK');
+    expect(assignments['Sasha Wiggins']).toBe('PBWM');
+    expect(assignments['Jane Sedgwick']).toBe('PBWM');
+    expect(assignments['Matthew Fitzwater']).toBe('Compliance');
+    expect(assignments['Christopher Singh']).toBe('Compliance');
+    expect(assignments['Stephen Shapiro']).toBe('Legal');
+    expect(assignments['David Mackenzie']).toBe('Legal');
+    expect(assignments['Wally Adeyemo']).toBe('COO');
+    expect(assignments['Tom Hoskin']).toBe('COO');
   });
 });
