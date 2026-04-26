@@ -688,11 +688,91 @@
           "newStakeholder": true
         }
       ]
+    },
+    "Ben George": {
+      "initials": "",
+      "score": "",
+      "socialStyle": "",
+      "businessUnit": "CTO",
+      "region": "US",
+      "function": "Distinguished Engineer (AI/ML & Data)",
+      "engagementOwner": "",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T17:00:48.994Z",
+          "score": "",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
+    },
+    "Meggy Chung": {
+      "initials": "SC",
+      "score": "4",
+      "socialStyle": "Dr",
+      "businessUnit": "CTO",
+      "region": "US",
+      "function": "MD, Head of Global Enterprise Data Platform",
+      "engagementOwner": "SC",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T17:00:48.994Z",
+          "score": "4",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
     }
   },
-  "lastUpdated": "2026-04-26T16:58:41.564Z",
+  "lastUpdated": "2026-04-26T17:00:48.994Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T17:00:48.994Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T16:58:41.564Z"
@@ -748,10 +828,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-26T10:39:19.563Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-25T21:01:26.753Z"
     }
   ]
 }
