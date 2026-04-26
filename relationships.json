@@ -954,11 +954,53 @@
           "newStakeholder": true
         }
       ]
+    },
+    "Alastair Blackwell": {
+      "initials": "PS",
+      "score": "",
+      "socialStyle": "",
+      "businessUnit": "COO",
+      "region": "",
+      "function": "COO for BX, Risk & Finance",
+      "engagementOwner": "PS",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T17:06:21.417Z",
+          "score": "",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
     }
   },
-  "lastUpdated": "2026-04-26T17:06:04.571Z",
+  "lastUpdated": "2026-04-26T17:06:21.417Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T17:06:21.417Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T17:06:04.571Z"
@@ -1014,10 +1056,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-26T16:53:27.948Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-26T16:53:06.457Z"
     }
   ]
 }
