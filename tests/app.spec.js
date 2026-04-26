@@ -109,7 +109,7 @@ test.describe('power map application', () => {
   test('uses the canonical business unit list and assigns every stakeholder', async ({ page }) => {
     await login(page);
 
-    const expected = ['Audit', 'BUK', 'CFO', 'CIO', 'Compliance', 'Controls', 'COO', 'CRO', 'CTO', 'GFED', 'GTIS', 'GTSM', 'HR', 'IB', 'IT', 'Legal', 'PBWM', 'Risk', 'UKCB', 'USCB'];
+    const expected = ['Audit', 'BUK', 'CFO', 'CIO', 'Compliance', 'Controls', 'COO', 'CRO', 'CTO', 'GFED', 'GTIS', 'GTSM', 'HR', 'IB', 'IT', 'Legal', 'Markets', 'PBWM', 'Risk', 'Strategy', 'UKCB', 'USCB'];
     await expect(page.locator('#loginVersion')).toHaveCSS('font-size', '8px');
 
     const options = await page.locator('#buFilter option').evaluateAll(nodes => nodes.map(node => node.textContent.trim()).filter(Boolean));
@@ -136,8 +136,8 @@ test.describe('power map application', () => {
 
     expect(assignments['Anna Cross']).toBe('CFO');
     expect(assignments['Steven Ewart']).toBe('CFO');
-    expect(assignments['Adeel Khan']).toBe('IB');
-    expect(assignments['Michael Webb']).toBe('IB');
+    expect(assignments['Adeel Khan']).toBe('Markets');
+    expect(assignments['Michael Webb']).toBe('Markets');
     expect(assignments['Taalib Shaah']).toBe('CRO');
     expect(assignments['Kirsty Fitzgerald']).toBe('CRO');
     expect(assignments['Tristram Roberts']).toBe('HR');
@@ -152,7 +152,7 @@ test.describe('power map application', () => {
     expect(assignments['Christopher Singh']).toBe('Compliance');
     expect(assignments['Stephen Shapiro']).toBe('Legal');
     expect(assignments['David Mackenzie']).toBe('Legal');
-    expect(assignments['Wally Adeyemo']).toBe('COO');
-    expect(assignments['Tom Hoskin']).toBe('COO');
+    expect(assignments['Wally Adeyemo']).toBe('Strategy');
+    expect(assignments['Tom Hoskin']).toBe('Strategy');
   });
 });
