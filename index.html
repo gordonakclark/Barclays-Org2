@@ -148,6 +148,11 @@
     letter-spacing: 1px;
     text-transform: uppercase;
   }
+  #loginVersion {
+    font-size: 8px;
+    padding: 4px 8px;
+    letter-spacing: 0.8px;
+  }
 
   .login-input {
     background: rgba(255, 255, 255, 0.05);
@@ -1404,6 +1409,7 @@
 <script>
 // ── AUTHENTICATION ────────────────────────────────────────────────────────────
 const APP_VERSION = 'v1.4.6';
+const CANONICAL_BUSINESS_UNITS = ['BUK', 'UKCB', 'PBWM', 'IB', 'USCB', 'COO', 'CIO', 'CRO', 'CFO', 'CTO', 'GTIS', 'GTSM', 'HR', 'IT', 'Legal', 'Risk', 'Audit', 'Controls', 'Compliance', 'GFED'];
 const SECURITY_CONFIG = {
   saveCooldownMs: 3000,
   historyLimit: 15,
@@ -1533,40 +1539,58 @@ function inferRegionFromRole(role) {
 function inferBusinessUnitFromRole(role) {
   const text = String(role || '');
   const patterns = [
-    { regex: /\bGTSM\b/i, value: 'GTSM' },
-    { regex: /Chief Technology Office/i, value: 'Chief Technology Office' },
-    { regex: /\bGTIS\b/i, value: 'GTIS' },
-    { regex: /Functions Technology|GFED Tech/i, value: 'Functions Technology' },
-    { regex: /Group Technology/i, value: 'Group Technology' },
-    { regex: /Corporate\s*&\s*Payments COO|CB&P COO|CBP CIO/i, value: 'Corporate & Payments COO' },
-    { regex: /PCB Technology/i, value: 'PCB Technology' },
-    { regex: /Wealth Processing/i, value: 'Wealth Processing' },
-    { regex: /\bControl\b|Group Control/i, value: 'Control' },
-    { regex: /\bIT\b/i, value: 'IT' },
-    { regex: /\bGroup CIO\b/i, value: 'CIO' },
-    { regex: /\bCIO\b/i, value: 'CIO' },
-    { regex: /\bMarkets\b/i, value: 'Markets' },
-    { regex: /\bInvestment Banking\b|\bIB\b/i, value: 'Investment Banking' },
-    { regex: /\bBanking\b/i, value: 'Banking' },
-    { regex: /\bRisk\b/i, value: 'Risk' },
+    { regex: /\bUS Consumer Bank\b|\bUSCB\b|Barclaycard|\bCards\b|BBDE/i, value: 'USCB' },
+    { regex: /\bBarclays UK\b|\bBUK\b|Business Banking|\bBB\b|Consumer Bank/i, value: 'BUK' },
+    { regex: /\bUKCB\b|UK Corporate Bank|Corporate Bank/i, value: 'UKCB' },
+    { regex: /Private Bank|Wealth Management|PBWM|\bPB\b|\bWM\b/i, value: 'PBWM' },
+    { regex: /Investment Banking|\bIB\b|\bMarkets\b/i, value: 'IB' },
+    { regex: /\bGTSM\b|Group Technology Service Management/i, value: 'GTSM' },
+    { regex: /\bGTIS\b|Group Technology Infrastructure Services/i, value: 'GTIS' },
+    { regex: /Chief Technology Office|\bCTO\b|Distinguished Engineer|Infrastructure Platform|Technology Strategy|Group Technology|\bTechnology\b/i, value: 'CTO' },
+    { regex: /\bGFED\b|GFED Tech/i, value: 'GFED' },
+    { regex: /\bCIO\b|Chief Information Officer|Functions Technology/i, value: 'CIO' },
+    { regex: /\bCOO\b|Chief Operating Officer|Operations|Execution Services|\bBX\b|Chief Executive Office|Chief of Staff/i, value: 'COO' },
+    { regex: /\bAudit\b|Internal Auditor/i, value: 'Audit' },
+    { regex: /\bControls?\b|Group Control/i, value: 'Controls' },
     { regex: /\bCompliance\b/i, value: 'Compliance' },
-    { regex: /\bFinance\b/i, value: 'Finance' },
-    { regex: /\bHR\b|Human Resources/i, value: 'HR' },
-    { regex: /\bBarclays UK\b|\bBUK\b/i, value: 'BUK' },
-    { regex: /\bUKCB\b|UK Corporate Bank/i, value: 'UKCB' },
-    { regex: /\bBX\b/i, value: 'BX' },
-    { regex: /\bPrivate Bank\b|PBWM/i, value: 'PBWM' },
+    { regex: /\bCRO\b|Chief Risk Officer/i, value: 'CRO' },
+    { regex: /\bCFO\b|Chief Financial Officer|Finance|Treasury/i, value: 'CFO' },
+    { regex: /\bHR\b|Human Resources|People/i, value: 'HR' },
+    { regex: /\bIT\b|Information Technology/i, value: 'IT' },
     { regex: /\bLegal\b|General Counsel/i, value: 'Legal' },
-    { regex: /\bInternal Auditor\b|Audit/i, value: 'Audit' },
-    { regex: /\bStrategy\b|Transformation/i, value: 'Strategy & Transformation' },
-    { regex: /\bTechnology\b|GTIS|GTSM|Chief Technology Office/i, value: 'Technology' }
+    { regex: /\bRisk\b/i, value: 'Risk' }
   ];
   const match = patterns.find(pattern => pattern.regex.test(text));
   return match ? match.value : '';
 }
 
+function normalizeBusinessUnitValue(value, role = '') {
+  const raw = sanitizeBusinessUnit(value || '');
+  const aliasMap = {
+    'Chief Technology Office': 'CTO',
+    'Technology': 'CTO',
+    'Group Technology': 'CTO',
+    'Functions Technology': 'CIO',
+    'GFED Tech': 'GFED',
+    'Banking': inferBusinessUnitFromRole(role) || 'UKCB',
+    'Investment Banking': 'IB',
+    'Markets': 'IB',
+    'Compliance': 'Compliance',
+    'Control': 'Controls',
+    'Controls': 'Controls',
+    'Finance': 'CFO',
+    'Audit': 'Audit',
+    'Strategy & Transformation': 'COO',
+    'BX': 'COO'
+  };
+  const normalized = aliasMap[raw] || raw;
+  if (CANONICAL_BUSINESS_UNITS.includes(normalized)) return normalized;
+  const inferred = inferBusinessUnitFromRole(role || raw);
+  return CANONICAL_BUSINESS_UNITS.includes(inferred) ? inferred : '';
+}
+
 function deriveOrgContext(node, inheritedContext = { businessUnit: '', region: '' }) {
-  const roleBusinessUnit = sanitizeBusinessUnit(node.businessUnit || inferBusinessUnitFromRole(node.role || '') || inheritedContext.businessUnit || '');
+  const roleBusinessUnit = normalizeBusinessUnitValue(node.businessUnit || inheritedContext.businessUnit || '', node.role || '') || normalizeBusinessUnitValue(inferBusinessUnitFromRole(node.role || ''), node.role || '') || inheritedContext.businessUnit || '';
   const roleRegion = normalizeExistingRegion(node.region || inferRegionFromRole(node.role || '') || inheritedContext.region || '');
   orgContextCache[node.name] = {
     businessUnit: roleBusinessUnit,
@@ -1597,13 +1621,13 @@ function normalizeRelationship(name, rel = {}) {
   const person = stakeholderLookup[name] || {};
   const engagementOwner = sanitizeEngagementOwner(rel.engagementOwner || rel.initials || '');
   const inherited = getInheritedOrgMetadata(name);
-  const inferredBusinessUnit = person.businessUnit || inferBusinessUnitFromRole(person.role || '') || inherited.businessUnit;
+  const inferredBusinessUnit = normalizeBusinessUnitValue(person.businessUnit || inherited.businessUnit || rel.businessUnit || '', person.role || '') || inferBusinessUnitFromRole(person.role || '') || inherited.businessUnit;
   const inferredRegion = person.region || inferRegionFromRole(person.role || '') || inherited.region;
   return {
     initials: engagementOwner,
     score: sanitizeScore(rel.score || ''),
     socialStyle: sanitizeSocialStyle(rel.socialStyle || ''),
-    businessUnit: sanitizeBusinessUnit(rel.businessUnit || inferredBusinessUnit || ''),
+    businessUnit: normalizeBusinessUnitValue(rel.businessUnit || inferredBusinessUnit || '', person.role || ''),
     region: normalizeExistingRegion(rel.region) || inferredRegion || '',
     function: sanitizeShortText(rel.function || person.role || '', 120),
     engagementOwner,
@@ -3619,10 +3643,11 @@ function filterTable(query) {
 
 // ── BUSINESS UNIT FILTER ──────────────────────────────────────────────────────
 function getUniqueBUs() {
-  const set = new Set();
+  const set = new Set(CANONICAL_BUSINESS_UNITS);
   allPeople.forEach(person => {
     const rel = getRelationship(person.name);
-    if (rel && rel.businessUnit && rel.businessUnit.trim()) set.add(rel.businessUnit.trim());
+    const normalized = normalizeBusinessUnitValue(rel?.businessUnit || '', person.role || '');
+    if (normalized) set.add(normalized);
   });
   return Array.from(set).sort((a, b) => a.localeCompare(b));
 }

@@ -93,7 +93,8 @@ test.describe('power map application', () => {
     await login(page);
 
     await expect(page.locator('#buFilter')).toContainText('GTSM');
-    await expect(page.locator('#buFilter')).toContainText('Chief Technology Office');
+    await expect(page.locator('#buFilter')).toContainText('CIO');
+    await expect(page.locator('#buFilter')).toContainText('USCB');
     await expect(page.locator('#tableBuFilter')).toContainText('GTSM');
 
     await expect(page.locator('#brandReinventionMetric')).toContainText('Total Enterprise Reinvention');
@@ -102,5 +103,21 @@ test.describe('power map application', () => {
     await loweRow.getByRole('button', { name: 'Edit details' }).click();
     await expect(page.locator('select.input-bu-select[data-name="Jonathan Lowe"]')).toHaveValue('GTSM');
     await expect(page.locator('#tableBuFilter')).toHaveValue('');
+  });
+
+  test('uses the canonical business unit list and assigns every stakeholder', async ({ page }) => {
+    await login(page);
+
+    const expected = ['Audit', 'BUK', 'CFO', 'CIO', 'Compliance', 'Controls', 'COO', 'CRO', 'CTO', 'GFED', 'GTIS', 'GTSM', 'HR', 'IB', 'IT', 'Legal', 'PBWM', 'Risk', 'UKCB', 'USCB'];
+    await expect(page.locator('#loginVersion')).toHaveCSS('font-size', '8px');
+
+    const options = await page.locator('#buFilter option').evaluateAll(nodes => nodes.map(node => node.textContent.trim()).filter(Boolean));
+    expect(options).toEqual(['All Business Units', ...expected]);
+
+    const assignments = await page.locator('#relTableBody tr').evaluateAll(rows => rows.map(row => {
+      const select = row.querySelector('select.input-bu-select');
+      return select ? select.value : '';
+    }));
+    expect(assignments.every(value => expected.includes(value))).toBeTruthy();
   });
 });
