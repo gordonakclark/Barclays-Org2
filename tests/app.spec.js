@@ -138,6 +138,8 @@ test.describe('power map application', () => {
     expect(assignments['Steven Ewart']).toBe('CFO');
     expect(assignments['Adeel Khan']).toBe('Markets');
     expect(assignments['Michael Webb']).toBe('Markets');
+    expect(assignments['Jonathan Lowe']).toBe('GTSM');
+    expect(assignments['Paul Austen']).toBe('GTSM');
     expect(assignments['Taalib Shaah']).toBe('CRO');
     expect(assignments['Kirsty Fitzgerald']).toBe('CRO');
     expect(assignments['Tristram Roberts']).toBe('HR');
@@ -148,6 +150,8 @@ test.describe('power map application', () => {
     expect(assignments['Nicola Eggers']).toBe('BUK');
     expect(assignments['Sasha Wiggins']).toBe('PBWM');
     expect(assignments['Jane Sedgwick']).toBe('PBWM');
+    expect(assignments['Amy Williams']).toBe('GTIS');
+    expect(assignments['David Richards']).toBe('GTIS');
     expect(assignments['Matthew Fitzwater']).toBe('Compliance');
     expect(assignments['Christopher Singh']).toBe('Compliance');
     expect(assignments['Stephen Shapiro']).toBe('Legal');
