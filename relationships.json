@@ -1030,11 +1030,53 @@
           "newStakeholder": true
         }
       ]
+    },
+    "Andrew Longmuir": {
+      "initials": "JP",
+      "score": "4",
+      "socialStyle": "Am",
+      "businessUnit": "Markets",
+      "region": "",
+      "function": "Head of Global Markets Operations",
+      "engagementOwner": "JP",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T18:56:43.079Z",
+          "score": "4",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
     }
   },
-  "lastUpdated": "2026-04-26T18:36:05.430Z",
+  "lastUpdated": "2026-04-26T18:56:43.079Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T18:56:43.079Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T18:36:05.430Z"
@@ -1090,10 +1132,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-26T16:54:55.027Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-26T16:54:27.183Z"
     }
   ]
 }
