@@ -340,13 +340,13 @@
       ]
     },
     "Paul Austen": {
-      "initials": "",
-      "score": "",
-      "socialStyle": "",
+      "initials": "GAKC",
+      "score": "3",
+      "socialStyle": "An",
       "businessUnit": "GTSM",
       "region": "UK",
       "function": "Head of RtB Corporate Tech & Infra BI",
-      "engagementOwner": "",
+      "engagementOwner": "GAKC",
       "initiative": "",
       "influence": "",
       "budgetControl": "",
@@ -367,6 +367,14 @@
       "reviewStatus": "",
       "interactions": [],
       "changeHistory": [
+        {
+          "at": "2026-04-26T16:53:06.457Z",
+          "score": "3",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        },
         {
           "at": "2026-04-26T14:21:36.937Z",
           "score": "",
@@ -416,9 +424,13 @@
       ]
     }
   },
-  "lastUpdated": "2026-04-26T16:52:37.534Z",
+  "lastUpdated": "2026-04-26T16:53:06.457Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T16:53:06.457Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T16:52:37.534Z"
@@ -474,10 +486,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-25T16:01:11.081Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-25T16:01:00.100Z"
     }
   ]
 }
