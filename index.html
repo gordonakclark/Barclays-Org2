@@ -3711,7 +3711,7 @@ function populateBUFilter() {
 // the selected BU or have a descendant that does (ancestors are kept so the
 // tree remains connected to the root).
 function pruneTreeByBU(node, bu) {
-  const rel = relationships[node.name];
+  const rel = getRelationship(node.name);
   const selfMatches = !!(rel && rel.businessUnit && rel.businessUnit.trim() === bu);
   const prunedChildren = (node.children || [])
     .map(ch => pruneTreeByBU(ch, bu))
@@ -3755,7 +3755,7 @@ function applyBUFilter(bu) {
   allPeople.forEach(p => {
     const box = nodeMap[p.name];
     if (!box) return;
-    const rel = relationships[p.name];
+    const rel = getRelationship(p.name);
     const matches = !!(rel && rel.businessUnit && rel.businessUnit.trim() === bu);
     box.classList.toggle('bu-match', matches);
     box.classList.toggle('bu-dim', !matches);

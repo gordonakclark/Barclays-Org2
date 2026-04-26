@@ -104,6 +104,11 @@ test.describe('power map application', () => {
     await loweRow.getByRole('button', { name: 'Edit details' }).click();
     await expect(page.locator('select.input-bu-select[data-name="Jonathan Lowe"]')).toHaveValue('GTSM');
     await expect(page.locator('#tableBuFilter')).toHaveValue('');
+
+    await page.locator('#buFilter').selectOption('GTSM');
+    await expect(page.locator('#chart')).toContainText('Jonathan Lowe');
+    await expect(page.locator('#chart')).toContainText('Paul Austen');
+    await expect(page.locator('#chart')).not.toContainText('Amy Williams');
   });
 
   test('uses the canonical business unit list and assigns every stakeholder', async ({ page }) => {
