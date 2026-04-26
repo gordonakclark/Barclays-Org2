@@ -160,13 +160,13 @@
       ]
     },
     "Antoinette O'Neill": {
-      "initials": "GAKC",
+      "initials": "PS",
       "score": "3",
       "socialStyle": "An",
       "businessUnit": "CIO",
       "region": "US",
       "function": "Chief Operating Officer, CIB",
-      "engagementOwner": "GAKC",
+      "engagementOwner": "PS",
       "initiative": "",
       "influence": "",
       "budgetControl": "",
@@ -842,9 +842,13 @@
       ]
     }
   },
-  "lastUpdated": "2026-04-26T17:02:13.159Z",
+  "lastUpdated": "2026-04-26T17:03:08.200Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T17:03:08.200Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T17:02:13.159Z"
@@ -900,10 +904,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-26T14:24:12.161Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-26T14:21:36.937Z"
     }
   ]
 }
