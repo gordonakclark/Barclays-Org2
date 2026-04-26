@@ -840,11 +840,91 @@
           "newStakeholder": true
         }
       ]
+    },
+    "Malcolm Brooke": {
+      "initials": "GAKC",
+      "score": "",
+      "socialStyle": "",
+      "businessUnit": "COO",
+      "region": "",
+      "function": "Group COO Chief of Staff",
+      "engagementOwner": "GAKC",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T17:05:39.751Z",
+          "score": "",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
+    },
+    "Sara O'Keane": {
+      "initials": "GAKC",
+      "score": "",
+      "socialStyle": "",
+      "businessUnit": "COO",
+      "region": "",
+      "function": "Chief of Staff to Anne Marie Darling",
+      "engagementOwner": "GAKC",
+      "initiative": "",
+      "influence": "",
+      "budgetControl": "",
+      "sponsorship": "",
+      "blockerRisk": "",
+      "changeAppetite": "",
+      "strategicImportance": "",
+      "engagementHealth": "",
+      "supportStatus": "",
+      "sentiment": "",
+      "confidence": "",
+      "source": "",
+      "objective": "",
+      "nextAction": "",
+      "dueDate": "",
+      "lastTouchpoint": "",
+      "notes": "",
+      "reviewStatus": "",
+      "interactions": [],
+      "changeHistory": [
+        {
+          "at": "2026-04-26T17:05:39.751Z",
+          "score": "",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": true
+        }
+      ]
     }
   },
-  "lastUpdated": "2026-04-26T17:03:08.200Z",
+  "lastUpdated": "2026-04-26T17:05:39.751Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-26T17:05:39.751Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-26T17:03:08.200Z"
@@ -900,10 +980,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-26T16:52:37.534Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-26T14:24:12.161Z"
     }
   ]
 }
