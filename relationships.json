@@ -31,7 +31,7 @@
     },
     "CS Venkatakrishnan": {
       "initials": "PS",
-      "score": "3",
+      "score": "4",
       "socialStyle": "Dr",
       "businessUnit": "BUK",
       "region": "",
@@ -57,6 +57,14 @@
       "reviewStatus": "",
       "interactions": [],
       "changeHistory": [
+        {
+          "at": "2026-04-28T07:56:21.058Z",
+          "score": "4",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        },
         {
           "at": "2026-04-26T10:39:19.563Z",
           "score": "3",
@@ -85,8 +93,8 @@
     },
     "Anna Cross": {
       "initials": "PS",
-      "score": "3",
-      "socialStyle": "Dr",
+      "score": "4",
+      "socialStyle": "An",
       "businessUnit": "CFO",
       "region": "",
       "function": "Group Finance Director",
@@ -111,6 +119,14 @@
       "reviewStatus": "",
       "interactions": [],
       "changeHistory": [
+        {
+          "at": "2026-04-28T07:56:21.058Z",
+          "score": "4",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        },
         {
           "at": "2026-04-25T15:50:28.168Z",
           "score": "3",
@@ -577,7 +593,7 @@
     },
     "Amy Williams": {
       "initials": "PS",
-      "score": "2",
+      "score": "3",
       "socialStyle": "Am",
       "businessUnit": "GTIS",
       "region": "US",
@@ -603,6 +619,14 @@
       "reviewStatus": "",
       "interactions": [],
       "changeHistory": [
+        {
+          "at": "2026-04-28T07:56:21.058Z",
+          "score": "3",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        },
         {
           "at": "2026-04-26T16:58:14.488Z",
           "score": "2",
@@ -919,8 +943,8 @@
     },
     "Georges Lauchard": {
       "initials": "PS",
-      "score": "",
-      "socialStyle": "",
+      "score": "3",
+      "socialStyle": "An",
       "businessUnit": "COO",
       "region": "",
       "function": "Global Markets and Wholesale Lending COO",
@@ -946,6 +970,14 @@
       "interactions": [],
       "changeHistory": [
         {
+          "at": "2026-04-28T07:56:21.058Z",
+          "score": "3",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        },
+        {
           "at": "2026-04-26T17:06:04.571Z",
           "score": "",
           "influence": "",
@@ -957,8 +989,8 @@
     },
     "Alastair Blackwell": {
       "initials": "PS",
-      "score": "",
-      "socialStyle": "",
+      "score": "4",
+      "socialStyle": "Am",
       "businessUnit": "COO",
       "region": "",
       "function": "COO for BX, Risk & Finance",
@@ -983,6 +1015,14 @@
       "reviewStatus": "",
       "interactions": [],
       "changeHistory": [
+        {
+          "at": "2026-04-28T07:56:21.058Z",
+          "score": "4",
+          "influence": "",
+          "supportStatus": "",
+          "engagementHealth": "",
+          "newStakeholder": false
+        },
         {
           "at": "2026-04-26T17:06:21.417Z",
           "score": "",
@@ -1108,9 +1148,13 @@
       ]
     }
   },
-  "lastUpdated": "2026-04-28T07:54:43.672Z",
+  "lastUpdated": "2026-04-28T07:56:21.058Z",
   "lastUpdatedBy": "gordonakclark",
   "history": [
+    {
+      "by": "gordonakclark",
+      "at": "2026-04-28T07:56:21.058Z"
+    },
     {
       "by": "gordonakclark",
       "at": "2026-04-28T07:54:43.672Z"
@@ -1166,10 +1210,6 @@
     {
       "by": "gordonakclark",
       "at": "2026-04-26T17:01:01.624Z"
-    },
-    {
-      "by": "gordonakclark",
-      "at": "2026-04-26T17:00:48.994Z"
     }
   ]
 }
